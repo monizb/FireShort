@@ -37,7 +37,7 @@ Prerequisites For Running The Project Locally:
  - A Firebase Project
  - Git
 
-Before cloning the project make sure you have created a firebase project on www.console.firebase.com
+Before cloning the project make sure you have created a firebase project on [Firebase Console](http://console.firebase.google.com)
 
  To clone this repository run:
 ```sh
