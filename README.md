@@ -37,7 +37,7 @@ Prerequisites For Running The Project Locally:
  - A Firebase Project
  - Git
 
-Before cloning the project make sure you have created a firebase project on www.consolfe.frebase.com
+Before cloning the project make sure you have created a firebase project on www.console.firebase.com
 
  To clone this repository run:
 ```sh
