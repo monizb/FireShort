@@ -19,7 +19,8 @@ The following features are under development/open for contributions.Please first
   - [ ] Add a lot more Analytics options with different types of charts 
   - [ ] Show a Dialog box with the created link wth different sharing option and a way to show QR Codes (and a way to track every qr scan) for the same
   - [ ] Add a homepage showcasing the tool with animations
-  - [ ] Revamp the dashboard 
+  - [ ] Revamp the dashboard
+  - [ ] Develop APIs for all the tasks for eay management 
 
 Valid Feature Requests will be added to the above list over time.
 
