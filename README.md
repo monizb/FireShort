@@ -2,7 +2,7 @@
 <img src="https://firebasestorage.googleapis.com/v0/b/trello-87674.appspot.com/o/Screenshot%202020-09-19%20at%2011.42.01%20AM.png?alt=media&token=e3e61cf4-1c14-41c0-ab5a-60bf4a55d581" alt="drawing" width="200"/>
  </p>
  
- [![Contributions](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)]
+![Contributions](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)
 [![GitHub license](https://img.shields.io/github/license/thedevs-network/kutt.svg)](https://github.com/monizb/FireShort/blob/master/LICENSE)
 
 Fireshort is a URL shortener made using Google Firestore and React.JS
