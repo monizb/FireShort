@@ -25,7 +25,7 @@ The following features are under development/open for contributions.Please first
   - [ ] Show a Dialog box with the created link wth different sharing option and a way to show QR Codes (and a way to track every qr scan) for the same
   - [ ] Add a homepage showcasing the tool with animations
   - [ ] Revamp the dashboard
-  - [ ] Develop APIs for all the tasks for eay management 
+  - [ ] Develop APIs for all the tasks for easy management 
 
 Valid Feature Requests will be added to the above list over time.
 
