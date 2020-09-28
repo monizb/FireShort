@@ -12,6 +12,7 @@ import {
 export default (
   state = {
     isLoggingIn: false,
+    isLoading:false,
     isLoggingOut: false,
     isVerifying: false,
     loginError: false,
@@ -26,12 +27,14 @@ export default (
       return {
         ...state,
         isLoggingIn: true,
+        isLoading:true,
         loginError: false
       };
     case LOGIN_SUCCESS:
       return {
         ...state,
         isLoggingIn: false,
+        isLoading:false,
         isAuthenticated: true,
         user: action.user
       };
