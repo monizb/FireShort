@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "alii13",
+      "name": "Shekh Aliul",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/48530814?v=4",
+      "profile": "https://alii13.github.io/portfolio/",
+      "contributions": [
+        "a11y"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "FireShort",
+  "projectOwner": "monizb",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
