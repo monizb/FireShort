@@ -1,76 +1,55 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
-import { loginUser } from "../actions";
-import { withStyles } from "@material-ui/styles";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Container from "@material-ui/core/Container";
+import Paper from "@material-ui/core/Paper";
+import {createMuiTheme, MuiThemeProvider} from '@material-ui/core/styles';
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
-import Paper from "@material-ui/core/Paper";
-import Container from "@material-ui/core/Container";
-import CircularProgress from '@material-ui/core/CircularProgress';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import {withStyles} from "@material-ui/styles";
+import React, {Component} from "react";
+import {connect} from "react-redux";
+import {Redirect} from "react-router-dom";
+
+import {loginUser} from "../actions";
 
 const styles = () => ({
-  "@global": {
-    body: {
-      backgroundColor: "#fff"
-    }
+  "@global" : {body : {backgroundColor : "#fff"}},
+  paper : {
+    marginTop : 100,
+    display : "flex",
+    padding : 20,
+    flexDirection : "column",
+    alignItems : "center"
   },
-  paper: {
-    marginTop: 100,
-    display: "flex",
-    padding: 20,
-    flexDirection: "column",
-    alignItems: "center"
-  },
-  avatar: {
-    marginLeft: "auto",
-    marginRight: "auto",
-    backgroundColor: "#f50057"
-  },
-  form: {
-    marginTop: 1
-  },
-  errorText: {
-    color: "#f50057",
-    marginBottom: 5,
-    textAlign: "center"
-  }
+  avatar :
+      {marginLeft : "auto", marginRight : "auto", backgroundColor : "#f50057"},
+  form : {marginTop : 1},
+  errorText : {color : "#f50057", marginBottom : 5, textAlign : "center"}
 });
 
-const theme = createMuiTheme({
-  palette: {
-    secondary: {
-      main: '#fff'
-    }
-  }
-});
+const theme = createMuiTheme({palette : {secondary : {main : '#fff'}}});
 
 class Login extends Component {
-  state = { email: "", password: "" };
+  state = {email : "", password: ""};
 
-  handleEmailChange = ({ target }) => {
-    this.setState({ email: target.value });
-  };
+  handleEmailChange = ({target}) => { this.setState({email : target.value}); };
 
-  handlePasswordChange = ({ target }) => {
-    this.setState({ password: target.value });
-  };
+  handlePasswordChange =
+      ({target}) => { this.setState({password : target.value}); };
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const { dispatch } = this.props;
-    const { email, password } = this.state;
+    const {dispatch} = this.props;
+    const {email, password} = this.state;
 
     dispatch(loginUser(email, password));
   };
 
   render() {
-    const { classes, loginError, isAuthenticated, isLoading } = this.props;
+    const {classes, loginError, isAuthenticated, isLoading} = this.props;
     if (isAuthenticated) {
-      return <Redirect to="/admin" />;
+      return <Redirect to = "/admin" />;
     } else {
       return (
         <Container component="main" maxWidth="xs">
@@ -93,20 +72,22 @@ class Login extends Component {
               onChange={this.handleEmailChange}
             />
             <TextField
-              variant="outlined"
-              margin="normal"
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              onChange={this.handlePasswordChange}
+      variant = "outlined"
+      margin = "normal"
+      fullWidth
+      name = "password"
+      label = "Password"
+      type = "password"
+      id = "password"
+              onChange={
+        this.handlePasswordChange}
             />
             {loginError && (
               <Typography component="p" className={classes.errorText}>
                 Incorrect email or password.
               </Typography>
-            )}
+            )
+    }
             <br></br>
             <Button
               type="submit"
@@ -117,12 +98,12 @@ class Login extends Component {
               className={classes.submit}
             >
               <MuiThemeProvider theme={theme}>
-             {(isLoading)?( <CircularProgress color="secondary" /> ): ("Sign In")}
-             </MuiThemeProvider>
-            </Button>
-            </form>
-          </Paper>
-        </Container>
+             {(isLoading)?( <CircularProgress color="secondary" /> ): ("Sign In")
+  }
+  </MuiThemeProvider>
+            </Button></form>
+          </Paper><
+      /Container>
       );
     }
   }
