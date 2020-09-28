@@ -7,7 +7,6 @@
  <br>
  <br>
 
-
 ![Contributions](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)
 [![GitHub license](https://img.shields.io/github/license/thedevs-network/kutt.svg)](https://github.com/monizb/FireShort/blob/master/LICENSE)
 ![Issues](https://img.shields.io/github/issues/monizb/FireShort)
