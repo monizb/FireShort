@@ -4,7 +4,7 @@
  
 ![Contributions](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)
 [![GitHub license](https://img.shields.io/github/license/thedevs-network/kutt.svg)](https://github.com/monizb/FireShort/blob/master/LICENSE)
-[![Issues]](https://img.shields.io/github/issues/monizb/FireShort)
+![Issues](https://img.shields.io/github/issues/monizb/FireShort)
 
 Fireshort is a URL shortener made using Google Firestore and React.JS
 The original repository has been forked from [here](https://github.com/xprilion/fireshort)
