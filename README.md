@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://firebasestorage.googleapis.com/v0/b/trello-87674.appspot.com/o/Fireshort.gif?alt=media&token=1a543d89-41f4-4ce4-b15b-bbf796cd4fd1" alt="drawing" width="300"/>
+<img src="https://firebasestorage.googleapis.com/v0/b/trello-87674.appspot.com/o/Untitled%20design.gif?alt=media&token=ceff00a1-4d3a-4b05-9ffd-68e90f458b2e" width="300"/>
  </p>
  <br>
  <br>
