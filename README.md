@@ -1,7 +1,4 @@
 <p align="center">
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
 <img src="https://firebasestorage.googleapis.com/v0/b/trello-87674.appspot.com/o/Screenshot%202020-09-19%20at%2011.42.01%20AM.png?alt=media&token=e3e61cf4-1c14-41c0-ab5a-60bf4a55d581" alt="drawing" width="200"/>
  </p>
  <br>
@@ -11,6 +8,9 @@
 [![GitHub license](https://img.shields.io/github/license/thedevs-network/kutt.svg)](https://github.com/monizb/FireShort/blob/master/LICENSE)
 ![Issues](https://img.shields.io/github/issues/monizb/FireShort)
 ![Hacktoberfest](https://img.shields.io/github/hacktoberfest/2020/badges/shields?label=hacktoberfest%202020)
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 `Accepting Hacktoberfest Contributions`
 
