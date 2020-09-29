@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://firebasestorage.googleapis.com/v0/b/trello-87674.appspot.com/o/Screenshot%202020-09-19%20at%2011.42.01%20AM.png?alt=media&token=e3e61cf4-1c14-41c0-ab5a-60bf4a55d581" alt="drawing" width="200"/>
+<img src="https://firebasestorage.googleapis.com/v0/b/trello-87674.appspot.com/o/Fireshort.gif?alt=media&token=1a543d89-41f4-4ce4-b15b-bbf796cd4fd1" alt="drawing" width="300"/>
  </p>
  <br>
  <br>
@@ -42,6 +42,7 @@ create a feature issue to discuss about the feature you would like to take up.
       way to show QR Codes (and a way to track every qr scan) for the same
 - [ ] Add a homepage showcasing the tool with animations
 - [ ] Revamp the dashboard
+- [ ] Add Protected Links With Password
 - [ ] Develop APIs for all the tasks for easy management
 
 Valid Feature Requests will be added to the above list over time.
