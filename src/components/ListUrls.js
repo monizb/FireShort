@@ -46,11 +46,11 @@ export default function ListUrls(props) {
                                 <TableCell key="curl" align="left" style={{ minWidth: "100px" }}>
                                     Short URL
                                 </TableCell>
+                                <TableCell key="action" align="center" style={{ minWidth: "100px" }}>
+                                    Action
+                                </TableCell>
                                 <TableCell key="lurl" align="left" style={{ minWidth: "100px" }}>
                                     Long URL
-                                </TableCell>
-                                <TableCell key="action" align="right" style={{ minWidth: "100px" }}>
-                                    Action
                                 </TableCell>
                             </TableRow>
                         </TableHead>
@@ -74,12 +74,7 @@ export default function ListUrls(props) {
                                                 </Badge>
                                             </Tooltip>
                                         </TableCell>
-                                        <TableCell key="lurl" align="left" style={{ minWidth: "100px" }}>
-                                            <Box bgcolor="text.primary" color="background.paper" p={2} style={{ overflowX: 'auto', overflowY: 'hidden', whiteSpace: "nowrap" }}>
-                                                {card.data.lurl}
-                                            </Box>
-                                        </TableCell>
-                                        <TableCell key="action" align="right" style={{ minWidth: "100px" }}>
+                                        <TableCell key="action" align="left" style={{ minWidth: "100px" }}>
                                             <ButtonGroup variant="outlined" color="default">
                                                 <Button size="small" color="primary" href={window.location.origin + "/" + card.data.curl} target="_blank">
                                                     <VisibilityIcon />
@@ -93,6 +88,12 @@ export default function ListUrls(props) {
                                             </ButtonGroup>
 
                                         </TableCell>
+                                        <TableCell key="lurl" align="right" style={{ minWidth: "100px" }}>
+                                            <Box bgcolor="text.primary" color="background.paper" p={2} style={{ overflowX: 'auto', overflowY: 'hidden', whiteSpace: "nowrap" }}>
+                                                {card.data.lurl}
+                                            </Box>
+                                        </TableCell>
+                                        
                                     </TableRow>
                                 );
                             })}
