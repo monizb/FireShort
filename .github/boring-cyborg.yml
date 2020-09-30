@@ -21,15 +21,15 @@ labelPRBasedOnFilePath:
 ##### Greetings ########################################################################################################
 # Comment to be posted to welcome users when they open their first PR
 firstPRWelcomeComment: >
-  Thanks for opening this pull request! Please check out our contributing guidelines.
+  Thanks for opening this pull request 🎉🎉! Please check out our contributing guidelines and provide us atleast 24 hours to review this PR
 
 # Comment to be posted to congratulate user on their first merged PR
 firstPRMergeComment: >
-  Awesome work, congrats on your first merged pull request!
+  Awesome work 🎊🎊, congrats on your first merged pull request!
 
 # Comment to be posted to on first time issues
 firstIssueWelcomeComment: >
-  Thanks for opening your first issue here! Be sure to follow the issue template!
+  Thanks for opening your first issue here! Be sure to follow the issue template! Also please provide us some ti!e to get back to you on this.
 
 ###### IssueLink Adder #################################################################################################
 # Insert Issue (Jira/Github etc) link in PR description based on the Issue ID in PR title.
@@ -50,28 +50,6 @@ insertIssueLinkInPrDescription:
       titleIssueIdRegexp: \[(AIRFLOW-X{4})\]
       descriptionIssueLink: "`Document only change, no JIRA issue`"
 
-###### Title Validator #################################################################################################
-# Verifies if commit/PR titles match the regexp specified
-verifyTitles:
-  # Regular expression that should be matched by titles of commits or PR
-  titleRegexp: ^\[AIRFLOW-[0-9]{4}\].*$|^\[AIRFLOW-XXXX\].*$
-  # If set to true, it will always check the PR title (as opposed to the individual commits).
-  alwaysUsePrTitle: true
-  # If set to true, it will only check the commit in case there is a single commit.
-  # In case of multiple commits it will check PR title.
-  # This reflects the standard behaviour of Github that for `Squash & Merge` GitHub
-  # uses the PR title rather than commit messages for the squashed commit ¯\_(ツ)_/¯
-  # For single-commit PRs it takes the squashed commit message from the commit as expected.
-  #
-  # If set to false it will check all commit messages. This is useful when you do not squash commits at merge.
-  validateEitherPrOrSingleCommitTitle: true
-  # The title the GitHub status should appear from.
-  statusTitle: "Title Validator"
-  # A custom message to be displayed when the title passes validation.
-  successMessage: "Validation successful!"
-  # A custom message to be displayed when the title fails validation.
-  # Allows insertion of ${type} (commit/PR), ${title} (the title validated) and ${regex} (the titleRegexp above).
-  failureMessage: "Wrong ${type} title: ${title}"
 
 ###### PR/Branch Up-To-Date Checker ####################################################################################
 # Check if the branch is up to date with master when certain files are modified
