@@ -55,6 +55,7 @@ git checkout -b Contributors
 
 ## Make necessary changes and commit those changes
 
+```
  git add Name of the file you just created or edited
 ```
 
