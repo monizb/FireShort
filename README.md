@@ -8,6 +8,7 @@
 [![GitHub license](https://img.shields.io/github/license/thedevs-network/kutt.svg)](https://github.com/monizb/FireShort/blob/master/LICENSE)
 ![Issues](https://img.shields.io/github/issues/monizb/FireShort)
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+![Stars](https://img.shields.io/github/stars/monizb/FireShort)
 
 `Accepting Hacktoberfest Contributions`
 
