@@ -10,22 +10,47 @@ import { withStyles } from "@material-ui/styles";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
+import EmailIcon from "@material-ui/icons/Email";
+import LockIcon from "@material-ui/icons/Lock";
+import Grid from "@material-ui/core/Grid";
 
 import { loginUser } from "../actions";
 
 const styles = () => ({
   "@global": { body: { backgroundColor: "#fff" } },
   paper: {
-    marginTop: 100,
+    marginTop: 80,
     display: "flex",
     padding: 20,
     flexDirection: "column",
     alignItems: "center",
   },
-  avatar: {
+  top: {
+    marginTop: 10,
+  },
+  maintext: {
+    fontFamily: "Pacifico",
+    fontSize: "45px",
+    marginLeft: "auto",
+    marginRight: "auto",
+    textAlign: "center",
+  },
+  margin: {
+    margin: theme.spacing(3),
+  },
+  avatar1: {
     marginLeft: "auto",
     marginRight: "auto",
     backgroundColor: "#f50057",
+    width: theme.spacing(6),
+    height: theme.spacing(6),
+  },
+  avatar2: {
+    marginLeft: "auto",
+    marginRight: "auto",
+    backgroundColor: "#f50057",
+    width: theme.spacing(10),
+    height: theme.spacing(10),
   },
   form: { marginTop: 1 },
   errorText: { color: "#f50057", marginBottom: 5, textAlign: "center" },
@@ -59,32 +84,46 @@ class Login extends Component {
     } else {
       return (
         <Container component="main" maxWidth="xs">
-          <Paper className={classes.paper}>
-            <Avatar className={classes.avatar} src="/favicon.ico"></Avatar>
-            <Typography component="h1" variant="h5">
-              FireShort
-            </Typography>
-            <br></br>
+          <div className={classes.top}>
+            <Avatar className={classes.avatar1} src="/favicon.ico"></Avatar>
+            <div className={classes.maintext}>FireShort</div>
+          </div>
+          <Paper className={classes.paper} elevation={3}>
+            <Avatar
+              className={classes.avatar2}
+              src="/icons/hacker.svg"
+            ></Avatar>
             <form onSubmit={this.handleSubmit}>
-              <TextField
-                variant="outlined"
-                margin="normal"
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                onChange={this.handleEmailChange}
-              />
-              <TextField
-                variant="outlined"
-                margin="normal"
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                onChange={this.handlePasswordChange}
-              />
+              <div className={classes.margin}>
+                <Grid container spacing={1} alignItems="flex-end">
+                  <Grid item>
+                    <EmailIcon />
+                  </Grid>
+                  <Grid item>
+                    <TextField
+                      id="email"
+                      fullWidth
+                      label="Email Address"
+                      onChange={this.handleEmailChange}
+                    />
+                  </Grid>
+                </Grid>
+              </div>
+              <div className={classes.margin}>
+                <Grid container spacing={1} alignItems="flex-end">
+                  <Grid item>
+                    <LockIcon />
+                  </Grid>
+                  <Grid item>
+                    <TextField
+                      id="password"
+                      fullWidth
+                      label="Password"
+                      onChange={this.handlePasswordChange}
+                    />
+                  </Grid>
+                </Grid>
+              </div>
               {loginError && (
                 <Typography component="p" className={classes.errorText}>
                   Incorrect email or password.
