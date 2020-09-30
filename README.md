@@ -71,7 +71,7 @@ $ git clone https://github.com/monizb/FireShort.git
 Head inside the cloned folder and install the dependencies using NPM
 
 ```sh
-$ cd FireShort-master
+$ cd FireShort
 $ npm install
 ```
 
