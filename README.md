@@ -139,12 +139,12 @@ Thanks goes to these wonderful people
     <td align="center"><a href="https://alii13.github.io/portfolio/"><img src="https://avatars1.githubusercontent.com/u/48530814?v=4" width="100px;" alt=""/><br /><sub><b>Shekh Aliul</b></sub></a><br /><a href="#a11y-alii13" title="Accessibility">️️️️♿️</a></td>
     <td align="center"><a href="https://github.com/OverthinkersArea"><img src="https://avatars2.githubusercontent.com/u/53104897?v=4" width="100px;" alt=""/><br /><sub><b>0ver3inker</b></sub></a><br /><a href="https://github.com/monizb/FireShort/commits?author=OverthinkersArea" title="Documentation">📖</a></td>
     <td align="center"><a href="http://harshvats.vercel.app"><img src="https://avatars0.githubusercontent.com/u/45518343?v=4" width="100px;" alt=""/><br /><sub><b>HARSH VATS</b></sub></a><br /><a href="https://github.com/monizb/FireShort/commits?author=harshvats2000" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/asi309"><img src="https://avatars0.githubusercontent.com/u/22616656?v=4" width="100px;" alt=""/><br /><sub><b>Asidipta</b></sub></a><br /><a href="https://github.com/monizb/FireShort/commits?author=asi309" title="Code">💻</a></td>
   </tr>
 </table>
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
-
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the
