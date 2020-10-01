@@ -17,16 +17,37 @@ import Grid from "@material-ui/core/Grid";
 import { loginUser } from "../actions";
 
 const styles = () => ({
-  "@global": { body: { backgroundColor: "#fff" } },
-  paper: {
-    marginTop: 80,
+  "@global": { body: { backgroundColor: "#fff" , margin:0 } },
+  root: {
+    height:"100vh"
+  },
+  paper2: {
     display: "flex",
     padding: 20,
     flexDirection: "column",
     alignItems: "center",
+    marginLeft: "auto",
+    marginRight: "auto",
+    width:"70%"
   },
-  top: {
-    marginTop: 10,
+  paper1: {
+    display: "flex",
+    padding: 20,
+    width: "100%",
+    
+  },
+  sign: {
+    display: "flex",
+    alignItems: "center",
+    justify:"center"
+  },
+  welcome: {
+    display: "flex",
+    backgroundImage: 'url(/icons/background.svg)',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    justify:"flex-start"
   },
   maintext: {
     fontFamily: "Pacifico",
@@ -34,6 +55,7 @@ const styles = () => ({
     marginLeft: "auto",
     marginRight: "auto",
     textAlign: "center",
+    color:"rgb(5.099487%,25.898743%,41.999817%)"
   },
   margin: {
     margin: theme.spacing(3),
@@ -83,12 +105,16 @@ class Login extends Component {
       return <Redirect to="/admin" />;
     } else {
       return (
-        <Container component="main" maxWidth="xs">
-          <div className={classes.top}>
-            <Avatar className={classes.avatar1} src="/favicon.ico"></Avatar>
-            <div className={classes.maintext}>FireShort</div>
-          </div>
-          <Paper className={classes.paper} elevation={3}>
+        <Grid container component="main" className={classes.root} >
+          
+          <Grid item className={classes.welcome}  md={7} >
+            
+                <div className={classes.maintext}>FireShort</div>
+                      
+          </Grid>
+          {/*  */}
+          <Grid item  md={5} className={classes.sign}  >
+<Paper className={classes.paper2} elevation={5} >
             <Avatar
               className={classes.avatar2}
               src="/icons/hacker.svg"
@@ -148,7 +174,10 @@ class Login extends Component {
               </Button>
             </form>
           </Paper>
-        </Container>
+
+          </Grid>
+          
+        </Grid>
       );
     }
   }
