@@ -1,0 +1,18 @@
+# Prettier Docs
+# - https://prettier.io/docs/en/index.html
+#
+# Prettier Configuration Docs
+# - https://prettier.io/docs/en/options.html
+#
+#
+# You can install prettier vsc extension
+# - https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
+#
+#
+printWidth: 100
+trailingComma: "all"
+tabWidth: 2
+semi: true
+singleQuote: true
+jsxSingleQuote: false
+arrowParens: always
