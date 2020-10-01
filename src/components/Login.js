@@ -1,107 +1,98 @@
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
-import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
+import {createMuiTheme, MuiThemeProvider} from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
-import { withStyles } from "@material-ui/styles";
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
 import EmailIcon from "@material-ui/icons/Email";
 import LockIcon from "@material-ui/icons/Lock";
-import Grid from "@material-ui/core/Grid";
+import {withStyles} from "@material-ui/styles";
+import React, {Component} from "react";
+import {connect} from "react-redux";
+import {Redirect} from "react-router-dom";
 
-import { loginUser } from "../actions";
+import {loginUser} from "../actions";
 
 const styles = () => ({
-  "@global": { body: { backgroundColor: "#fff" , margin:0 } },
-  root: {
-    height:"100vh"
+  "@global" : {body : {backgroundColor : "#fff", margin : 0}},
+  root : {height : "100vh"},
+  paper2 : {
+    display : "flex",
+    padding : 20,
+    flexDirection : "column",
+    alignItems : "center",
+    marginLeft : "auto",
+    marginRight : "auto",
+    width : "70%"
   },
-  paper2: {
-    display: "flex",
-    padding: 20,
-    flexDirection: "column",
-    alignItems: "center",
-    marginLeft: "auto",
-    marginRight: "auto",
-    width:"70%"
+  paper1 : {
+    display : "flex",
+    padding : 20,
+    width : "100%",
+
   },
-  paper1: {
-    display: "flex",
-    padding: 20,
-    width: "100%",
-    
+  sign : {display : "flex", alignItems : "center", justify : "center"},
+  welcome : {
+    display : "flex",
+    backgroundImage : 'url(/icons/background.svg)',
+    backgroundRepeat : 'no-repeat',
+    backgroundSize : 'cover',
+    backgroundPosition : 'center',
+    justify : "flex-start"
   },
-  sign: {
-    display: "flex",
-    alignItems: "center",
-    justify:"center"
+  maintext : {
+    fontFamily : "Pacifico",
+    fontSize : "45px",
+    marginLeft : "auto",
+    marginRight : "auto",
+    textAlign : "center",
+    color : "rgb(5.099487%,25.898743%,41.999817%)"
   },
-  welcome: {
-    display: "flex",
-    backgroundImage: 'url(/icons/background.svg)',
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    justify:"flex-start"
+  margin : {
+    margin : theme.spacing(3),
   },
-  maintext: {
-    fontFamily: "Pacifico",
-    fontSize: "45px",
-    marginLeft: "auto",
-    marginRight: "auto",
-    textAlign: "center",
-    color:"rgb(5.099487%,25.898743%,41.999817%)"
+  avatar1 : {
+    marginLeft : "auto",
+    marginRight : "auto",
+    backgroundColor : "#f50057",
+    width : theme.spacing(6),
+    height : theme.spacing(6),
   },
-  margin: {
-    margin: theme.spacing(3),
+  avatar2 : {
+    marginLeft : "auto",
+    marginRight : "auto",
+    backgroundColor : "#f50057",
+    width : theme.spacing(10),
+    height : theme.spacing(10),
   },
-  avatar1: {
-    marginLeft: "auto",
-    marginRight: "auto",
-    backgroundColor: "#f50057",
-    width: theme.spacing(6),
-    height: theme.spacing(6),
-  },
-  avatar2: {
-    marginLeft: "auto",
-    marginRight: "auto",
-    backgroundColor: "#f50057",
-    width: theme.spacing(10),
-    height: theme.spacing(10),
-  },
-  form: { marginTop: 1 },
-  errorText: { color: "#f50057", marginBottom: 5, textAlign: "center" },
+  form : {marginTop : 1},
+  errorText : {color : "#f50057", marginBottom : 5, textAlign : "center"},
 });
 
-const theme = createMuiTheme({ palette: { secondary: { main: "#fff" } } });
+const theme = createMuiTheme({palette : {secondary : {main : "#fff"}}});
 
 class Login extends Component {
-  state = { email: "", password: "" };
+  state = {email : "", password: ""};
 
-  handleEmailChange = ({ target }) => {
-    this.setState({ email: target.value });
-  };
+  handleEmailChange = ({target}) => { this.setState({email : target.value}); };
 
-  handlePasswordChange = ({ target }) => {
-    this.setState({ password: target.value });
-  };
+  handlePasswordChange =
+      ({target}) => { this.setState({password : target.value}); };
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const { dispatch } = this.props;
-    const { email, password } = this.state;
+    const {dispatch} = this.props;
+    const {email, password} = this.state;
 
     dispatch(loginUser(email, password));
   };
 
   render() {
-    const { classes, loginError, isAuthenticated, isLoading } = this.props;
+    const {classes, loginError, isAuthenticated, isLoading} = this.props;
     if (isAuthenticated) {
-      return <Redirect to="/admin" />;
+      return <Redirect to = "/admin" />;
     } else {
       return (
         <Grid container component="main" className={classes.root} >
@@ -153,7 +144,8 @@ class Login extends Component {
                 <Typography component="p" className={classes.errorText}>
                   Incorrect email or password.
                 </Typography>
-              )}
+              )
+    }
               <br></br>
               <Button
                 type="submit"
@@ -168,7 +160,8 @@ class Login extends Component {
                     <CircularProgress color="secondary" />
                   ) : (
                     "Sign In"
-                  )}
+                  )
+  }
                 </MuiThemeProvider>
               </Button>
             </form>
@@ -178,16 +171,16 @@ class Login extends Component {
           
         </Grid>
       );
-    }
-  }
+}
+}
 }
 
 function mapStateToProps(state) {
   return {
-    isLoggingIn: state.auth.isLoggingIn,
-    isLoading: state.auth.isLoading,
-    loginError: state.auth.loginError,
-    isAuthenticated: state.auth.isAuthenticated,
+    isLoggingIn : state.auth.isLoggingIn,
+    isLoading : state.auth.isLoading,
+    loginError : state.auth.loginError,
+    isAuthenticated : state.auth.isAuthenticated,
   };
 }
 
