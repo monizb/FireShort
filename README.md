@@ -71,7 +71,7 @@ $ git clone https://github.com/monizb/FireShort.git
 Head inside the cloned folder and install the dependencies using NPM
 
 ```sh
-$ cd FireShort-master
+$ cd FireShort
 $ npm install
 ```
 
@@ -113,7 +113,7 @@ server for you on the PORT:3000 and take you to the login page
 
 To contribute to this repository please first create an issue with the
 appropriate template, after which you can directly fork this repository,make
-changes and start a pull request to the master branch.
+changes and start a pull request to the master branch. Please also have a look at our Contribution guidelines [here](https://github.com/monizb/FireShort/blob/master/CONTRBUTING.md)
 
 ### Live Demo
 
