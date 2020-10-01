@@ -7,7 +7,7 @@ import {
   LOGOUT_SUCCESS,
   VERIFY_REQUEST,
   VERIFY_SUCCESS,
-} from "../actions/";
+} from '../actions/';
 
 export default (
   state = {
@@ -20,7 +20,7 @@ export default (
     isAuthenticated: false,
     user: {},
   },
-  action
+  action,
 ) => {
   switch (action.type) {
     case LOGIN_REQUEST:

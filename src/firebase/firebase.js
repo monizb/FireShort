@@ -1,6 +1,6 @@
-import firebase from "firebase/app";
-import "firebase/auth";
-import "firebase/firestore";
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/firestore';
 
 var firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -10,7 +10,7 @@ var firebaseConfig = {
   storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
   messagingSenderId: process.env.REACT_APP_SENDER_ID,
   appId: process.env.REACT_APP_APP_ID,
-  measurementId: process.env.REACT_APP_MEAS_ID
+  measurementId: process.env.REACT_APP_MEAS_ID,
 };
 
 export const myFirebase = firebase.initializeApp(firebaseConfig);
