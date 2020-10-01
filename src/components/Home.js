@@ -35,12 +35,10 @@ class Home extends Component {
             window.location = data.lurl;
           } else {
             let ipv4 = "";
-            let ipv6 = "";
             (async () => {
               ipv4 = await publicIp.v4();
-              ipv6 = await publicIp.v6();
               docref.update({ hits: firebase.firestore.FieldValue.increment(1) })
-              docref.collection("tracking").add({ ipv4: ipv4, ipv6: ipv6, timestamp: new Date().toLocaleString(), useragent: navigator.userAgent }).then(() => {
+              docref.collection("tracking").add({ ipv4: ipv4, timestamp: new Date().toLocaleString(), useragent: navigator.userAgent }).then(() => {
                 self.setState({ newloc: data.lurl });
                 window.location = data.lurl;
               })

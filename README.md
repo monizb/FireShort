@@ -23,7 +23,7 @@ this rep:
 - The Custom URL is an optional field now, if left black it generates a random 8
   character long code using NanoID
 - Ability to track link activity : The links can now track the
-  timestamp,ipv4,ipv6 and User-Agent of the Request source
+  timestamp,ipv4 and User-Agent of the Request source
 - The Link Tracking feature for any link can be switched on/off at anytime from
   Admin Panel
 - A lot of UI Changes
