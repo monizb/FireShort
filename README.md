@@ -22,8 +22,8 @@ this rep:
 - The generated links now track the number of hits on them
 - The Custom URL is an optional field now, if left black it generates a random 8
   character long code using NanoID
-- Ability to track link activity : The links can now track the
-  timestamp,ipv4 and User-Agent of the Request source
+- Ability to track link activity : The links can now track the timestamp,ipv4
+  and User-Agent of the Request source
 - The Link Tracking feature for any link can be switched on/off at anytime from
   Admin Panel
 - A lot of UI Changes
@@ -113,7 +113,9 @@ server for you on the PORT:3000 and take you to the login page
 
 To contribute to this repository please first create an issue with the
 appropriate template, after which you can directly fork this repository,make
-changes and start a pull request to the master branch. Please also have a look at our Contribution guidelines [here](https://github.com/monizb/FireShort/blob/master/CONTRBUTING.md)
+changes and start a pull request to the master branch. Please also have a look
+at our Contribution guidelines
+[here](https://github.com/monizb/FireShort/blob/master/CONTRBUTING.md)
 
 ### Live Demo
 
@@ -142,6 +144,7 @@ Thanks goes to these wonderful people
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the
