@@ -1,13 +1,13 @@
-/* =================================================================== 
+/* ===================================================================
  *  Kreative Vendor/Third Party CSS
- *  Template Ver. 2.0.0 
+ *  Template Ver. 2.0.0
  *  05-30-2020
  *  ------------------------------------------------------------------
  *
  * TOC:
  * # PrismJS 1.20.0
  * # Lity - v2.4.0 - 2019-08-10
- * # Animate On Scroll 
+ * # Animate On Scroll
  * # Slick Slider
  *
  * =================================================================== */
@@ -15,8 +15,8 @@
 
 /* ===================================================================
  * # PrismJS 1.20.0
- *   https://prismjs.com/download.html#themes=prism-okaidia&languages=markup+css+clike+javascript+markup-templating+php 
- *   
+ *   https://prismjs.com/download.html#themes=prism-okaidia&languages=markup+css+clike+javascript+markup-templating+php
+ *
  *   okaidia theme for JavaScript, CSS and HTML
  *   Loosely based on Monokai textmate theme by http://www.monokai.nl/
  *   @author ocodia
@@ -116,7 +116,7 @@ pre[class*="language-"] {
 /* ===================================================================
  * # Lity - v2.4.0 - 2019-08-10
  *   http://sorgalla.com/lity/
- *   Copyright (c) 2015-2019 Jan Sorgalla; Licensed MIT 
+ *   Copyright (c) 2015-2019 Jan Sorgalla; Licensed MIT
  * ------------------------------------------------------------------- */
 
 .lity {
@@ -350,7 +350,7 @@ pre[class*="language-"] {
 
 
 /* ===================================================================
- * # Animate On Scroll 
+ * # Animate On Scroll
  * https://michalsnik.github.io/aos/
  * ------------------------------------------------------------------- */
 [data-aos][data-aos][data-aos-duration="50"], body[data-aos-duration="50"] [data-aos] {
