@@ -164,7 +164,7 @@ class Admin extends Component {
 
         self.setState({ lurl: data.lurl });
         self.setState({ curl: data.curl });
-        self.setState({ track: data.track })
+        self.setState({ track: data.track });
         this.setState({ backdrop: false });
         self.setState({ formopen: true });
       }
