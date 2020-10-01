@@ -93,7 +93,7 @@ class Admin extends Component {
 
   createLink = (curl, data) => {
     const self = this;
-    db.collection('shorturls').doc(curl).set(data).then(function () {
+    db.collection('shorturls').doc(curl).set(data).then(() => {
       self.setState({ successToast: true });
     });
   }
@@ -112,7 +112,7 @@ class Admin extends Component {
       track: track,
       hits: 0
     };
-    db.collection('shorturls').doc(curl).get().then(function (docSnapshot) {
+    db.collection('shorturls').doc(curl).get().then((docSnapshot) => {
       if (docSnapshot.exists) {
         self.handleClose();
         confirmAlert({
@@ -144,7 +144,7 @@ class Admin extends Component {
 
   handleDeleteShortUrl = (curl) => {
     const self = this;
-    db.collection('shorturls').doc(curl).delete().then(function () {
+    db.collection('shorturls').doc(curl).delete().then(() => {
       self.updateUrls();
     });
   }
@@ -236,7 +236,7 @@ class Admin extends Component {
 
   componentDidMount() {
     const self = this;
-    myFirebase.auth().onAuthStateChanged(function (user) {
+    myFirebase.auth().onAuthStateChanged((user) => {
       if (user) {
         self.setState({ user });
         self.updateUrls();
@@ -354,7 +354,7 @@ class Admin extends Component {
   }
 }
 
-function mapStateToProps(state) {
+mapStateToProps(state) => {
   return {
     isLoggingOut: state.auth.isLoggingOut
   };
