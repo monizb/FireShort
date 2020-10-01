@@ -93,7 +93,7 @@ REACT_APP_MEAS_ID=
 ```
 
 Save the file and now in the Firebase Console Goto Authentication > SignIn
-Methods > Enable Email Sigin.Then UNder Users Tab Select Add User and add any
+Methods > Enable Email Sigin.Then Under Users Tab Select Add User and add any
 one user of your choice which will be used for logging in to the admin panel.
 Next, Goto Cloud Firestore > Create Database and then navigate to the rules tab
 and copy paste the rules from
