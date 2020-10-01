@@ -11,12 +11,7 @@ import { nanoid } from 'nanoid';
 import { connect } from 'react-redux';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
-<<<<<<< HEAD
 import { logoutUser } from '../actions';
-=======
-import { logoutUser, addLink, setLinks } from "../actions";
-import { getFilteredLinks } from '../selectors';
->>>>>>> c744b43fae3752386a67c00a0bfac0edd62aadfb
 import { myFirebase, db } from '../firebase/firebase';
 import './components.module.css';
 
@@ -132,7 +127,6 @@ class Admin extends Component {
       locked: false,
       password: '',
     };
-<<<<<<< HEAD
     db.collection('shorturls')
       .doc(curl)
       .get()
@@ -161,34 +155,6 @@ class Admin extends Component {
           self.updateUrls();
         }
       });
-=======
-    db.collection('shorturls').doc(curl).get().then(function (docSnapshot) {
-      if (docSnapshot.exists) {
-        self.handleClose();
-        confirmAlert({
-          title: 'Custom URL overwrite confirm',
-          message: 'The Custom URL you entered is alread associated with some other link, clicking ok will overwrite that link to the new one. Continue?',
-          buttons: [
-            {
-              label: 'Yes',
-              onClick: () => {
-                // self.props.addLink(data);
-                self.createLink(curl, data)
-                self.updateUrls();
-              }
-            },
-            {
-              label: 'No'
-            }
-          ]
-        });
-      } else {
-        // self.props.addLink(data);
-        self.createLink(curl, data);
-        self.updateUrls();
-      }
-    })
->>>>>>> c744b43fae3752386a67c00a0bfac0edd62aadfb
 
     self.handleClose();
   };
@@ -224,7 +190,6 @@ class Admin extends Component {
     this.setState({ backdrop: true });
     const self = this;
     var docref = db.collection('shorturls').doc(curl);
-<<<<<<< HEAD
     docref
       .get()
       .then((doc) => {
@@ -241,22 +206,6 @@ class Admin extends Component {
         }
       })
       .catch((err) => {
-=======
-    docref.get().then(doc => {
-      if (!doc.exists) {
-        console.log('No such document!');
-      } else {
-        var data = doc.data();
-
-        self.setState({ lurl: data.lurl });
-        self.setState({ curl: data.curl });
-        self.setState({ track: data.track });
-        this.setState({ backdrop: false });
-        self.setState({ formopen: true });
-      }
-    })
-      .catch(err => {
->>>>>>> c744b43fae3752386a67c00a0bfac0edd62aadfb
         console.log('Error getting document', err);
       });
   };
@@ -293,7 +242,6 @@ class Admin extends Component {
             shortUrls: [...self.state.shortUrls, { id: doc.id, data: doc.data() }],
           });
         });
-        self.props.setLink(self.state.shortUrls)
         self.setState({ loading: false });
         this.setState({ backdrop: false });
       })
@@ -424,7 +372,6 @@ class Admin extends Component {
         </div>
         {this.state.loading && <LinearProgress color='secondary' />}
         <main>
-<<<<<<< HEAD
           <MainToolBar
             state={this.state}
             updateViewMode={this.updateViewMode}
@@ -438,19 +385,6 @@ class Admin extends Component {
                   handleEditShortUrl={this.handleEditShortUrl}
                   handleDeleteShortUrl={this.handleDeleteShortUrl}
                   openHits={this.getHits}
-=======
-          <MainToolBar state={this.state} updateViewMode={this.updateViewMode} refresh={this.updateUrls} />
-          {this.state.shortUrls.length > 0 ?
-            (
-              <>
-                {this.state.viewMode === "module" ? (
-                  <CardUrls
-                    shortUrls={this.props.links}
-                    handleEditShortUrl={this.handleEditShortUrl}
-                    handleDeleteShortUrl={this.handleDeleteShortUrl}
-
-                    openHits={this.getHits}
->>>>>>> c744b43fae3752386a67c00a0bfac0edd62aadfb
                   // updateHits={this.updateUrls}
                 />
               ) : (
@@ -518,22 +452,7 @@ class Admin extends Component {
 function mapStateToProps(state) {
   return {
     isLoggingOut: state.auth.isLoggingOut,
-<<<<<<< HEAD
   };
 }
 
 export default withStyles(styles)(connect(mapStateToProps)(Admin));
-=======
-    links: getFilteredLinks(state.links, state.filter)
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    addLink: (data) => dispatch(addLink(data)),
-    setLink: (data) => dispatch(setLinks(data))
-  };
-}
-
-export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(Admin));
->>>>>>> c744b43fae3752386a67c00a0bfac0edd62aadfb
