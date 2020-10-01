@@ -50,7 +50,6 @@ export default function UrlsDialog(props) {
                             <Box bgcolor="text.primary" color="background.paper" p={2} width={1}>
                                 <div>
                                     <p><b>IPV4:</b>{activity.data.ipv4}</p>
-                                    <p><b>IPV6:</b>{activity.data.ipv6}</p>
                                     <p><b>User-Agent:</b>{activity.data.useragent}</p>
                                 </div>
                             </Box>
