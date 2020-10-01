@@ -22,6 +22,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "harshvats2000",
+      "name": "HARSH VATS",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/45518343?v=4",
+      "profile": "http://harshvats.vercel.app",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
