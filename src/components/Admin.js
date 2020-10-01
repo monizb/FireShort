@@ -39,6 +39,9 @@ const styles = (theme) => ({
   root: {
     flexGrow: 1,
   },
+  passInput: {
+    padfing: 15
+  },
   menuButton: {
     marginRight: theme.spacing(2),
   },
@@ -346,14 +349,20 @@ class Admin extends Component {
               zIndex: 10,
             }}
           >
-            <div>
-              <input
-                placeholder='Enter Password...'
-                value={newPsw}
-                onChange={(e) => this.setState({ newPsw: e.target.value })}
-              />
-              <button onClick={(e) => this.onPswSave(e)}>Save</button>
-              <button onClick={(e) => this.setState({ inputBackdrop: false })}>Cancel</button>
+            <div style={{ padding: "20px", backgroundColor: "white" }}>
+              <h3>Protect Link With Password</h3>
+              <div style={{ display: "block", padding: "20px" }}>
+                <input
+                  placeholder='Enter Password...'
+                  value={newPsw}
+                  style={{ padding: "15px", fontSize: "15px", borderRadius: "2px", width: "100%" }}
+                  onChange={(e) => this.setState({ newPsw: e.target.value })}
+                />
+                <div style={{ marginTop: "25px" }}>
+                  <button onClick={(e) => this.onPswSave(e)} style={{ padding: "12px", color: "white", backgroundColor: "black", fontSize: "15px", border: "none", marginRight: "15px", borderRadius: "5px", cursor: "pointer" }}>Save</button>
+                  <button onClick={(e) => this.setState({ inputBackdrop: false })} style={{ padding: "12px", color: "white", backgroundColor: "red", fontSize: "15px", border: "none", marginRight: "15px", borderRadius: "5px", cursor: "pointer" }}>Cancel</button>
+                </div>
+              </div>
             </div>
           </div>
         ) : null}
@@ -385,26 +394,26 @@ class Admin extends Component {
                   handleEditShortUrl={this.handleEditShortUrl}
                   handleDeleteShortUrl={this.handleDeleteShortUrl}
                   openHits={this.getHits}
-                  // updateHits={this.updateUrls}
+                // updateHits={this.updateUrls}
                 />
               ) : (
-                <ListUrls
-                  shortUrls={this.state.shortUrls}
-                  handleEditShortUrl={this.handleEditShortUrl}
-                  handleDeleteShortUrl={this.handleDeleteShortUrl}
-                  toggleSecurity={this.toggleSecurity}
-                />
-              )}
+                  <ListUrls
+                    shortUrls={this.state.shortUrls}
+                    handleEditShortUrl={this.handleEditShortUrl}
+                    handleDeleteShortUrl={this.handleDeleteShortUrl}
+                    toggleSecurity={this.toggleSecurity}
+                  />
+                )}
             </>
           ) : (
-            <div className={classes.heroContent}>
-              <Container maxWidth='sm'>
-                {/* <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
+              <div className={classes.heroContent}>
+                <Container maxWidth='sm'>
+                  {/* <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
                     Oops! Nothing here.
                   </Typography> */}
-              </Container>
-            </div>
-          )}
+                </Container>
+              </div>
+            )}
 
           <Fab
             aria-label='Add'

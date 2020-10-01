@@ -48,7 +48,6 @@ class Home extends Component {
                 let ipv4 = '';
                 (async () => {
                   ipv4 = await publicIp.v4();
-                  // ipv6 = await publicIp.v6();
                   docref.update({ hits: firebase.firestore.FieldValue.increment(1) });
                   docref
                     .collection('tracking')
@@ -74,12 +73,17 @@ class Home extends Component {
     }
   };
 
-  onPasswordChange = (e) => {
+  checkpassword = () => {
     const { realPassword } = this.state;
-    this.setState({ password: e.target.value });
-    if (realPassword !== '' && e.target.value === realPassword) {
+    if (realPassword !== '' && this.state.password === realPassword) {
       this.setState({ isLocked: false }, () => this.startFunc(false));
+    } else {
+      alert("Invalid Link Password")
     }
+  }
+
+  onPasswordChange = (e) => {
+    this.setState({ password: e.target.value });
   };
 
   render() {
@@ -88,6 +92,7 @@ class Home extends Component {
       <div>
         {loading ? (
           <>
+            <p className={classes.mainlogo}>Fireshort</p>
             <div className={classes.loader}>
               <span></span>
               <span></span>
@@ -95,15 +100,21 @@ class Home extends Component {
               <span></span>
               <span></span>
             </div>
-            <p className={classes.mainlogo}>Fireshort</p>
           </>
         ) : isLocked ? (
-          <input
-            type='password'
-            placeholder='Type password...'
-            value={password}
-            onChange={(e) => this.onPasswordChange(e)}
-          />
+          <div>
+            <p className={classes.mainlogo}>Fireshort</p>
+            <div style={{ display: "flex" }}>
+              <input
+                type='password'
+                placeholder='Enter Link Password'
+                value={password}
+                style={{ padding: "15px", fontSize: "15px", borderRadius: "2px", width: "100%" }}
+                onChange={(e) => this.onPasswordChange(e)}
+              />
+              <button onClick={(e) => this.checkpassword()} style={{ padding: "12px", color: "white", backgroundColor: "black", fontSize: "15px", border: "none", marginRight: "15px", borderRadius: "5px", cursor: "pointer", marginLeft: "10px" }}>Go</button>
+            </div>
+          </div>
         ) : null}
 
         {/* Redirecting to <a href={this.state.newloc} target="_blank" rel="noopener noreferrer">{this.state.newloc}</a>. */}
