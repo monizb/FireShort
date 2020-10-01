@@ -11,7 +11,8 @@ import { nanoid } from 'nanoid';
 import { connect } from 'react-redux';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
-import { logoutUser } from '../actions';
+import { logoutUser, addLink, setLinks } from "../actions";
+import { getFilteredLinks } from '../selectors';
 import { myFirebase, db } from '../firebase/firebase';
 import './components.module.css';
 
@@ -245,6 +246,7 @@ class Admin extends Component {
             shortUrls: [...self.state.shortUrls, { id: doc.id, data: doc.data() }],
           });
         });
+        self.props.setLink(self.state.shortUrls)
         self.setState({ loading: false });
         this.setState({ backdrop: false });
       })
@@ -390,7 +392,7 @@ class Admin extends Component {
             <>
               {this.state.viewMode === 'module' ? (
                 <CardUrls
-                  shortUrls={this.state.shortUrls}
+                  shortUrls={this.props.links}
                   handleEditShortUrl={this.handleEditShortUrl}
                   handleDeleteShortUrl={this.handleDeleteShortUrl}
                   openHits={this.getHits}
@@ -461,7 +463,15 @@ class Admin extends Component {
 function mapStateToProps(state) {
   return {
     isLoggingOut: state.auth.isLoggingOut,
+    links: getFilteredLinks(state.links, state.filter)
   };
 }
 
-export default withStyles(styles)(connect(mapStateToProps)(Admin));
+function mapDispatchToProps(dispatch) {
+  return {
+    addLink: (data) => dispatch(addLink(data)),
+    setLink: (data) => dispatch(setLinks(data))
+  };
+}
+
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(Admin));
