@@ -88,7 +88,7 @@ class Admin extends Component {
   }
 
   handleTrackChange = (event) => {
-    this.setState({ track: this.state.track !== true })
+    this.setState({ track: this.state.track === true ? false : true })
   }
 
   createLink = (curl, data) => {
