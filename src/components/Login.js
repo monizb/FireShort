@@ -158,7 +158,7 @@ class Login extends Component {
                     className={classes.submit}
                   >
                     <MuiThemeProvider theme={theme}>
-                      {isLoading ? (
+                      {isLoading && !loginError ? (
                         <CircularProgress className={classes.loader} color="secondary" />
                       ) : (
                         "Sign In"
