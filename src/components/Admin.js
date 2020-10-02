@@ -411,6 +411,7 @@ class Admin extends Component {
                   handleDeleteShortUrl={this.handleDeleteShortUrl}
                   openHits={this.getHits}
                 // updateHits={this.updateUrls}
+                  toggleSecurity={this.toggleSecurity}
                 />
               ) : (
                   <ListUrls
