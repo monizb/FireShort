@@ -1,4 +1,4 @@
-name: Pull Request Spamtoberfest checker
+name: Pull Request Spam Checker
 
 on:
   pull_request:
