@@ -311,12 +311,7 @@ class Admin extends Component {
             )
             :
             (
-              <div className={classes.heroContent}>
-                <Container maxWidth="sm">
-                  {/* <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-                    Oops! Nothing here.
-                  </Typography> */}
-                </Container>
+              <div>
               </div>
             )
           }
