@@ -2,7 +2,7 @@
   "files": [
     "README.md"
   ],
-  "imageSize": 100,
+  "imageSize": 50,
   "commit": false,
   "contributors": [
     {
@@ -48,6 +48,15 @@
       "profile": "https://github.com/vikashgaya916",
       "contributions": [
         "bug"
+      ]
+    },
+    {
+      "login": "i-aryan",
+      "name": "Aryan Verma",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/12378189?v=4",
+      "profile": "http://aryanverma.in",
+      "contributions": [
+        "code"
       ]
     }
   ],
