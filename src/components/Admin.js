@@ -144,9 +144,12 @@ class Admin extends Component {
 
   handleDeleteShortUrl = (curl) => {
     const self = this;
-    db.collection('shorturls').doc(curl).delete().then(function () {
-      self.updateUrls();
-    });
+    if (window.confirm("Are you sure you want to delete this URL?")) {
+      db.collection('shorturls').doc(curl).delete().then(function () {
+        self.updateUrls();
+      });
+    }
+    else return;
   }
 
   handleEditShortUrl = (curl) => {
