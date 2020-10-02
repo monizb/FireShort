@@ -1,0 +1,6 @@
+name: Rummelsnuff
+  uses: andrewslotin/rummelsnuff@master
+    with:
+      spam_label: "Potentially Spam"
+      close_spam_prs: "no"
+      access_token: ${{ secrets.GITHUB_TOKEN }}
