@@ -77,6 +77,7 @@ class Home extends Component {
                       ipv4: ipv4,
                       timestamp: new Date().toLocaleString(),
                       useragent: navigator.userAgent,
+                      author: data.author
                     })
                     .then(() => {
                       this.setState({ newloc: data.lurl });

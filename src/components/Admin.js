@@ -305,6 +305,7 @@ class Admin extends Component {
     db.collection('shorturls')
       .doc(id)
       .collection('tracking')
+      .where("author","==",this.props.user.uid)
       .get()
       .then((snapshot) => {
         snapshot.forEach((hit) => {

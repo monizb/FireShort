@@ -14,11 +14,10 @@ service cloud.firestore {
       allow create : if request.auth.uid != null;
       allow update,delete: if request.auth.uid == resource.data.author;
       
-      match /tracking/{takingId}{
-      	allow read : if true;
+      match /tracking/{trackingId}{
+      	allow read : if request.auth.uid == resource.data.author;
         allow create : if true;
-        allow delete: if false;
-        allow update: if false;
+        allow delete,update: if request.resource.data.author == resource.data.author;
       }
     }
     
