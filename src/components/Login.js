@@ -1,5 +1,4 @@
 import { Grid } from "@material-ui/core";
-import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Container from "@material-ui/core/Container";
@@ -41,12 +40,6 @@ const styles = () => ({
     alignItems: 'center',
     overflow: 'hidden',
   },
-  welcomeText: {
-    color: 'rgb(230, 230, 230)',
-    height: '100%',
-    fontSize: '1.8rem',
-    fontWeight: '500',
-  },
   loginImage: {
     width: '30rem',
   },
@@ -59,6 +52,12 @@ const styles = () => ({
     justifyContent: 'center',
     alignItems: 'stretch',
     overflow: 'hidden',
+  },
+  logoTextContainer: {
+    textAlign: 'center',
+  },
+  logoTextImage: {
+    height: '50px',
   },
   loginText: {
     textAlign: 'center',
@@ -110,13 +109,12 @@ class Login extends Component {
           <Paper className={classes.paper} elevation={24}>
             <Grid container alignItems="stretch" direction="row">
               <Grid item className={classes.loginLeftPart}>
-                <Avatar className={classes.avatar} src="./icons/favicon-128.png"></Avatar><br />
-                <Typography component="h1" variant="h5" className={classes.welcomeText}>
-                  Welcome to Fireshort
-                </Typography>
                 <img className={classes.loginImage} src="./images/loginPageIllustration.svg" alt="Login Welcome Image" />
               </Grid>
               <Grid item className={classes.loginRightPart}>
+                <div className={classes.logoTextContainer}>
+                  <img className={classes.logoTextImage} src="./images/fireshortLogoText.gif" alt="Fireshort Logo Text"/>
+                </div>             
                 <Typography className={classes.loginText} component="h1" variant="h5">
                   Login
                 </Typography>
