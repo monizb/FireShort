@@ -2,7 +2,7 @@
   "files": [
     "README.md"
   ],
-  "imageSize": 100,
+  "imageSize": 50,
   "commit": false,
   "contributors": [
     {
@@ -53,7 +53,7 @@
   ],
   "contributorsPerLine": 7,
   "projectName": "FireShort",
-  "projectOwner": "monizb",
+  "projectOwner": "Monish Basaniwal",
   "repoType": "github",
   "repoHost": "https://github.com",
   "skipCi": true
