@@ -9,9 +9,9 @@ import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/styles";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link, Redirect } from "react-router-dom";
+import {Link} from "react-router-dom";
 
-import { loginUser } from "../actions";
+import { sendPasswordResetLink } from "../actions";
 
 const styles = () => ({
   "@global": { body: { backgroundColor: "#fff" } },
@@ -29,44 +29,40 @@ const styles = () => ({
   },
   form: { marginTop: 1 },
   errorText: { color: "#f50057", marginBottom: 5, textAlign: "center" },
+  successText: { color: "#00CC66", marginBottom: 5, textAlign: "center" },
 });
 
 const theme = createMuiTheme({ palette: { secondary: { main: "#fff" } } });
 
-class Login extends Component {
-  state = { email: "", password: "" };
+class ForgotPassword extends Component {
+  state = { email: ""};
 
   handleEmailChange = ({ target }) => {
     this.setState({ email: target.value });
   };
 
-  handlePasswordChange = ({ target }) => {
-    this.setState({ password: target.value });
-  };
-
   handleSubmit = (e) => {
     e.preventDefault();
     const { dispatch } = this.props;
-    const { email, password } = this.state;
+    const { email } = this.state;
 
-    dispatch(loginUser(email, password));
+    dispatch(sendPasswordResetLink(email));
   };
-
   render() {
-    const { classes, loginError, isAuthenticated, isLoading } = this.props;
-    if (isAuthenticated) {
-      return <Redirect to="/admin" />;
-    } else {
-      return (
+    const { classes, sendPassResetSuccess, sendPassResetError, isLoading } = this.props;
+    return (
         <Container component="main" maxWidth="xs">
-          <Paper className={classes.paper}>
+        <Paper className={classes.paper}>
             <Avatar className={classes.avatar} src="/favicon.ico"></Avatar>
             <Typography component="h1" variant="h5">
-              FireShort
+            FireShort
             </Typography>
             <br></br>
-            <form onSubmit={this.handleSubmit}>
-              <TextField
+            <Typography component="h6" variant="h6">
+            Password Reset
+            </Typography>
+            <form onSubmit={this.handleSubmit} style={{width: "100%"}}>
+            <TextField
                 variant="outlined"
                 margin="normal"
                 fullWidth
@@ -74,75 +70,54 @@ class Login extends Component {
                 label="Email Address"
                 name="email"
                 onChange={this.handleEmailChange}
-              />
-              <TextField
-                variant="outlined"
-                margin="normal"
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                onChange={this.handlePasswordChange}
-              />
-              {loginError && (
+            />
+            {sendPassResetError && (
                 <Typography component="p" className={classes.errorText}>
-                  Incorrect email or password.
+                {sendPassResetError}
                 </Typography>
-              )}
-              <br></br>
-              <Button
+            )}
+            {sendPassResetSuccess && (
+                <Typography component="p" className={classes.successText}>
+                    Password reset link sent!
+                </Typography>
+            )}
+            <br></br>
+            <Button
                 type="submit"
                 fullWidth
                 size="large"
                 variant="contained"
                 color="primary"
                 className={classes.submit}
-              >
+            >
                 <MuiThemeProvider theme={theme}>
-                  {isLoading ? (
+                {isLoading ? (
                     <CircularProgress color="secondary" />
-                  ) : (
-                    "Sign In"
-                  )}
+                ) : (
+                    "Send Password Reset Link"
+                )}
                 </MuiThemeProvider>
-              </Button>
-              <br/>
-              <br/>
-              <Link to="/signup" style={{textDecoration: "none"}}>
-                <Button
-                  type="button"
-                  fullWidth
-                  size="large"
-                  variant="outlined"
-                  color="primary"
-                  className={classes.submit}
-                >
-                  Sign Up
-                </Button>
-              </Link>
-            </form>
+            </Button>
+            </form>            
             <div style={{padding: "0.5rem", widht: "100%", textAlign:"center"}}>
-                <Link to="/forgot-password">
-                  <Typography component="p">
-                    Forgot Password?
-                  </Typography>
-                </Link>
+                <Typography component="p">
+                  <Link to="/login">
+                    Log in?
+                    </Link>
+                </Typography>
             </div>
-          </Paper>
+        </Paper>
         </Container>
-      );
-    }
+    );
   }
 }
 
 function mapStateToProps(state) {
   return {
-    isLoggingIn: state.auth.isLoggingIn,
+    sendPassResetSuccess: state.auth.sendPassResetSuccess,
     isLoading: state.auth.isLoading,
-    loginError: state.auth.loginError,
-    isAuthenticated: state.auth.isAuthenticated,
+    sendPassResetError: state.auth.sendPassResetError,
   };
 }
 
-export default withStyles(styles)(connect(mapStateToProps)(Login));
+export default withStyles(styles)(connect(mapStateToProps)(ForgotPassword));

@@ -9,9 +9,9 @@ import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/styles";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
-import { loginUser } from "../actions";
+import { signupUser } from "../actions";
 
 const styles = () => ({
   "@global": { body: { backgroundColor: "#fff" } },
@@ -33,8 +33,12 @@ const styles = () => ({
 
 const theme = createMuiTheme({ palette: { secondary: { main: "#fff" } } });
 
-class Login extends Component {
-  state = { email: "", password: "" };
+class SignUp extends Component {
+  state = { email: "", password: "", password2: "", displayName: "" };
+
+  handleNameChange = ({ target }) => {
+    this.setState({ displayName: target.value });
+  };
 
   handleEmailChange = ({ target }) => {
     this.setState({ email: target.value });
@@ -44,16 +48,20 @@ class Login extends Component {
     this.setState({ password: target.value });
   };
 
+  handlePasswordChange2 = ({ target }) => {
+    this.setState({ password2: target.value });
+  };
+
   handleSubmit = (e) => {
     e.preventDefault();
     const { dispatch } = this.props;
-    const { email, password } = this.state;
+    const { displayName, email, password, password2 } = this.state;
 
-    dispatch(loginUser(email, password));
+    dispatch(signupUser(displayName, email, password, password2));
   };
 
   render() {
-    const { classes, loginError, isAuthenticated, isLoading } = this.props;
+    const { classes, signupError, isAuthenticated, isLoading } = this.props;
     if (isAuthenticated) {
       return <Redirect to="/admin" />;
     } else {
@@ -65,7 +73,19 @@ class Login extends Component {
               FireShort
             </Typography>
             <br></br>
+            <Typography component="h3" variant="h6">
+              Create an account
+            </Typography>
             <form onSubmit={this.handleSubmit}>
+              <TextField
+                variant="outlined"
+                margin="normal"
+                fullWidth
+                id="name"
+                label="Full Name"
+                name="fullname"
+                onChange={this.handleNameChange}
+                />
               <TextField
                 variant="outlined"
                 margin="normal"
@@ -85,9 +105,19 @@ class Login extends Component {
                 id="password"
                 onChange={this.handlePasswordChange}
               />
-              {loginError && (
+              <TextField
+                variant="outlined"
+                margin="normal"
+                fullWidth
+                name="password2"
+                label="Confirm Password"
+                type="password"
+                id="password2"
+                onChange={this.handlePasswordChange2}
+              />
+              {signupError && (
                 <Typography component="p" className={classes.errorText}>
-                  Incorrect email or password.
+                  {signupError}
                 </Typography>
               )}
               <br></br>
@@ -103,32 +133,11 @@ class Login extends Component {
                   {isLoading ? (
                     <CircularProgress color="secondary" />
                   ) : (
-                    "Sign In"
+                    "Sign Up"
                   )}
                 </MuiThemeProvider>
               </Button>
-              <br/>
-              <br/>
-              <Link to="/signup" style={{textDecoration: "none"}}>
-                <Button
-                  type="button"
-                  fullWidth
-                  size="large"
-                  variant="outlined"
-                  color="primary"
-                  className={classes.submit}
-                >
-                  Sign Up
-                </Button>
-              </Link>
             </form>
-            <div style={{padding: "0.5rem", widht: "100%", textAlign:"center"}}>
-                <Link to="/forgot-password">
-                  <Typography component="p">
-                    Forgot Password?
-                  </Typography>
-                </Link>
-            </div>
           </Paper>
         </Container>
       );
@@ -138,11 +147,11 @@ class Login extends Component {
 
 function mapStateToProps(state) {
   return {
-    isLoggingIn: state.auth.isLoggingIn,
+    isSigningUp: state.auth.isSigningUp,
     isLoading: state.auth.isLoading,
-    loginError: state.auth.loginError,
+    signupError: state.auth.signupError,
     isAuthenticated: state.auth.isAuthenticated,
   };
 }
 
-export default withStyles(styles)(connect(mapStateToProps)(Login));
+export default withStyles(styles)(connect(mapStateToProps)(SignUp));
