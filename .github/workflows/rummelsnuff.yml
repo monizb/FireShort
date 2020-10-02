@@ -1,6 +1,16 @@
-name: Rummelsnuff
-  uses: andrewslotin/rummelsnuff@master
-    with:
+name: Pull Request Spamtoberfest checker
+
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  mark-as-spam:
+    name: Rummelsnuff
+    steps:
+      - name: Rummelsnuff
+        uses: andrewslotin/rummelsnuff@master
+          with:
       spam_label: "Potentially Spam"
       close_spam_prs: "no"
       access_token: ${{ secrets.GITHUB_TOKEN }}
