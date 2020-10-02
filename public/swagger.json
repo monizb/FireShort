@@ -51,7 +51,13 @@
         ],
         "responses": {
           "405": {
-            "description": "Invalid input"
+            "description": "no api key specified / invalid api key"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "400": {
+            "description": "Unable to create a Link"
           }
         },
         "security": [
@@ -84,8 +90,14 @@
               }
             }
           },
+          "405": {
+            "description": "no api key specified / invalid api key"
+          },
           "400": {
-            "description": "Invalid value"
+            "description": "Unable to fetch all Links"
+          },
+          "404": {
+            "description": "Not found"
           }
         },
         "security": [
@@ -96,23 +108,23 @@
         ]
       }
     },
-    "/url/{name}": {
+    "/url/{curl}": {
       "get": {
         "tags": [
           "ShortenURL"
         ],
-        "summary": "Find url by name",
+        "summary": "Find link by curl",
         "description": "Returns a single ShortenURL object",
-        "operationId": "getURLByName",
+        "operationId": "getURLByCURL",
         "produces": [
           "application/json",
           "application/xml"
         ],
         "parameters": [
           {
-            "name": "name",
+            "name": "curl",
             "in": "path",
-            "description": "Name of url to return",
+            "description": "curl of the link",
             "required": true,
             "type": "string"
           }
@@ -124,11 +136,17 @@
               "$ref": "#/definitions/ShortenURL"
             }
           },
-          "400": {
-            "description": "Invalid name supplied"
-          },
           "404": {
-            "description": "URL not found"
+            "description": "Not found"
+          },
+          "400": {
+            "description": "Unable to fetch given Link"
+          },
+          "405": {
+            "description": "no api key specified / invalid api key"
+          },
+          "406": {
+            "description": "invalid curl / no Link found"
           }
         },
         "security": [
@@ -154,9 +172,9 @@
         ],
         "parameters": [
           {
-            "name": "name",
+            "name": "curl",
             "in": "path",
-            "description": "name of URL that needs to be updated",
+            "description": "curl of link that needs to be updated",
             "required": true,
             "type": "string"
           },
@@ -177,7 +195,13 @@
         ],
         "responses": {
           "405": {
-            "description": "Invalid input"
+            "description": "no api key specified / invalid api key"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "400": {
+            "description": "Unable to update Link"
           }
         },
         "security": [
@@ -200,19 +224,22 @@
         ],
         "parameters": [
           {
-            "name": "name",
+            "name": "curl",
             "in": "path",
-            "description": "URL name to delete",
+            "description": "curl to delete",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
-          "400": {
-            "description": "Invalid name supplied"
+          "405": {
+            "description": "no api key specified / invalid api key"
           },
           "404": {
-            "description": "URL not found"
+            "description": "Not found"
+          },
+          "400": {
+            "description": "Unable to delete Link"
           }
         },
         "security": [
@@ -223,23 +250,23 @@
         ]
       }
     },
-    "/url/{name}/track": {
+    "/url/{curl}/track": {
       "get": {
         "tags": [
           "LinkActivity"
         ],
-        "summary": "Get Analysis for giving URL",
+        "summary": "Get Analysis for giving curl",
         "description": "",
-        "operationId": "getLinkActivityByName",
+        "operationId": "getLinkActivityByCURL",
         "produces": [
           "application/json",
           "application/xml"
         ],
         "parameters": [
           {
-            "name": "name",
+            "name": "curl",
             "in": "path",
-            "description": "name of URL that needs to be fetched",
+            "description": "curl that needs to be fetched",
             "required": true,
             "type": "string"
           }
@@ -251,11 +278,14 @@
               "$ref": "#/definitions/LinkActivity"
             }
           },
-          "400": {
-            "description": "Invalid name supplied"
+          "405": {
+            "description": "no api key specified / invalid api key"
           },
           "404": {
-            "description": "LinkActivity not found"
+            "description": "Not found"
+          },
+          "400": {
+            "description": "Unable to fetch Tracking details of the give Link"
           }
         },
         "security": [
@@ -275,30 +305,15 @@
     }
   },
   "definitions": {
-    "ApiResponse": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "type": {
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
-        }
-      }
-    },
     "ShortenURL": {
       "type": "object",
       "required": [
-        "name",
+        "curl",
         "lrul",
         "track"
       ],
       "properties": {
-        "name": {
+        "curl": {
           "type": "string",
           "example": "jithin"
         },
