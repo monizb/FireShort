@@ -18,6 +18,10 @@ class Home extends Component {
     };
     document.body.style =
       'background: #f1f1f1; margin: 0; padding: 0; min-height: 100vh; display: flex;justify-content: center;align-items: center;';
+    
+  }
+
+  componentDidMount() {
     this.startFunc(true);
   }
 
@@ -33,7 +37,6 @@ class Home extends Component {
         .get()
         .then((doc) => {
           var data = doc.data();
-          console.log(data.password);
           this.setState({ loading: false, realPassword: data.password });
           if (!doc.exists) {
             window.location.pathname = '/login';
