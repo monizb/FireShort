@@ -22,6 +22,33 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "harshvats2000",
+      "name": "HARSH VATS",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/45518343?v=4",
+      "profile": "http://harshvats.vercel.app",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "asi309",
+      "name": "Asidipta",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/22616656?v=4",
+      "profile": "https://github.com/asi309",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "vikashgaya916",
+      "name": "Vikash Kumar",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/62158550?v=4",
+      "profile": "https://github.com/vikashgaya916",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
