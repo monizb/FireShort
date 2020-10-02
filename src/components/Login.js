@@ -12,6 +12,8 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
 import { loginUser } from "../actions";
+import FeatureCard from "./FeatureCard";
+import LoginLeftComponent from "./LoginLeftComponent";
 
 const styles = () => ({
   "@global": { 
@@ -28,20 +30,6 @@ const styles = () => ({
     width: '60vw',
     overflow: 'hidden',
     borderRadius: '20px'
-  },
-  loginLeftPart: {
-    width: '50%',
-    height: 'initial',
-    backgroundColor: 'rgb(40, 40, 40)',
-    padding: '50px 0px',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    overflow: 'hidden',
-  },
-  loginImage: {
-    width: '30rem',
   },
   loginRightPart: {
     width: '50%',
@@ -108,9 +96,7 @@ class Login extends Component {
         <Container className={classes.mainContainer}>
           <Paper className={classes.paper} elevation={24}>
             <Grid container alignItems="stretch" direction="row">
-              <Grid item className={classes.loginLeftPart}>
-                <img className={classes.loginImage} src="./images/loginPageIllustration.svg" alt="Login Welcome Image" />
-              </Grid>
+              <LoginLeftComponent />
               <Grid item className={classes.loginRightPart}>
                 <div className={classes.logoTextContainer}>
                   <img className={classes.logoTextImage} src="./images/fireshortLogoText.gif" alt="Fireshort Logo Text"/>
