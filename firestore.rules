@@ -15,9 +15,8 @@ service cloud.firestore {
       allow update,delete: if request.auth.uid == resource.data.author;
       
       match /tracking/{trackingId}{
-      	allow read : if request.auth.uid == resource.data.author;
+      	allow read, delete, update : if request.auth.uid == resource.data.author;
         allow create : if true;
-        allow delete,update: if request.resource.data.author == resource.data.author;
       }
     }
     
