@@ -1,95 +1,83 @@
-import { Grid } from "@material-ui/core";
+import {Grid} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
-import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
+import {createMuiTheme, MuiThemeProvider} from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
-import { withStyles } from "@material-ui/styles";
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import {withStyles} from "@material-ui/styles";
+import React, {Component} from "react";
+import {connect} from "react-redux";
+import {Redirect} from "react-router-dom";
 
-import { loginUser } from "../actions";
+import {loginUser} from "../actions";
 import LoginLeftComponent from "./LoginLeftComponent";
 
 const styles = () => ({
-  "@global": { 
-    body: { background: `beige`, padding: 0, margin: 0 }
+  "@global" : {body : {background : `beige`, padding : 0, margin : 0}},
+  mainContainer : {
+    height : '100vh',
+    display : 'flex',
+    flexDirection : 'column',
+    justifyContent : 'center',
+    alignItems : 'center'
   },
-  mainContainer: {
-    height: '100vh',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center'
+  paper : {width : '60vw', overflow : 'hidden', borderRadius : '20px'},
+  loginRightPart : {
+    width : '50%',
+    height : 'initial',
+    padding : '50px 50px',
+    display : 'flex',
+    flexDirection : 'column',
+    justifyContent : 'center',
+    alignItems : 'stretch',
+    overflow : 'hidden',
   },
-  paper: {
-    width: '60vw',
-    overflow: 'hidden',
-    borderRadius: '20px'
+  logoTextContainer : {
+    textAlign : 'center',
   },
-  loginRightPart: {
-    width: '50%',
-    height: 'initial',
-    padding: '50px 50px',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'stretch',
-    overflow: 'hidden',
+  logoTextImage : {
+    height : '50px',
   },
-  logoTextContainer: {
-    textAlign: 'center',
+  loginText : {
+    textAlign : 'center',
   },
-  logoTextImage: {
-    height: '50px',
+  avatar : {width : '64px', height : '64px'},
+  form : {
+    width : 'initial',
+    display : 'flex',
+    flexDirection : 'column',
+    justifyContent : 'center',
+    alignItems : 'center',
+    margin : '0px',
   },
-  loginText: {
-    textAlign: 'center',
-  },
-  avatar: {
-    width: '64px',
-    height: '64px'
-  },
-  form: { 
-    width: 'initial',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    margin: '0px',
-  },
-  errorText: { color: "#f50057", marginBottom: 5, textAlign: "center" },
-  submit: { fontSize: '1.2rem' },
+  errorText : {color : "#f50057", marginBottom : 5, textAlign : "center"},
+  submit : {fontSize : '1.2rem'},
 });
 
-const theme = createMuiTheme({ palette: { secondary: { main: "#fff" } } });
+const theme = createMuiTheme({palette : {secondary : {main : "#fff"}}});
 
 class Login extends Component {
-  state = { email: "", password: "" };
+  state = {email : "", password: ""};
 
-  handleEmailChange = ({ target }) => {
-    this.setState({ email: target.value });
-  };
+  handleEmailChange = ({target}) => { this.setState({email : target.value}); };
 
-  handlePasswordChange = ({ target }) => {
-    this.setState({ password: target.value });
-  };
+  handlePasswordChange =
+      ({target}) => { this.setState({password : target.value}); };
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const { dispatch } = this.props;
-    const { email, password } = this.state;
+    const {dispatch} = this.props;
+    const {email, password} = this.state;
 
     dispatch(loginUser(email, password));
   };
 
   render() {
-    const { classes, loginError, isAuthenticated, isLoading } = this.props;
+    const {classes, loginError, isAuthenticated, isLoading} = this.props;
     if (isAuthenticated) {
-      return <Redirect to="/admin" />;
+      return <Redirect to = "/admin" />;
     } else {
       return (
         <Container className={classes.mainContainer}>
@@ -105,14 +93,16 @@ class Login extends Component {
                 </Typography>
                 <form onSubmit={this.handleSubmit} className={classes.form}>
                   <TextField
-                    variant="outlined"
-                    margin="normal"
-                    fullWidth
-                    id="email"
-                    label="Email Address"
-                    name="email"
-                    onChange={this.handleEmailChange}
-                  />
+      variant = "outlined"
+      margin = "normal"
+      fullWidth
+      id = "email"
+      label = "Email Address"
+      name = "email"
+      onChange =
+      {
+        this.handleEmailChange
+      } />
                   <TextField
                     variant="outlined"
                     margin="normal"
@@ -122,8 +112,8 @@ class Login extends Component {
                     type="password"
                     id="password"
                     onChange={this.handlePasswordChange}
-                  />
-                  {loginError && (
+                  / >
+      {loginError && (
                     <Typography component="p" className={classes.errorText}>
                       Incorrect email or password.
                     </Typography>
