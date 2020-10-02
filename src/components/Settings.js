@@ -3,9 +3,7 @@ import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import {nanoid} from 'nanoid'
 import {connect} from "react-redux";
-import {confirmAlert} from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
-import {logoutUser} from "../actions";
 import {db, myFirebase} from '../firebase/firebase';
 import "./components.module.css"
 import SwaggerUI from "swagger-ui-react"
@@ -162,7 +160,9 @@ class Admin extends Component {
                             <Typography variant="h6" className={classes.title}>
                                 FireShort
                             </Typography>
-                            <Button color="inherit" onClick={()=>{window.location.href=`${window.location.origin}/admin`}}>Back to dashboard</Button>
+                            <Button color="inherit" onClick={() => {
+                                window.location.href = `${window.location.origin}/admin`
+                            }}>Back to dashboard</Button>
                         </Toolbar>
                     </AppBar>
                 </div>
