@@ -18,7 +18,7 @@ const styles = () => ({
   paper: {
     marginTop: 100,
     display: "flex",
-    padding: 20,
+    padding: 40,
     flexDirection: "column",
     alignItems: "center",
   },
@@ -59,7 +59,7 @@ class Login extends Component {
     } else {
       return (
         <Container component="main" maxWidth="xs">
-          <Paper className={classes.paper}>
+          <Paper className={classes.paper} elevation={3}>
             <Avatar className={classes.avatar} src="/favicon.ico"></Avatar>
             <Typography component="h1" variant="h5">
               FireShort
@@ -100,7 +100,7 @@ class Login extends Component {
                 className={classes.submit}
               >
                 <MuiThemeProvider theme={theme}>
-                  {isLoading ? (
+                  {isLoading && !loginError ? (
                     <CircularProgress color="secondary" />
                   ) : (
                     "Sign In"

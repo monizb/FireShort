@@ -1,4 +1,4 @@
-#If you are looking to make your first contribution, follow the steps below.
+We are glad to know that you have decided to contribute to this repository 🥳🥳 .If you are looking to make your first contribution, follow the steps below.
 
 <img align="right" width="300" src="/public/Images/fork.jpg" alt="fork this repository" />
 
@@ -106,6 +106,8 @@ Now submit the pull request.
 
 <img style="float: right;" src="public/Images/submit-pull-request.png" alt="submit pull request" />
 
-If your changes are correct then I'll merge all your changes into the master
+If your changes are correct then we will merge all your changes into the master
 branch of this project. You will get a notification email once the changes have
 been merged.
+
+`Spammy and low value PRs which fix typos and whitespaces will be labeled invalid and will NOT count towards your Hacktoberfest contributions`
