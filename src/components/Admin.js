@@ -4,7 +4,6 @@ import CardUrls from "./CardUrls.js";
 import ListUrls from "./ListUrls.js";
 import HitsDialog from "./HitsDialog.js";
 import UrlsDialog from "./UrlsDialog.js";
-import Footer from "./Footer.js";
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { nanoid } from 'nanoid'
@@ -16,7 +15,7 @@ import { myFirebase, db } from '../firebase/firebase';
 import "./components.module.css"
 
 import {
-  AppBar, Button, Container, CssBaseline,
+  AppBar, Button, CssBaseline,
   Fab, LinearProgress, Snackbar, Toolbar, Typography
 } from '@material-ui/core';
 
