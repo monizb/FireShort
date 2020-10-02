@@ -19,19 +19,17 @@ original repository has been forked from
 The following features has been added to the original repository before pushing
 this rep:
 
-- The generated links now track the number of hits on them
-- The Custom URL is an optional field now, if left black it generates a random 8
-  character long code using NanoID
-- Ability to track link activity : The links can now track the timestamp,ipv4
-  and User-Agent of the Request source
+- The generated link now track the number of hits on them
+- The Custom URL is an optional field now, if left black it generates a random 8character long code using NanoID
+- Ability to track link activity : The links can now track the timestamp,ipv and User-Agent of the Request source
 - The Link Tracking feature for any link can be switched on/off at anytime from
   Admin Panel
 - A lot of UI Changes
 
 ### Features To Be Added
 
-The following features are under development/open for contributions.Please first
-create a feature issue to discuss about the feature you would like to take up.
+The following features are under development/open for contributions.
+Please first create a feature issue to discuss about the feature you would like to take up.
 
 - [ ] Multiple Admin Panels and New User Registration
 - [ ] Ability to check for Custom URL clashes across all users instantly to
