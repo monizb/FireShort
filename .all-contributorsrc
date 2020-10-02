@@ -49,11 +49,20 @@
       "contributions": [
         "bug"
       ]
+    },
+    {
+      "login": "i-aryan",
+      "name": "Aryan Verma",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/12378189?v=4",
+      "profile": "http://aryanverma.in",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
   "projectName": "FireShort",
-  "projectOwner": "Monish Basaniwal",
+  "projectOwner": "monizb",
   "repoType": "github",
   "repoHost": "https://github.com",
   "skipCi": true
