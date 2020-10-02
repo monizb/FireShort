@@ -1,3 +1,4 @@
+import { CssBaseline, Grid } from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -6,6 +7,7 @@ import Paper from "@material-ui/core/Paper";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
+import { CenterFocusStrong, CropLandscapeSharp } from "@material-ui/icons";
 import { withStyles } from "@material-ui/styles";
 import React, { Component } from "react";
 import { connect } from "react-redux";
@@ -13,22 +15,71 @@ import { Redirect } from "react-router-dom";
 
 import { loginUser } from "../actions";
 
+// linear-gradient(45deg, coral, #FAEBD7)
+
 const styles = () => ({
-  "@global": { body: { backgroundColor: "#fff" } },
+  "@global": { 
+    body: { background: `beige`, padding: 0, margin: 0 }
+  },
+  mainContainer: {
+    height: '100vh',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
   paper: {
-    marginTop: 100,
-    display: "flex",
-    padding: 20,
-    flexDirection: "column",
-    alignItems: "center",
+    width: '60vw',
+    overflow: 'hidden',
+    borderRadius: '20px'
+  },
+  loginLeftPart: {
+    width: '50%',
+    height: 'initial',
+    backgroundColor: 'rgb(40, 40, 40)',
+    padding: '50px 0px',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    overflow: 'hidden',
+  },
+  welcomeText: {
+    color: 'rgb(230, 230, 230)',
+    height: '100%',
+    fontSize: '1.8rem',
+    fontWeight: '500',
+  },
+  loginImage: {
+    width: '30rem',
+  },
+  loginRightPart: {
+    width: '50%',
+    height: 'initial',
+    padding: '50px 50px',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'stretch',
+    overflow: 'hidden',
+  },
+  loginText: {
+    textAlign: 'center',
   },
   avatar: {
-    marginLeft: "auto",
-    marginRight: "auto",
-    backgroundColor: "#f50057",
+    width: '64px',
+    height: '64px'
   },
-  form: { marginTop: 1 },
+  form: { 
+    width: 'initial',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: '0px',
+  },
   errorText: { color: "#f50057", marginBottom: 5, textAlign: "center" },
+  submit: { fontSize: '1.2rem' },
 });
 
 const theme = createMuiTheme({ palette: { secondary: { main: "#fff" } } });
@@ -58,56 +109,65 @@ class Login extends Component {
       return <Redirect to="/admin" />;
     } else {
       return (
-        <Container component="main" maxWidth="xs">
-          <Paper className={classes.paper}>
-            <Avatar className={classes.avatar} src="/favicon.ico"></Avatar>
-            <Typography component="h1" variant="h5">
-              FireShort
-            </Typography>
-            <br></br>
-            <form onSubmit={this.handleSubmit}>
-              <TextField
-                variant="outlined"
-                margin="normal"
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                onChange={this.handleEmailChange}
-              />
-              <TextField
-                variant="outlined"
-                margin="normal"
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                onChange={this.handlePasswordChange}
-              />
-              {loginError && (
-                <Typography component="p" className={classes.errorText}>
-                  Incorrect email or password.
+        <Container className={classes.mainContainer}>
+          <Paper className={classes.paper} elevation={24}>
+            <Grid container alignItems="stretch" direction="row">
+              <Grid item className={classes.loginLeftPart}>
+                <Avatar className={classes.avatar} src="./icons/favicon-128.png"></Avatar><br />
+                <Typography component="h1" variant="h5" className={classes.welcomeText}>
+                  Welcome to Fireshort
                 </Typography>
-              )}
-              <br></br>
-              <Button
-                type="submit"
-                fullWidth
-                size="large"
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-              >
-                <MuiThemeProvider theme={theme}>
-                  {isLoading ? (
-                    <CircularProgress color="secondary" />
-                  ) : (
-                    "Sign In"
+                <img className={classes.loginImage} src="./images/loginPageIllustration.svg" altText="" />
+              </Grid>
+              <Grid item className={classes.loginRightPart}>
+                <Typography className={classes.loginText} component="h1" variant="h5">
+                  Login
+                </Typography>
+                <form onSubmit={this.handleSubmit} className={classes.form}>
+                  <TextField
+                    variant="outlined"
+                    margin="normal"
+                    fullWidth
+                    id="email"
+                    label="Email Address"
+                    name="email"
+                    onChange={this.handleEmailChange}
+                  />
+                  <TextField
+                    variant="outlined"
+                    margin="normal"
+                    fullWidth
+                    name="password"
+                    label="Password"
+                    type="password"
+                    id="password"
+                    onChange={this.handlePasswordChange}
+                  />
+                  {loginError && (
+                    <Typography component="p" className={classes.errorText}>
+                      Incorrect email or password.
+                    </Typography>
                   )}
-                </MuiThemeProvider>
-              </Button>
-            </form>
+                  <br />
+                  <Button
+                    type="submit"
+                    size="large"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    className={classes.submit}
+                  >
+                    <MuiThemeProvider theme={theme}>
+                      {isLoading ? (
+                        <CircularProgress className={classes.loader} color="secondary" />
+                      ) : (
+                        "Sign In"
+                      )}
+                    </MuiThemeProvider>
+                  </Button>
+                </form>
+              </Grid>
+            </Grid>
           </Paper>
         </Container>
       );
