@@ -144,12 +144,25 @@ class Admin extends Component {
 
   handleDeleteShortUrl = (curl) => {
     const self = this;
-    if (window.confirm("Are you sure you want to delete this URL?")) {
-      db.collection('shorturls').doc(curl).delete().then(function () {
-        self.updateUrls();
-      });
-    }
-    else return;
+  
+    confirmAlert({
+      title: 'Confirm Deletion',
+      message: 'Are you sure you want to delete this URL?',
+      buttons: [
+        {
+          label: 'Delete',
+          onClick: () => {
+            db.collection('shorturls').doc(curl).delete().then(function () {
+              self.updateUrls();
+            });
+          }
+        },
+        {
+          label: 'Back',
+          onClick: () => {return;}
+        }
+      ]
+    });
   }
 
   handleEditShortUrl = (curl) => {
