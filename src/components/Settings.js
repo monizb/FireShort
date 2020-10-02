@@ -99,17 +99,17 @@ class Admin extends Component {
         apiKeyRef.get()
             .then(doc => {
                 if (doc.exists) {
-                    var data = doc.data();//api key details
+                    let data = doc.data();
                     self.setState({loading: false});
                     this.setState({apikey: data.key});
                     this.setState({backdrop: false});
                 } else {
-                    //SET UP CREATE Button
                     let apiKey = nanoid(32);
                     apiKeyRef.set({key: apiKey, uid: uid})
-                        .then(r => {
-                            alert('d')
-                            console.log(r)
+                        .then(() => {
+                            self.setState({loading: false});
+                            this.setState({apikey: apiKey});
+                            this.setState({backdrop: false});
                         }).catch(err => {
                         console.log('Error creating api keys', err);
                         self.setState({loading: false});
