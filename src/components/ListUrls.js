@@ -1,40 +1,57 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { Box, Button, ButtonGroup, Container, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Tooltip } from '@material-ui/core';
-import { FileCopyOutlined as FileCopyOutlinedIcon, Edit as EditIcon, Visibility as VisibilityIcon, DeleteForever as DeleteForeverIcon } from '@material-ui/icons';
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  Container,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TablePagination,
+  TableRow,
+  Tooltip
+} from '@material-ui/core';
 import Badge from '@material-ui/core/Badge';
-import { OpenInBrowser } from '@material-ui/icons';
+import {makeStyles} from '@material-ui/core/styles';
+import {
+  DeleteForever as DeleteForeverIcon,
+  Edit as EditIcon,
+  FileCopyOutlined as FileCopyOutlinedIcon,
+  Visibility as VisibilityIcon
+} from '@material-ui/icons';
+import {OpenInBrowser} from '@material-ui/icons';
+import React from 'react';
 
 const useStyles = makeStyles((theme) => ({
-    cardGrid: {
-        paddingTop: theme.spacing(8),
-        paddingBottom: theme.spacing(8),
-    },
-    root: {
-        width: '100%',
-    },
-    container: {
-        maxHeight: 440,
-    },
-    label: {
-        textTransform: 'initial',
-    },
-}));
+                               cardGrid : {
+                                 paddingTop : theme.spacing(8),
+                                 paddingBottom : theme.spacing(8),
+                               },
+                               root : {
+                                 width : '100%',
+                               },
+                               container : {
+                                 maxHeight : 440,
+                               },
+                               label : {
+                                 textTransform : 'initial',
+                               },
+                             }));
 
 export default function ListUrls(props) {
-    const classes = useStyles();
+  const classes = useStyles();
 
-    const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-    const handleChangePage = (event, newPage) => {
-        setPage(newPage);
-    };
+  const handleChangePage = (event, newPage) => { setPage(newPage); };
 
-    const handleChangeRowsPerPage = (event) => {
-        setRowsPerPage(+event.target.value);
-        setPage(0);
-    };
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
 
     return (
         <Container className={classes.cardGrid} maxWidth="md">
@@ -43,13 +60,15 @@ export default function ListUrls(props) {
                     <Table stickyHeader aria-label="sticky table">
                         <TableHead>
                             <TableRow>
-                                <TableCell key="curl" align="left" style={{ minWidth: "100px" }}>
+                                <TableCell key="curl" align="left" style={{
+    minWidth: "100px" }}>
                                     Short URL
                                 </TableCell>
                                 <TableCell key="action" align="center" style={{ minWidth: "100px" }}>
                                     Action
                                 </TableCell>
-                                <TableCell key="lurl" align="left" style={{ minWidth: "100px" }}>
+                                <TableCell key="lurl" align="left" style={{
+    minWidth: "100px" }}>
                                     Long URL
                                 </TableCell>
                             </TableRow>
@@ -62,10 +81,11 @@ export default function ListUrls(props) {
                                             <Button
                                                 startIcon={
                                                     <FileCopyOutlinedIcon />
-                                                }
-                                                onClick={() => { navigator.clipboard.writeText(window.location.origin + "/" + card.data.curl) }}
+}
+                                                onClick={() => {
+  navigator.clipboard.writeText(window.location.origin + "/" + card.data.curl) }}
                                                 classes={{
-                                                    label: classes.label
+  label: classes.label
                                                 }}
                                             >{card.data.curl}</Button>
                                             <Tooltip title={card.data.hits + " Hits"}>
@@ -96,7 +116,8 @@ export default function ListUrls(props) {
                                         
                                     </TableRow>
                                 );
-                            })}
+                                                })
+                                                }
                         </TableBody>
                     </Table>
                 </TableContainer>
@@ -112,4 +133,4 @@ export default function ListUrls(props) {
             </Paper>
         </Container>
     );
-}
+                        }
