@@ -1,4 +1,4 @@
-import { CssBaseline, Grid } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -7,7 +7,6 @@ import Paper from "@material-ui/core/Paper";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
-import { CenterFocusStrong, CropLandscapeSharp } from "@material-ui/icons";
 import { withStyles } from "@material-ui/styles";
 import React, { Component } from "react";
 import { connect } from "react-redux";
@@ -115,7 +114,7 @@ class Login extends Component {
                 <Typography component="h1" variant="h5" className={classes.welcomeText}>
                   Welcome to Fireshort
                 </Typography>
-                <img className={classes.loginImage} src="./images/loginPageIllustration.svg" altText="Login Welcome Image" />
+                <img className={classes.loginImage} src="./images/loginPageIllustration.svg" alt="Login Welcome Image" />
               </Grid>
               <Grid item className={classes.loginRightPart}>
                 <Typography className={classes.loginText} component="h1" variant="h5">
