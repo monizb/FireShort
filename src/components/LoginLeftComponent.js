@@ -49,7 +49,7 @@ const styles = () => ({
 const LoginLeftComponent = ({classes}) => {
     return (
         <Grid item className={classes.loginLeftPart}>
-            <img className={classes.loginImage} src="./images/loginPageIllustration.svg" alt="Login Welcome Image" />
+            <img className={classes.loginImage} src="./images/loginPageIllustration.svg" alt="Login Welcome" />
             <div className={classes.featureContainer}>
                 <FeatureCard feature="Custom Tiny URLs" />
                 <FeatureCard feature="Hit Tracker" />

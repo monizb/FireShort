@@ -12,7 +12,6 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
 import { loginUser } from "../actions";
-import FeatureCard from "./FeatureCard";
 import LoginLeftComponent from "./LoginLeftComponent";
 
 const styles = () => ({
@@ -99,7 +98,7 @@ class Login extends Component {
               <LoginLeftComponent />
               <Grid item className={classes.loginRightPart}>
                 <div className={classes.logoTextContainer}>
-                  <img className={classes.logoTextImage} src="./images/fireshortLogoText.gif" alt="Fireshort Logo Text"/>
+                  <img className={classes.logoTextImage} src="./images/fireshortLogoText.gif" alt="Fireshort Text Logo"/>
                 </div>             
                 <Typography className={classes.loginText} component="h1" variant="h5">
                   Login
