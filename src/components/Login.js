@@ -15,8 +15,6 @@ import { Redirect } from "react-router-dom";
 
 import { loginUser } from "../actions";
 
-// linear-gradient(45deg, coral, #FAEBD7)
-
 const styles = () => ({
   "@global": { 
     body: { background: `beige`, padding: 0, margin: 0 }
@@ -117,7 +115,7 @@ class Login extends Component {
                 <Typography component="h1" variant="h5" className={classes.welcomeText}>
                   Welcome to Fireshort
                 </Typography>
-                <img className={classes.loginImage} src="./images/loginPageIllustration.svg" altText="" />
+                <img className={classes.loginImage} src="./images/loginPageIllustration.svg" altText="Login Welcome Image" />
               </Grid>
               <Grid item className={classes.loginRightPart}>
                 <Typography className={classes.loginText} component="h1" variant="h5">
