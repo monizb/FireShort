@@ -325,8 +325,8 @@ class Admin extends Component {
   }
 
   handleLogout = () => {
-    const { dispatch } = this.props;
-    dispatch(logoutUser());
+    const { logout } = this.props;
+    logout();
   };
 
   onPswSave = (e) => {
@@ -484,7 +484,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     addLink: (data) => dispatch(addLink(data)),
-    setLink: (data) => dispatch(setLinks(data))
+    setLink: (data) => dispatch(setLinks(data)),
+    logout: () => dispatch(logoutUser())
   };
 }
 
