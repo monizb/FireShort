@@ -88,7 +88,7 @@ class Admin extends Component {
   }
 
   handleTrackChange = (event) => {
-    this.setState({ track: this.state.track === true ? false : true })
+    this.setState({ track: this.state.track !== true })
   }
 
   createLink = (curl, data) => {
@@ -277,6 +277,7 @@ class Admin extends Component {
                 FireShort
               </Typography>
               <Button color="inherit" onClick={this.handleLogout} >Logout</Button>
+              <Button color="inherit" onClick={()=>{window.location.href=`${window.location.origin}/admin/settings/api`}} >API</Button>
             </Toolbar>
           </AppBar>
         </div>

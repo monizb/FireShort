@@ -1,0 +1,337 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "The FireShort API uses <b>API Keys</b> to authenticate requests.You can view and manage your API keys in the FireShort Settings <a href=\"#\">Dashboard</a>. Your API keys carry many privileges, so be sure to keep them secure! Do not share your secret API keys in publicly accessible areas such as GitHub, client-side code, and so forth. Authentication to the API is performed via<a href=\"https://en.wikipedia.org/wiki/Basic_access_authentication\"> HTTP Basic Auth</a>. Provide your API key as the basic auth username value. You do not need to provide a password. If you need to. If you need to authenticate via bearer auth (e.g., for a cross-origin request), use<code><b> -H \"Authorization: Bearer YOUR_API_KEY\"</b></code> instead of <code><b> -u YOUR_API_KEY</b></code>",
+    "version": "0.1.0",
+    "title": "FireShort API Docs"
+  },
+  "host": "%YOUR_CLOUD_FUNCTION_URL%",
+  "basePath": "/v1",
+  "tags": [
+    {
+      "name": "ShortenURL",
+      "description": "Shorten URL "
+    },
+    {
+      "name": "LinkActivity",
+      "description": "Complete Analysis for the given URL"
+    }
+  ],
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "paths": {
+    "/url": {
+      "post": {
+        "tags": [
+          "ShortenURL"
+        ],
+        "summary": "Shorten a new url",
+        "description": "",
+        "operationId": "addURL",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Information needed for shorten URL",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ShortenURL"
+            }
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "security": [
+          {
+            "api_key": [
+            ]
+          }
+        ]
+      },
+      "get": {
+        "tags": [
+          "ShortenURL"
+        ],
+        "summary": "Finds All Shorten URL's",
+        "description": "Multiple status values can be provided with comma-separated strings",
+        "operationId": "findAllURLS",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ShortenURL"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid value"
+          }
+        },
+        "security": [
+          {
+            "api_key": [
+            ]
+          }
+        ]
+      }
+    },
+    "/url/{name}": {
+      "get": {
+        "tags": [
+          "ShortenURL"
+        ],
+        "summary": "Find url by name",
+        "description": "Returns a single ShortenURL object",
+        "operationId": "getURLByName",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of url to return",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ShortenURL"
+            }
+          },
+          "400": {
+            "description": "Invalid name supplied"
+          },
+          "404": {
+            "description": "URL not found"
+          }
+        },
+        "security": [
+          {
+            "api_key": [
+            ]
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "ShortenURL"
+        ],
+        "summary": "Updates a URL in the store with form data",
+        "description": "",
+        "operationId": "updateURLWithForm",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "description": "name of URL that needs to be updated",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "url",
+            "in": "formData",
+            "description": "Updated long url",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "track",
+            "in": "formData",
+            "description": "Want to track url",
+            "required": true,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "security": [
+          {
+            "api_key": [
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "ShortenURL"
+        ],
+        "summary": "Deletes a URL",
+        "description": "",
+        "operationId": "deleteURL",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "description": "URL name to delete",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid name supplied"
+          },
+          "404": {
+            "description": "URL not found"
+          }
+        },
+        "security": [
+          {
+            "api_key": [
+            ]
+          }
+        ]
+      }
+    },
+    "/url/{name}/track": {
+      "get": {
+        "tags": [
+          "LinkActivity"
+        ],
+        "summary": "Get Analysis for giving URL",
+        "description": "",
+        "operationId": "getLinkActivityByName",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "description": "name of URL that needs to be fetched",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/LinkActivity"
+            }
+          },
+          "400": {
+            "description": "Invalid name supplied"
+          },
+          "404": {
+            "description": "LinkActivity not found"
+          }
+        },
+        "security": [
+          {
+            "api_key": [
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "securityDefinitions": {
+    "api_key": {
+      "type": "apiKey",
+      "name": "api_key",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "ApiResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "type": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "ShortenURL": {
+      "type": "object",
+      "required": [
+        "name",
+        "lrul",
+        "track"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "jithin"
+        },
+        "lurl": {
+          "type": "string",
+          "example": "https://www.google.co.in/"
+        },
+        "track": {
+          "type": "boolean"
+        }
+      },
+      "xml": {
+        "name": "ShortenURL"
+      }
+    },
+    "LinkActivity": {
+      "type": "object",
+      "properties": {
+        "ipv4": {
+          "type": "string",
+          "format": "int64"
+        },
+        "timestamp": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "useragent": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "LinkActivity"
+      }
+    }
+  }
+}

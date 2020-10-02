@@ -7,6 +7,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Login from "./components/Login";
 import Home from "./components/Home";
 import Admin from "./components/Admin";
+import Settings from "./components/Settings";
 
 function App(props) {
   const { isAuthenticated, isVerifying } = props;
@@ -20,6 +21,7 @@ function App(props) {
         isVerifying={isVerifying}
       />
       <Route path="/login" component={Login} />
+      <Route path="/admin/settings/api" component={Settings} />
       <Route path="/" component={Home} />
     </Switch>
   );
