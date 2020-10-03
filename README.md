@@ -43,10 +43,9 @@ create a feature issue to discuss about the feature you would like to take up.
       way to show QR Codes (and a way to track every qr scan) for the same
 - [ ] Add a homepage showcasing the tool with animations
 - [ ] Revamp the dashboard
-- [ ] Add Protected Links With Password
 - [ ] Develop APIs for all the tasks for easy management
 - [ ] Add Link Expiry
-- [ ] Add Password Protected Links
+- [x] Add Password Protected Links
 
 Valid Feature Requests will be added to the above list over time.
 
