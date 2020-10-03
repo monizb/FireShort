@@ -142,12 +142,12 @@ Thanks goes to these wonderful people
     <td align="center"><a href="https://github.com/asi309"><img src="https://avatars0.githubusercontent.com/u/22616656?v=4" width="50px;" alt=""/><br /><sub><b>Asidipta</b></sub></a><br /><a href="https://github.com/monizb/FireShort/commits?author=asi309" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/vikashgaya916"><img src="https://avatars1.githubusercontent.com/u/62158550?v=4" width="50px;" alt=""/><br /><sub><b>Vikash Kumar</b></sub></a><br /><a href="https://github.com/monizb/FireShort/issues?q=author%3Avikashgaya916" title="Bug reports">🐛</a></td>
     <td align="center"><a href="http://aryanverma.in"><img src="https://avatars1.githubusercontent.com/u/12378189?v=4" width="50px;" alt=""/><br /><sub><b>Aryan Verma</b></sub></a><br /><a href="https://github.com/monizb/FireShort/commits?author=i-aryan" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/TaarnStar"><img src="https://avatars3.githubusercontent.com/u/17704741?v=4" width="50px;" alt=""/><br /><sub><b>Marko Milošević</b></sub></a><br /><a href="https://github.com/monizb/FireShort/issues?q=author%3ATaarnStar" title="Bug reports">🐛</a></td>
   </tr>
 </table>
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
-
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the
