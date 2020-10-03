@@ -62,7 +62,7 @@ class Home extends Component {
                     .collection("tracking")
                     .add({
                       ipv4: ipv4,
-                      timestamp: new Date().toLocaleString(),
+                      timestamp: new Date().toISOString(),
                       useragent: navigator.userAgent,
                     })
                     .then(() => {
