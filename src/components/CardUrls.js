@@ -2,7 +2,6 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box, Button, Card, CardContent, CardHeader, Container, CardActions, Grid, IconButton, Tooltip, Typography } from '@material-ui/core';
 import { FileCopyOutlined as FileCopyOutlinedIcon } from '@material-ui/icons';
-import Chip from '@material-ui/core/Chip';
 import Badge from '@material-ui/core/Badge';
 import { OpenInBrowser } from '@material-ui/icons';
 
