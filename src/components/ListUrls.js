@@ -126,7 +126,7 @@ export default function ListUrls(props) {
                           <Button
                             size='small'
                             color='primary'
-                            href={window.location.origin + '/' + card.data.curl}
+                            href={card.data.lurl}
                             target='_blank'
                           >
                             <VisibilityIcon />
