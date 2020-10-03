@@ -144,11 +144,13 @@ Thanks goes to these wonderful people
     <td align="center"><a href="http://aryanverma.in"><img src="https://avatars1.githubusercontent.com/u/12378189?v=4" width="50px;" alt=""/><br /><sub><b>Aryan Verma</b></sub></a><br /><a href="https://github.com/monizb/FireShort/commits?author=i-aryan" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/TaarnStar"><img src="https://avatars3.githubusercontent.com/u/17704741?v=4" width="50px;" alt=""/><br /><sub><b>Marko Milošević</b></sub></a><br /><a href="https://github.com/monizb/FireShort/issues?q=author%3ATaarnStar" title="Bug reports">🐛</a></td>
   </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/rahul1995"><img src="https://avatars0.githubusercontent.com/u/7647789?v=4" width="50px;" alt=""/><br /><sub><b>rahul1995</b></sub></a><br /><a href="https://github.com/monizb/FireShort/commits?author=rahul1995" title="Code">💻</a></td>
+  </tr>
 </table>
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
-
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the
