@@ -58,6 +58,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "TaarnStar",
+      "name": "Marko Milošević",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/17704741?v=4",
+      "profile": "https://github.com/TaarnStar",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
