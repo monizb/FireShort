@@ -14,33 +14,33 @@ import {
   Tooltip,
 } from "@material-ui/core";
 import Badge from "@material-ui/core/Badge";
-import { makeStyles } from "@material-ui/core/styles";
+import {makeStyles} from "@material-ui/core/styles";
 import {
   DeleteForever as DeleteForeverIcon,
   Edit as EditIcon,
   FileCopyOutlined as FileCopyOutlinedIcon,
   Visibility as VisibilityIcon,
 } from "@material-ui/icons";
-import { OpenInBrowser } from "@material-ui/icons";
+import {OpenInBrowser} from "@material-ui/icons";
 import LockIcon from "@material-ui/icons/Lock";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
 import React from "react";
 
 const useStyles = makeStyles((theme) => ({
-  cardGrid: {
-    paddingTop: theme.spacing(8),
-    paddingBottom: theme.spacing(8),
-  },
-  root: {
-    width: "100%",
-  },
-  container: {
-    maxHeight: 440,
-  },
-  label: {
-    textTransform: "initial",
-  },
-}));
+                               cardGrid : {
+                                 paddingTop : theme.spacing(8),
+                                 paddingBottom : theme.spacing(8),
+                               },
+                               root : {
+                                 width : "100%",
+                               },
+                               container : {
+                                 maxHeight : 440,
+                               },
+                               label : {
+                                 textTransform : "initial",
+                               },
+                             }));
 
 export default function ListUrls(props) {
   const classes = useStyles();
@@ -48,9 +48,7 @@ export default function ListUrls(props) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
+  const handleChangePage = (event, newPage) => { setPage(newPage); };
 
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
@@ -65,32 +63,26 @@ export default function ListUrls(props) {
             <TableHead>
               <TableRow>
                 <TableCell
-                  key="curl"
-                  align="left"
-                  style={{
-                    minWidth: "100px",
-                  }}
-                >
-                  Short URL
-                </TableCell>
+  key = "curl"
+  align = "left"
+  style =
+      {{ minWidth: "100px", }} >
+      Short URL<
+          /TableCell>
                 <TableCell
                   key="lurl"
                   align="left"
                   style={{ minWidth: "100px" }}
                 >
                   Long URL
-                </TableCell>
-                <TableCell
-                  key="action"
-                  align="right"
-                  style={{
-                    minWidth: "100px",
-                  }}
-                >
-                  Action
-                </TableCell>
+                </TableCell><
+      TableCell
+  key = "action"
+  align = "right"
+  style =
+      {{ minWidth: "100px", }} > Action</TableCell>
               </TableRow>
-            </TableHead>
+      </TableHead>
             <TableBody>
               {props.shortUrls
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
@@ -103,16 +95,19 @@ export default function ListUrls(props) {
                         style={{ minWidth: "100px" }}
                       >
                         <Button
-                          startIcon={<FileCopyOutlinedIcon />}
-                          onClick={() => {
-                            navigator.clipboard.writeText(
-                              window.location.origin + "/" + card.data.curl
-                            );
-                          }}
-                          classes={{ label: classes.label }}
-                        >
-                          {card.data.curl}
-                        </Button>
+                          startIcon={<FileCopyOutlinedIcon />
+}
+onClick = {
+  () => {
+    navigator.clipboard.writeText(window.location.origin + "/" +
+                                  card.data.curl);
+  }
+} classes =
+    {
+      { label: classes.label }
+    } >
+    {card.data.curl}<
+        /Button>
                         <Tooltip title={card.data.hits + " Hits"}>
                           <Badge
                             badgeContent={card.data.hits}
@@ -121,9 +116,8 @@ export default function ListUrls(props) {
                             showZero
                           >
                             <OpenInBrowser />
-                          </Badge>
-                        </Tooltip>
-                      </TableCell>
+    </Badge>
+                        </Tooltip></TableCell>
                       <TableCell
                         key="lurl"
                         align="left"
@@ -140,8 +134,7 @@ export default function ListUrls(props) {
                           }}
                         >
                           {card.data.lurl}
-                        </Box>
-                      </TableCell>
+                        </Box></TableCell>
                       <TableCell
                         key="action"
                         align="right"
@@ -155,7 +148,7 @@ export default function ListUrls(props) {
                             target="_blank"
                           >
                             <VisibilityIcon />
-                          </Button>
+    </Button>
                           <Button
                             size="small"
                             onClick={() =>
@@ -163,7 +156,7 @@ export default function ListUrls(props) {
                             }
                           >
                             <EditIcon />
-                          </Button>
+    </Button>
                           <Button
                             size="small"
                             color="secondary"
@@ -172,19 +165,22 @@ export default function ListUrls(props) {
                             }
                           >
                             <DeleteForeverIcon />
-                          </Button>
+    </Button>
                           <Button
                             size="small"
                             color="default"
                             onClick={() => props.toggleSecurity(card.data.curl)}
                           >
-                            {card.data.locked ? <LockIcon /> : <LockOpenIcon />}
+                            {card.data.locked ? <LockIcon />:
+        <LockOpenIcon />
+}
                           </Button>
                         </ButtonGroup>
                       </TableCell>
                     </TableRow>
                   );
-                })}
+                          })
+                          }
             </TableBody>
           </Table>
         </TableContainer>
@@ -200,4 +196,4 @@ export default function ListUrls(props) {
       </Paper>
     </Container>
   );
-}
+            }
