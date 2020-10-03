@@ -12,18 +12,29 @@ import { connect } from "react-redux";
 import { loginUser, logoutUser, resendConfirmationEmail } from "../actions";
 
 const styles = () => ({
-  "@global": { body: { backgroundColor: "#fff" } },
+  "@global": { body: { backgroundColor: "#040404", backgroundImage: `url("../../public/Images/verify.png")` } },
   paper: {
     marginTop: 100,
     display: "flex",
-    padding: 20,
+    padding: 40,
     flexDirection: "column",
     alignItems: "center",
+  },
+  buttonResend: {
+    backgroundColor: "black"
+  },
+  buttonLogout: {
+    backgroundColor: "red"
   },
   avatar: {
     marginLeft: "auto",
     marginRight: "auto",
     backgroundColor: "#f50057",
+  },
+  title: {
+    flexGrow: 1,
+    fontFamily: 'Pacifico, cursive',
+    userSelect: 'none',
   },
   form: { marginTop: 1 },
   errorText: { color: "#f50057", marginBottom: 5, textAlign: "center" },
@@ -55,66 +66,65 @@ class EmailNotVerified extends Component {
   render() {
     const { classes, isLoading, email, resendSuccess, resendError } = this.props;
     return (
-        <Container component="main" maxWidth="xs">
-          <Paper className={classes.paper}>
-            <Avatar className={classes.avatar} src="/favicon.ico"></Avatar>
-            <Typography component="h1" variant="h5">
-              FireShort
+      <Container component="main" maxWidth="xs">
+        <Paper className={classes.paper}>
+          <Typography component="h5" variant="h3" className={classes.title}>
+            FireShort
             </Typography>
-            <br></br>
-            <Typography component="h3" variant="h6">
-              Email Not Verified.
+          <br></br>
+          <Typography component="h3" variant="h6">
+            Email Not Verified.
             </Typography>
-            <br/>
-            <Typography component="div" variant="body1" style={{textAlign: "center"}}>
-                A verification email has been sent to <b>{email}</b>. Verify your account and refresh this page.
+          <br />
+          <Typography component="div" variant="body1" style={{ textAlign: "center" }}>
+            A verification email has been sent to <b>{email}</b>. Verify your account and refresh this page.
             </Typography>
-            <br/>
-            <Button
-                fullWidth
-                size="large"
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-                onClick={this.handleResend}
-              >
-                <MuiThemeProvider theme={theme}>
-                  {isLoading ? (
-                    <CircularProgress color="secondary" />
-                  ) : (
-                    "Resend Email"
-                  )}
+          <br />
+          <Button
+            fullWidth
+            size="large"
+            variant="contained"
+            color="primary"
+            onClick={this.handleResend}
+            className={classes.buttonResend}
+          >
+            <MuiThemeProvider theme={theme}>
+              {isLoading ? (
+                <CircularProgress color="secondary" />
+              ) : (
+                  "Resend Email"
+                )}
+            </MuiThemeProvider>
+          </Button>
+          <br />
+          <Button
+            fullWidth
+            size="large"
+            variant="contained"
+            color="primary"
+            className={classes.buttonLogout}
+            onClick={this.handleLogout}
+          >
+            <MuiThemeProvider theme={theme}>
+              Log out
                 </MuiThemeProvider>
-            </Button>
-            <br/>
-            <Button
-                fullWidth
-                size="large"
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-                onClick={this.handleLogout}
-              >
-                <MuiThemeProvider theme={theme}>
-                    Log out
-                </MuiThemeProvider>
-            </Button>
-            <br/>
-            {resendSuccess && (
-                <Typography component="p" className={classes.successText}>
-                  Email Sent
-                  <br></br>
-                </Typography>
-              )}
-            {resendError && (
-                <Typography component="p" className={classes.errorText}>
-                  {resendError}
-                  <br></br>
-                </Typography>
-              )}
-          </Paper>
-        </Container>
-      );
+          </Button>
+          <br />
+          {resendSuccess && (
+            <Typography component="p" className={classes.successText}>
+              Email Sent
+              <br></br>
+            </Typography>
+          )}
+          {resendError && (
+            <Typography component="p" className={classes.errorText}>
+              {resendError}
+              <br></br>
+            </Typography>
+          )}
+        </Paper>
+      </Container>
+    );
   }
 }
 
