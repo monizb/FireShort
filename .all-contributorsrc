@@ -77,6 +77,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "abhinavkrin",
+      "name": "Abhinav Kumar",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/15830206?v=4",
+      "profile": "https://me.avitechlab.com",
+      "contributions": [
+        "code",
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
