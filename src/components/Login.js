@@ -143,8 +143,8 @@ class Login extends Component {
                           color="secondary"
                         />
                       ) : (
-                        "Sign In"
-                      )}
+                          "Sign In"
+                        )}
                     </MuiThemeProvider>
                   </Button>
                 </form>

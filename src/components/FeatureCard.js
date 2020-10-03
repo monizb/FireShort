@@ -6,8 +6,8 @@ const styles = () => ({
   root: {
     textAlign: "center",
     padding: "0.6rem 1rem",
-    backgroundColor: "rgb(20, 20, 20)",
-    color: "white",
+    backgroundColor: "whte",
+    color: "black",
     transition: "all 0.1s ease-in",
     "&:hover": {
       transform: "scale(1.1)",
