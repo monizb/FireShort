@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Box, Button, ButtonGroup, Container, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Tooltip } from '@material-ui/core';
+import { Box, Button, ButtonGroup, Container, CardActions, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Tooltip } from '@material-ui/core';
 import { FileCopyOutlined as FileCopyOutlinedIcon, Edit as EditIcon, Visibility as VisibilityIcon, DeleteForever as DeleteForeverIcon } from '@material-ui/icons';
 import Badge from '@material-ui/core/Badge';
 import { OpenInBrowser } from '@material-ui/icons';
@@ -30,6 +30,7 @@ export default function ListUrls(props) {
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
+  
 
     const handleChangeRowsPerPage = (event) => {
         setRowsPerPage(+event.target.value);
@@ -37,7 +38,7 @@ export default function ListUrls(props) {
     };
 
     return (
-        <Container className={classes.cardGrid} maxWidth="md">
+        <Container className={classes.cardGrid} maxWidth="lg">
             <Paper className={classes.root}>
                 <TableContainer className={classes.container}>
                     <Table stickyHeader aria-label="sticky table">
@@ -69,9 +70,11 @@ export default function ListUrls(props) {
                                                 }}
                                             >{card.data.curl}</Button>
                                             <Tooltip title={card.data.hits + " Hits"}>
-                                                <Badge badgeContent={card.data.hits} color="secondary" max={Infinity} showZero>
-                                                    <OpenInBrowser />
-                                                </Badge>
+                                                <div onClick={() => { props.openHits(card.data.curl) }} style={{ cursor: "pointer" }}>
+                                                    <Badge badgeContent={card.data.hits} color="secondary" max={Infinity} showZero>
+                                                        <OpenInBrowser />
+                                                    </Badge>
+                                                </div>
                                             </Tooltip>
                                         </TableCell>
                                         <TableCell key="action" align="left" style={{ minWidth: "100px" }}>
@@ -85,6 +88,7 @@ export default function ListUrls(props) {
                                                 <Button size="small" color="secondary" onClick={() => props.handleDeleteShortUrl(card.data.curl)}>
                                                     <DeleteForeverIcon />
                                                 </Button>
+                                                
                                             </ButtonGroup>
 
                                         </TableCell>

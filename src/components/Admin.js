@@ -304,6 +304,8 @@ class Admin extends Component {
                       shortUrls={this.state.shortUrls}
                       handleEditShortUrl={this.handleEditShortUrl}
                       handleDeleteShortUrl={this.handleDeleteShortUrl}
+
+                      openHits={this.getHits}
                     />
                   )}
               </>
