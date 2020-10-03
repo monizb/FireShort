@@ -5,7 +5,7 @@ export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
 
 export const SIGN_UP_REQUEST = "SIGN_UP_REQUEST";
-export const SIGN_UP_SUCCESS = "SIGN_UP_SUCESS";
+export const SIGN_UP_SUCCESS = "SIGN_UP_SUCCESS";
 export const SIGN_UP_FAILURE = "SIGN_UP_FAILURE";
 
 export const RESEND_CONFIRMATION_EMAIL = "RESEND_CONFIRMATION_EMAIL";
@@ -148,7 +148,7 @@ export const signupUser = (displayName, email, password, password2) => dispatch 
   dispatch(requestsignup());
   //verifying password and name.
   if(displayName.length < 3){
-    return dispatch(signupError("Name must have alteast 3 characters."));
+    return dispatch(signupError("Name must have atleast 3 characters."));
   }
 
   if(displayName.length > 50){
@@ -174,7 +174,7 @@ export const signupUser = (displayName, email, password, password2) => dispatch 
           dispatch(receiveSignup(user.user));
         })
         .catch(error=>{
-          dispatch(resendCEFailure("An error occured while sending verification email."));
+          dispatch(resendCEFailure("An error occurred while sending verification email."));
           dispatch(receiveSignup(user.user));
         })
       })
@@ -192,7 +192,7 @@ export const signupUser = (displayName, email, password, password2) => dispatch 
           dispatch(signupError("Invalid email address."));
           break;
         default:
-          dispatch(signupError("An unknown error occured while signing up."));
+          dispatch(signupError("An unknown error occurred while signing up."));
       }
     });
 };
@@ -232,7 +232,7 @@ export const resendConfirmationEmail = () => dispatch => {
       //Do something with the error if you want
       console.error(error);
       if(error.code === "auth/too-many-requests")
-        dispatch(resendCEFailure("An error occured while sending verification email."));
+        dispatch(resendCEFailure("An error occurred while sending verification email."));
       else 
         dispatch(resendCEFailure("Too many request. Please wait for some time before you request again."));
     });
