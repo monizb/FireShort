@@ -55,8 +55,21 @@ class Home extends Component {
                 let ipv4 = "";
                 (async () => {
                   ipv4 = await publicIp.v4();
-                  docref.update({
+                  //update the hits count
+                  const hitref = db.collection('hits').doc(docid);
+                  hitref
+                  .update({
                     hits: firebase.firestore.FieldValue.increment(1),
+                  })
+                  .catch(error=>{
+                    //hit document is not created yet.
+                    if(error.code)
+                    hitref
+                    .set({
+                      hits: 1,
+                      curl: docid,
+                      author: data.author
+                    });
                   });
                   docref
                     .collection("tracking")
@@ -64,6 +77,7 @@ class Home extends Component {
                       ipv4: ipv4,
                       timestamp: new Date().toLocaleString(),
                       useragent: navigator.userAgent,
+                      author: data.author
                     })
                     .then(() => {
                       this.setState({ newloc: data.lurl });
