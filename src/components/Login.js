@@ -9,7 +9,7 @@ import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/styles";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 import { loginUser } from "../actions";
 import LoginLeftComponent from "./LoginLeftComponent";
@@ -127,7 +127,7 @@ class Login extends Component {
                       Incorrect email or password.
                     </Typography>
                   )}
-                  <br />
+                <br />
                   <Button
                     type="submit"
                     size="large"
@@ -147,7 +147,28 @@ class Login extends Component {
                         )}
                     </MuiThemeProvider>
                   </Button>
-                </form>
+              <br/>
+              <br/>
+              <Link to="/signup" style={{textDecoration: "none"}}>
+                <Button
+                  type="button"
+                  fullWidth
+                  size="large"
+                  variant="outlined"
+                  color="primary"
+                  className={classes.submit}
+                >
+                  Sign Up
+                </Button>
+              </Link>
+            </form>
+            <div style={{padding: "0.5rem", widht: "100%", textAlign:"center"}}>
+                <Link to="/forgot-password">
+                  <Typography component="p">
+                    Forgot Password?
+                  </Typography>
+                </Link>
+            </div>
               </Grid>
             </Grid>
           </Paper>
