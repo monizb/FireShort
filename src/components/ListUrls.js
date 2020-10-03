@@ -1,5 +1,3 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import {
   Box,
   Button,
@@ -15,33 +13,34 @@ import {
   TableRow,
   Tooltip,
 } from '@material-ui/core';
-import {
-  FileCopyOutlined as FileCopyOutlinedIcon,
-  Edit as EditIcon,
-  Visibility as VisibilityIcon,
-  DeleteForever as DeleteForeverIcon,
-} from '@material-ui/icons';
 import Badge from '@material-ui/core/Badge';
-import { OpenInBrowser } from '@material-ui/icons';
-
+import {makeStyles} from '@material-ui/core/styles';
+import {
+  DeleteForever as DeleteForeverIcon,
+  Edit as EditIcon,
+  FileCopyOutlined as FileCopyOutlinedIcon,
+  Visibility as VisibilityIcon,
+} from '@material-ui/icons';
+import {OpenInBrowser} from '@material-ui/icons';
 import LockIcon from '@material-ui/icons/Lock';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
+import React from 'react';
 
 const useStyles = makeStyles((theme) => ({
-  cardGrid: {
-    paddingTop: theme.spacing(8),
-    paddingBottom: theme.spacing(8),
-  },
-  root: {
-    width: '100%',
-  },
-  container: {
-    maxHeight: 440,
-  },
-  label: {
-    textTransform: 'initial',
-  },
-}));
+                               cardGrid : {
+                                 paddingTop : theme.spacing(8),
+                                 paddingBottom : theme.spacing(8),
+                               },
+                               root : {
+                                 width : '100%',
+                               },
+                               container : {
+                                 maxHeight : 440,
+                               },
+                               label : {
+                                 textTransform : 'initial',
+                               },
+                             }));
 
 export default function ListUrls(props) {
   const classes = useStyles();
@@ -49,9 +48,7 @@ export default function ListUrls(props) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
+  const handleChangePage = (event, newPage) => { setPage(newPage); };
 
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
@@ -65,13 +62,15 @@ export default function ListUrls(props) {
           <Table stickyHeader aria-label='sticky table'>
             <TableHead>
               <TableRow>
-                <TableCell key='curl' align='left' style={{ minWidth: '100px' }}>
+                <TableCell key='curl' align='left' style={{
+    minWidth: '100px' }}>
                   Short URL
                 </TableCell>
                 <TableCell key='lurl' align='left' style={{ minWidth: '100px' }}>
                   Long URL
                 </TableCell>
-                <TableCell key='action' align='right' style={{ minWidth: '100px' }}>
+                <TableCell key='action' align='right' style={{
+    minWidth: '100px' }}>
                   Action
                 </TableCell>
               </TableRow>
@@ -84,18 +83,19 @@ export default function ListUrls(props) {
                     <TableRow hover role='checkbox' tabIndex={-1} key={card.id}>
                       <TableCell key='curl' align='left' style={{ minWidth: '100px' }}>
                         <Button
-                          startIcon={<FileCopyOutlinedIcon />}
-                          onClick={() => {
-                            navigator.clipboard.writeText(
-                              window.location.origin + '/' + card.data.curl
-                            );
-                          }}
-                          classes={{
-                            label: classes.label,
-                          }}
-                        >
-                          {card.data.curl}
-                        </Button>
+                          startIcon={<FileCopyOutlinedIcon />
+}
+onClick = {
+  () => {
+    navigator.clipboard.writeText(window.location.origin + '/' +
+                                  card.data.curl);
+  }
+} classes =
+    {
+      { label: classes.label, }
+    } >
+    {card.data.curl}<
+        /Button>
                         <Tooltip title={card.data.hits + ' Hits'}>
                           <Badge
                             badgeContent={card.data.hits}
@@ -104,9 +104,9 @@ export default function ListUrls(props) {
                             showZero
                           >
                             <OpenInBrowser />
-                          </Badge>
+    </Badge>
                         </Tooltip>
-                      </TableCell>
+    </TableCell>
                       <TableCell key='lurl' align='left' style={{ minWidth: '100px' }}>
                         <Box
                           bgcolor='text.primary'
@@ -119,8 +119,7 @@ export default function ListUrls(props) {
                           }}
                         >
                           {card.data.lurl}
-                        </Box>
-                      </TableCell>
+                        </Box></TableCell>
                       <TableCell key='action' align='right' style={{ minWidth: '100px' }}>
                         <ButtonGroup variant='outlined' color='default'>
                           <Button
@@ -129,33 +128,34 @@ export default function ListUrls(props) {
                             href={card.data.lurl}
                             target='_blank'
                           >
-                            <VisibilityIcon />
-                          </Button>
+                            <VisibilityIcon /></Button>
                           <Button
                             size='small'
                             onClick={() => props.handleEditShortUrl(card.data.curl)}
                           >
-                            <EditIcon />
-                          </Button>
+                            <EditIcon /></Button>
                           <Button
                             size='small'
                             color='secondary'
                             onClick={() => props.handleDeleteShortUrl(card.data.curl)}
                           >
-                            <DeleteForeverIcon />
-                          </Button>
+                            <DeleteForeverIcon /><
+        /Button>
                           <Button
                             size='small'
                             color='default'
                             onClick={() => props.toggleSecurity(card.data.curl)}
                           >
-                            {card.data.locked ? <LockIcon /> : <LockOpenIcon />}
+                            {card.data.locked ? <LockIcon />:
+        <LockOpenIcon />
+}
                           </Button>
                         </ButtonGroup>
                       </TableCell>
                     </TableRow>
                   );
-                })}
+                          })
+                          }
             </TableBody>
           </Table>
         </TableContainer>
@@ -171,4 +171,4 @@ export default function ListUrls(props) {
       </Paper>
     </Container>
   );
-}
+            }
