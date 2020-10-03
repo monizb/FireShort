@@ -10,26 +10,23 @@ import { nanoid } from 'nanoid';
 import { connect } from 'react-redux';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
-import { logoutUser, addLink, setLinks } from "../actions";
+import { addLink, setLinks } from "../actions";
 import { getFilteredLinks } from '../selectors';
 import { myFirebase, db } from '../firebase/firebase';
 import './components.module.css';
 
 import {
-  AppBar,
-  Button,
   Container,
   CssBaseline,
   Fab,
   LinearProgress,
   Snackbar,
-  Toolbar,
-  Typography,
 } from '@material-ui/core';
 
 import { withStyles } from '@material-ui/core/styles';
 import AddIcon from '@material-ui/icons/Add';
 import MuiAlert from '@material-ui/lab/Alert';
+import Header from './Header.js';
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant='filled' {...props} />;
@@ -323,11 +320,6 @@ class Admin extends Component {
     });
   }
 
-  handleLogout = () => {
-    const { dispatch } = this.props;
-    dispatch(logoutUser());
-  };
-
   onPswSave = (e) => {
     const curl = this.state.currUrl.curl;
     if (this.state.newPsw !== '') {
@@ -382,18 +374,7 @@ class Admin extends Component {
           </div>
         ) : null}
         <CssBaseline />
-        <div className={classes.root}>
-          <AppBar position='fixed' className={classes.appbar}>
-            <Toolbar>
-              <Typography variant='h6' className={classes.title}>
-                FireShort
-              </Typography>
-              <Button color='inherit' onClick={this.handleLogout}>
-                Logout
-              </Button>
-            </Toolbar>
-          </AppBar>
-        </div>
+        <Header />
         {this.state.loading && <LinearProgress color='secondary' />}
         <main>
           <MainToolBar
