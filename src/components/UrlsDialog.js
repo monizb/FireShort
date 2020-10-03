@@ -45,6 +45,12 @@ function isUrl(s) {
     return regexp.test(s);
 }
 
+function hasSpaces(s){
+    var regexp = /\s/;  
+    console.log(regexp.test(s))  
+    return regexp.test(s);
+}
+
 export default function UrlsDialog(props) {
     const [open, setOpen] = React.useState(false);
     const handleClick = () => {
@@ -123,7 +129,7 @@ export default function UrlsDialog(props) {
                     Cancel
               </Button>
                 <Button onClick={() => {
-                    if (isUrl(props.state.lurl)) {
+                    if (isUrl(props.state.lurl) && !hasSpaces(props.state.curl)) {
                         props.handleSubmit()
                     } else {
                         handleClick()
@@ -133,9 +139,9 @@ export default function UrlsDialog(props) {
               </Button>
                 <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
                     <Alert onClose={handleClose} severity="error" variant="filled">
-                        Enter a valid URL to shorten
-  </Alert>
-                </Snackbar>
+                        {!isUrl(props.state.lurl) ? "Enter a valid URL to shorten" : "Enter a custom URL without spaces"}
+                    </Alert>
+                </Snackbar>                
             </DialogActions>
         </Dialog>
     );
