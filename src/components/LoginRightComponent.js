@@ -1,58 +1,64 @@
 import { Grid } from "@material-ui/core";
+import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/styles";
+import Lottie from "react-lottie";
+import LinkData from "../lotties/link.json";
 import React from "react";
 
 import FeatureCard from "./FeatureCard";
 
 const styles = () => ({
   loginLeftPart: {
-    width: "50%",
+    width: "60%",
     height: "initial",
-    backgroundColor: "rgb(40, 40, 40)",
-    padding: "50px 0px",
+    padding: "30px",
     display: "flex",
     flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
     overflow: "hidden",
-    animation: "$colorEffect 10s ease-in-out",
-    animationIterationCount: "infinite",
+    backgroundImage: `url(./Images/right.jpg)`,
+    backgroundSize: "cover",
   },
   loginImage: {
     width: "30rem",
     transition: "all 0.1s ease-in",
     "&:hover": { transform: "scale(1.05)" },
   },
+  loginText: {
+    color: "white",
+    fontSize: "2.5rem",
+  },
+  subText: {
+    color: "white",
+    fontSize: "1.5rem",
+  },
   featureContainer: {
-    width: "80%",
     display: "flex",
-    justifyContent: "space-around",
     alignItems: "center",
     flexWrap: "wrap",
-    columnGap: "1rem",
+    columnGap: "0.5rem",
     rowGap: "0.7rem",
-  },
-  "@keyframes colorEffect": {
-    "0%": {
-      backgroundColor: "rgb(20, 20, 20)",
-    },
-    "50%": {
-      backgroundColor: "rgb(60, 60, 60)",
-    },
-    "100%": {
-      backgroundColor: "rgb(20, 20, 20)",
-    },
+    padding: "40px 0px 0px 0px",
   },
 });
 
 const LoginLeftComponent = ({ classes }) => {
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: LinkData,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
   return (
     <Grid item className={classes.loginLeftPart}>
-      <img
-        className={classes.loginImage}
-        src="./images/loginPageIllustration.svg"
-        alt="Login Welcome"
-      />
+      <Lottie options={defaultOptions} height={400} width={400} />
+      <Typography className={classes.loginText} component="h2" variant="h2">
+        Welcome to Fireshort
+      </Typography>
+      <Typography className={classes.subText} component="h2" variant="h2">
+        Everything is short here.
+      </Typography>
       <div className={classes.featureContainer}>
         <FeatureCard feature="Custom Tiny URLs" />
         <FeatureCard feature="Hit Tracker" />

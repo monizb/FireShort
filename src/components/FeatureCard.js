@@ -8,9 +8,9 @@ const styles = () => ({
     padding: "0.6rem 1rem",
     backgroundColor: "whte",
     color: "black",
-    transition: "all 0.1s ease-in",
+    transition: "all 0.2s ease-in",
     "&:hover": {
-      transform: "scale(1.1)",
+      transform: "scale(1.05)",
     },
   },
   featureText: {

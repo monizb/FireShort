@@ -12,10 +12,18 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
 import { loginUser } from "../actions";
-import LoginLeftComponent from "./LoginLeftComponent";
+import LoginRightComponent from "./LoginRightComponent";
 
 const styles = () => ({
-  "@global": { body: { background: `beige`, padding: 0, margin: 0 } },
+  "@global": {
+    body: {
+      background: `white`,
+      padding: 0,
+      margin: 0,
+      backgroundImage: `url(./Images/background.png)`,
+      backgroundSize: "cover",
+    },
+  },
   mainContainer: {
     height: "100vh",
     display: "flex",
@@ -24,8 +32,8 @@ const styles = () => ({
     alignItems: "center",
   },
   paper: { width: "60vw", overflow: "hidden", borderRadius: "20px" },
-  loginRightPart: {
-    width: "50%",
+  loginLeftPart: {
+    width: "40%",
     height: "initial",
     padding: "50px 50px",
     display: "flex",
@@ -35,13 +43,13 @@ const styles = () => ({
     overflow: "hidden",
   },
   logoTextContainer: {
-    textAlign: "center",
+    textAlign: "flex-start",
   },
   logoTextImage: {
     height: "50px",
   },
   loginText: {
-    textAlign: "center",
+    fontSize: "3rem",
   },
   avatar: { width: "64px", height: "64px" },
   form: {
@@ -53,7 +61,7 @@ const styles = () => ({
     margin: "0px",
   },
   errorText: { color: "#f50057", marginBottom: 5, textAlign: "center" },
-  submit: { fontSize: "1.2rem" },
+  submit: { fontSize: "1.2rem", backgroundColor: "black" },
 });
 
 const theme = createMuiTheme({ palette: { secondary: { main: "#fff" } } });
@@ -86,8 +94,7 @@ class Login extends Component {
         <Container className={classes.mainContainer}>
           <Paper className={classes.paper} elevation={24}>
             <Grid container alignItems="stretch" direction="row">
-              <LoginLeftComponent />
-              <Grid item className={classes.loginRightPart}>
+              <Grid item className={classes.loginLeftPart}>
                 <div className={classes.logoTextContainer}>
                   <img
                     className={classes.logoTextImage}
@@ -143,12 +150,13 @@ class Login extends Component {
                           color="secondary"
                         />
                       ) : (
-                          "Sign In"
-                        )}
+                        "Sign In"
+                      )}
                     </MuiThemeProvider>
                   </Button>
                 </form>
               </Grid>
+              <LoginRightComponent />
             </Grid>
           </Paper>
         </Container>
