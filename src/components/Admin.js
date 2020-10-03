@@ -196,7 +196,7 @@ class Admin extends Component {
 
   handleDeleteShortUrl = (curl) => {
     const self = this;
-  
+
     confirmAlert({
       title: 'Confirm Deletion',
       message: 'Are you sure you want to delete this URL?',
@@ -211,7 +211,7 @@ class Admin extends Component {
         },
         {
           label: 'Back',
-          onClick: () => {return;}
+          onClick: () => { return; }
         }
       ]
     });
@@ -439,6 +439,7 @@ class Admin extends Component {
                   handleDeleteShortUrl={this.handleDeleteShortUrl}
                   openHits={this.getHits}
                 // updateHits={this.updateUrls}
+                  toggleSecurity={this.toggleSecurity}
                 />
               ) : (
                   <ListUrls

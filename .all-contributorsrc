@@ -47,7 +47,8 @@
       "avatar_url": "https://avatars1.githubusercontent.com/u/62158550?v=4",
       "profile": "https://github.com/vikashgaya916",
       "contributions": [
-        "bug"
+        "bug",
+        "design"
       ]
     },
     {
@@ -55,6 +56,24 @@
       "name": "Aryan Verma",
       "avatar_url": "https://avatars1.githubusercontent.com/u/12378189?v=4",
       "profile": "http://aryanverma.in",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "TaarnStar",
+      "name": "Marko Milošević",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/17704741?v=4",
+      "profile": "https://github.com/TaarnStar",
+      "contributions": [
+        "bug"
+      ]
+    },
+    {
+      "login": "rahul1995",
+      "name": "rahul1995",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/7647789?v=4",
+      "profile": "https://github.com/rahul1995",
       "contributions": [
         "code"
       ]

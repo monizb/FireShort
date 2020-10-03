@@ -39,7 +39,7 @@ class Home extends Component {
         .get()
         .then((doc) => {
           var data = doc.data();
-          this.setState({ loading: false, realPassword: data.password });
+          this.setState({ realPassword: data.password });
           if (!doc.exists) {
             window.location.pathname = "/login";
           } else {
@@ -86,7 +86,7 @@ class Home extends Component {
                 })();
               }
             } else {
-              this.setState({ isLocked: true });
+              this.setState({ loading: false, isLocked: true });
             }
           }
         })
