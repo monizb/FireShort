@@ -1,4 +1,4 @@
-import Avatar from "@material-ui/core/Avatar";
+import { Grid } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Container from "@material-ui/core/Container";
@@ -12,23 +12,48 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
 import { loginUser } from "../actions";
+import LoginLeftComponent from "./LoginLeftComponent";
 
 const styles = () => ({
-  "@global": { body: { backgroundColor: "#fff" } },
-  paper: {
-    marginTop: 100,
+  "@global": { body: { background: `beige`, padding: 0, margin: 0 } },
+  mainContainer: {
+    height: "100vh",
     display: "flex",
-    padding: 20,
     flexDirection: "column",
+    justifyContent: "center",
     alignItems: "center",
   },
-  avatar: {
-    marginLeft: "auto",
-    marginRight: "auto",
-    backgroundColor: "#f50057",
+  paper: { width: "60vw", overflow: "hidden", borderRadius: "20px" },
+  loginRightPart: {
+    width: "50%",
+    height: "initial",
+    padding: "50px 50px",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "stretch",
+    overflow: "hidden",
   },
-  form: { marginTop: 1 },
+  logoTextContainer: {
+    textAlign: "center",
+  },
+  logoTextImage: {
+    height: "50px",
+  },
+  loginText: {
+    textAlign: "center",
+  },
+  avatar: { width: "64px", height: "64px" },
+  form: {
+    width: "initial",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    margin: "0px",
+  },
   errorText: { color: "#f50057", marginBottom: 5, textAlign: "center" },
+  submit: { fontSize: "1.2rem" },
 });
 
 const theme = createMuiTheme({ palette: { secondary: { main: "#fff" } } });
@@ -58,56 +83,73 @@ class Login extends Component {
       return <Redirect to="/admin" />;
     } else {
       return (
-        <Container component="main" maxWidth="xs">
-          <Paper className={classes.paper}>
-            <Avatar className={classes.avatar} src="/favicon.ico"></Avatar>
-            <Typography component="h1" variant="h5">
-              FireShort
-            </Typography>
-            <br></br>
-            <form onSubmit={this.handleSubmit}>
-              <TextField
-                variant="outlined"
-                margin="normal"
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                onChange={this.handleEmailChange}
-              />
-              <TextField
-                variant="outlined"
-                margin="normal"
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                onChange={this.handlePasswordChange}
-              />
-              {loginError && (
-                <Typography component="p" className={classes.errorText}>
-                  Incorrect email or password.
+        <Container className={classes.mainContainer}>
+          <Paper className={classes.paper} elevation={24}>
+            <Grid container alignItems="stretch" direction="row">
+              <LoginLeftComponent />
+              <Grid item className={classes.loginRightPart}>
+                <div className={classes.logoTextContainer}>
+                  <img
+                    className={classes.logoTextImage}
+                    src="./images/fireshortLogoText.gif"
+                    alt="Fireshort Text Logo"
+                  />
+                </div>
+                <Typography
+                  className={classes.loginText}
+                  component="h1"
+                  variant="h5"
+                >
+                  Login
                 </Typography>
-              )}
-              <br></br>
-              <Button
-                type="submit"
-                fullWidth
-                size="large"
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-              >
-                <MuiThemeProvider theme={theme}>
-                  {isLoading ? (
-                    <CircularProgress color="secondary" />
-                  ) : (
-                    "Sign In"
+                <form onSubmit={this.handleSubmit} className={classes.form}>
+                  <TextField
+                    variant="outlined"
+                    margin="normal"
+                    fullWidth
+                    id="email"
+                    label="Email Address"
+                    name="email"
+                    onChange={this.handleEmailChange}
+                  />
+                  <TextField
+                    variant="outlined"
+                    margin="normal"
+                    fullWidth
+                    name="password"
+                    label="Password"
+                    type="password"
+                    id="password"
+                    onChange={this.handlePasswordChange}
+                  />
+                  {loginError && (
+                    <Typography component="p" className={classes.errorText}>
+                      Incorrect email or password.
+                    </Typography>
                   )}
-                </MuiThemeProvider>
-              </Button>
-            </form>
+                  <br />
+                  <Button
+                    type="submit"
+                    size="large"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    className={classes.submit}
+                  >
+                    <MuiThemeProvider theme={theme}>
+                      {isLoading && !loginError ? (
+                        <CircularProgress
+                          className={classes.loader}
+                          color="secondary"
+                        />
+                      ) : (
+                          "Sign In"
+                        )}
+                    </MuiThemeProvider>
+                  </Button>
+                </form>
+              </Grid>
+            </Grid>
           </Paper>
         </Container>
       );
