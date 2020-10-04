@@ -12,10 +12,10 @@ import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 
 import { loginUser } from "../actions";
-import LoginLeftComponent from "./LoginLeftComponent";
+import LoginRightComponent from "./LoginRightComponent";
 
 const styles = () => ({
-  "@global": { body: { background: `beige`, padding: 0, margin: 0 } },
+  "@global": { body: { background: `white`, padding: 0, margin: 0 } },
   mainContainer: {
     height: "100vh",
     display: "flex",
@@ -23,22 +23,31 @@ const styles = () => ({
     justifyContent: "center",
     alignItems: "center",
   },
-  paper: { width: "60vw", overflow: "hidden", borderRadius: "20px" },
+  title: {
+    fontSize: "3rem",
+    fontFamily: "Pacifico, cursive",
+    userSelect: "none",
+    color: "black",
+    textAlign: "center",
+  },
+  paper: {
+    width: "90vw",
+    overflow: "hidden",
+    borderRadius: "10px",
+  },
   loginRightPart: {
-    width: "50%",
-    height: "initial",
-    padding: "50px 50px",
+    width: "40%",
+    flex: 0.5,
+    padding: "80px",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    alignItems: "stretch",
-    overflow: "hidden",
   },
   logoTextContainer: {
     textAlign: "center",
   },
   logoTextImage: {
-    height: "50px",
+    height: "250px",
   },
   loginText: {
     textAlign: "center",
@@ -53,7 +62,12 @@ const styles = () => ({
     margin: "0px",
   },
   errorText: { color: "#f50057", marginBottom: 5, textAlign: "center" },
-  submit: { fontSize: "1.2rem" },
+  signInButton: { fontSize: "1.2rem", backgroundColor: "black" },
+  signUpButton: {
+    fontSize: "1.2rem",
+    backgroundColor: "white",
+    color: "black",
+  },
 });
 
 const theme = createMuiTheme({ palette: { secondary: { main: "#fff" } } });
@@ -84,17 +98,19 @@ class Login extends Component {
     } else {
       return (
         <Container className={classes.mainContainer}>
-          <Paper className={classes.paper} elevation={24}>
-            <Grid container alignItems="stretch" direction="row">
-              <LoginLeftComponent />
+          <Paper className={classes.paper} elevation={15}>
+            <Grid container direction="row">
               <Grid item className={classes.loginRightPart}>
                 <div className={classes.logoTextContainer}>
                   <img
                     className={classes.logoTextImage}
-                    src="./images/fireshortLogoText.gif"
+                    src="./images/loginillustration.png"
                     alt="Fireshort Text Logo"
                   />
                 </div>
+                <Typography variant="h6" className={classes.title}>
+                  FireShort
+                </Typography>
                 <Typography
                   className={classes.loginText}
                   component="h1"
@@ -127,14 +143,14 @@ class Login extends Component {
                       Incorrect email or password.
                     </Typography>
                   )}
-                <br />
+                  <br />
                   <Button
                     type="submit"
                     size="large"
                     fullWidth
                     variant="contained"
                     color="primary"
-                    className={classes.submit}
+                    className={classes.signInButton}
                   >
                     <MuiThemeProvider theme={theme}>
                       {isLoading && !loginError ? (
@@ -143,33 +159,38 @@ class Login extends Component {
                           color="secondary"
                         />
                       ) : (
-                          "Sign In"
-                        )}
+                        "Sign In"
+                      )}
                     </MuiThemeProvider>
                   </Button>
-              <br/>
-              <br/>
-              <Link to="/signup" style={{textDecoration: "none"}}>
-                <Button
-                  type="button"
-                  fullWidth
-                  size="large"
-                  variant="outlined"
-                  color="primary"
-                  className={classes.submit}
+                  <br />
+                  <br />
+                  <Link to="/signup" style={{ textDecoration: "none" }}>
+                    <Button
+                      type="button"
+                      fullWidth
+                      size="large"
+                      variant="outlined"
+                      color="primary"
+                      className={classes.signUpButton}
+                    >
+                      Sign Up
+                    </Button>
+                  </Link>
+                </form>
+                <div
+                  style={{
+                    padding: "0.5rem",
+                    widht: "100%",
+                    textAlign: "center",
+                  }}
                 >
-                  Sign Up
-                </Button>
-              </Link>
-            </form>
-            <div style={{padding: "0.5rem", widht: "100%", textAlign:"center"}}>
-                <Link to="/forgot-password">
-                  <Typography component="p">
-                    Forgot Password?
-                  </Typography>
-                </Link>
-            </div>
+                  <Link to="/forgot-password">
+                    <Typography component="p">Forgot Password?</Typography>
+                  </Link>
+                </div>
               </Grid>
+              <LoginRightComponent />
             </Grid>
           </Paper>
         </Container>
