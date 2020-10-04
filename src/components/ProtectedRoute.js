@@ -1,10 +1,13 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Route, Redirect } from "react-router-dom";
+import EmailNotVerified from "./EmailNotVerified";
 
 const ProtectedRoute = ({
   component: Component,
   isAuthenticated,
   isVerifying,
+  emailVerified,
   ...rest
 }) => (
   <Route
@@ -13,7 +16,10 @@ const ProtectedRoute = ({
       isVerifying ? (
         <div />
       ) : isAuthenticated ? (
+        emailVerified ?
         <Component {...props} />
+        :
+        <EmailNotVerified {...props}/>
       ) : (
         <Redirect
           to={{
@@ -26,4 +32,8 @@ const ProtectedRoute = ({
   />
 );
 
-export default ProtectedRoute;
+const mapStateToProps = state => ({
+  emailVerified: state.auth.user.emailVerified ? true : false
+});
+
+export default connect(mapStateToProps)(ProtectedRoute);

@@ -1,8 +1,5 @@
 <p align="center">
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
-<img src="https://firebasestorage.googleapis.com/v0/b/trello-87674.appspot.com/o/Screenshot%202020-09-19%20at%2011.42.01%20AM.png?alt=media&token=e3e61cf4-1c14-41c0-ab5a-60bf4a55d581" alt="drawing" width="200"/>
+<img src="https://firebasestorage.googleapis.com/v0/b/trello-87674.appspot.com/o/Untitled%20design.gif?alt=media&token=ceff00a1-4d3a-4b05-9ffd-68e90f458b2e" width="240"/>
  </p>
  <br>
  <br>
@@ -10,7 +7,8 @@
 ![Contributions](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)
 [![GitHub license](https://img.shields.io/github/license/thedevs-network/kutt.svg)](https://github.com/monizb/FireShort/blob/master/LICENSE)
 ![Issues](https://img.shields.io/github/issues/monizb/FireShort)
-![Hacktoberfest](https://img.shields.io/github/hacktoberfest/2020/badges/shields?label=hacktoberfest%202020)
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+![Stars](https://img.shields.io/github/stars/monizb/FireShort)
 
 `Accepting Hacktoberfest Contributions`
 
@@ -24,8 +22,8 @@ this rep:
 - The generated links now track the number of hits on them
 - The Custom URL is an optional field now, if left black it generates a random 8
   character long code using NanoID
-- Ability to track link activity : The links can now track the
-  timestamp,ipv4,ipv6 and User-Agent of the Request source
+- Ability to track link activity : The links can now track the timestamp,ipv4
+  and User-Agent of the Request source
 - The Link Tracking feature for any link can be switched on/off at anytime from
   Admin Panel
 - A lot of UI Changes
@@ -46,6 +44,8 @@ create a feature issue to discuss about the feature you would like to take up.
 - [ ] Add a homepage showcasing the tool with animations
 - [ ] Revamp the dashboard
 - [ ] Develop APIs for all the tasks for easy management
+- [ ] Add Link Expiry
+- [x] Add Password Protected Links
 
 Valid Feature Requests will be added to the above list over time.
 
@@ -70,7 +70,7 @@ $ git clone https://github.com/monizb/FireShort.git
 Head inside the cloned folder and install the dependencies using NPM
 
 ```sh
-$ cd FireShort-master
+$ cd FireShort
 $ npm install
 ```
 
@@ -112,7 +112,9 @@ server for you on the PORT:3000 and take you to the login page
 
 To contribute to this repository please first create an issue with the
 appropriate template, after which you can directly fork this repository,make
-changes and start a pull request to the master branch.
+changes and start a pull request to the master branch. Please also have a look
+at our Contribution guidelines
+[here](https://github.com/monizb/FireShort/blob/master/CONTRBUTING.md)
 
 ### Live Demo
 
@@ -133,7 +135,17 @@ Thanks goes to these wonderful people
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="https://alii13.github.io/portfolio/"><img src="https://avatars1.githubusercontent.com/u/48530814?v=4" width="100px;" alt=""/><br /><sub><b>Shekh Aliul</b></sub></a><br /><a href="#a11y-alii13" title="Accessibility">️️️️♿️</a></td>
+    <td align="center"><a href="https://alii13.github.io/portfolio/"><img src="https://avatars1.githubusercontent.com/u/48530814?v=4" width="50px;" alt=""/><br /><sub><b>Shekh Aliul</b></sub></a><br /><a href="#a11y-alii13" title="Accessibility">️️️️♿️</a></td>
+    <td align="center"><a href="https://github.com/OverthinkersArea"><img src="https://avatars2.githubusercontent.com/u/53104897?v=4" width="50px;" alt=""/><br /><sub><b>0ver3inker</b></sub></a><br /><a href="https://github.com/monizb/FireShort/commits?author=OverthinkersArea" title="Documentation">📖</a></td>
+    <td align="center"><a href="http://harshvats.vercel.app"><img src="https://avatars0.githubusercontent.com/u/45518343?v=4" width="50px;" alt=""/><br /><sub><b>HARSH VATS</b></sub></a><br /><a href="https://github.com/monizb/FireShort/commits?author=harshvats2000" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/asi309"><img src="https://avatars0.githubusercontent.com/u/22616656?v=4" width="50px;" alt=""/><br /><sub><b>Asidipta</b></sub></a><br /><a href="https://github.com/monizb/FireShort/commits?author=asi309" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/vikashgaya916"><img src="https://avatars1.githubusercontent.com/u/62158550?v=4" width="50px;" alt=""/><br /><sub><b>Vikash Kumar</b></sub></a><br /><a href="https://github.com/monizb/FireShort/issues?q=author%3Avikashgaya916" title="Bug reports">🐛</a> <a href="#design-vikashgaya916" title="Design">🎨</a></td>
+    <td align="center"><a href="http://aryanverma.in"><img src="https://avatars1.githubusercontent.com/u/12378189?v=4" width="50px;" alt=""/><br /><sub><b>Aryan Verma</b></sub></a><br /><a href="https://github.com/monizb/FireShort/commits?author=i-aryan" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/TaarnStar"><img src="https://avatars3.githubusercontent.com/u/17704741?v=4" width="50px;" alt=""/><br /><sub><b>Marko Milošević</b></sub></a><br /><a href="https://github.com/monizb/FireShort/issues?q=author%3ATaarnStar" title="Bug reports">🐛</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/rahul1995"><img src="https://avatars0.githubusercontent.com/u/7647789?v=4" width="50px;" alt=""/><br /><sub><b>rahul1995</b></sub></a><br /><a href="https://github.com/monizb/FireShort/commits?author=rahul1995" title="Code">💻</a></td>
+    <td align="center"><a href="https://me.avitechlab.com"><img src="https://avatars1.githubusercontent.com/u/15830206?v=4" width="50px;" alt=""/><br /><sub><b>Abhinav Kumar</b></sub></a><br /><a href="https://github.com/monizb/FireShort/commits?author=abhinavkrin" title="Code">💻</a> <a href="https://github.com/monizb/FireShort/issues?q=author%3Aabhinavkrin" title="Bug reports">🐛</a></td>
   </tr>
 </table>
 
