@@ -447,26 +447,11 @@ class Admin extends Component {
                     handleEditShortUrl={this.handleEditShortUrl}
                     handleDeleteShortUrl={this.handleDeleteShortUrl}
                     toggleSecurity={this.toggleSecurity}
+                    openHits={this.getHits}
                   />
-<<<<<<< HEAD
-                ) : (
-                    <ListUrls
-                      shortUrls={this.state.shortUrls}
-                      handleEditShortUrl={this.handleEditShortUrl}
-                      handleDeleteShortUrl={this.handleDeleteShortUrl}
-
-                      openHits={this.getHits}
-                    />
-                  )}
-              </>
-            )
-            :
-            (
-=======
                 )}
             </>
           ) : (
->>>>>>> upstream/master
               <div className={classes.heroContent}>
                 <Container maxWidth='sm'>
                   {/* <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
