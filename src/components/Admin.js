@@ -447,6 +447,7 @@ class Admin extends Component {
                     handleEditShortUrl={this.handleEditShortUrl}
                     handleDeleteShortUrl={this.handleDeleteShortUrl}
                     toggleSecurity={this.toggleSecurity}
+                    openHits={this.getHits}
                   />
                 )}
             </>
