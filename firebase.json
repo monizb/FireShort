@@ -12,13 +12,17 @@
         "destination": "/index.html"
       }
     ],
-    "headers": [{
-      "source": "**/*.@(jpg|jpeg|gif|png|woff2|css|js|webp|svg)",
-      "headers": [ {
-        "key": "cache-control",
-        "value": "max-age=6048001"
-      } ]
-    }]
+    "headers": [
+      {
+        "source": "**/*.@(jpg|jpeg|gif|png|woff2|css|js|webp|svg)",
+        "headers": [
+          {
+            "key": "cache-control",
+            "value": "max-age=6048001"
+          }
+        ]
+      }
+    ]
   },
   "firestore": {
     "rules": "firestore.rules",
