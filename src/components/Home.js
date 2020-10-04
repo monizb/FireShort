@@ -1,10 +1,12 @@
 import "../config";
 
-import firebase from "firebase";
 import publicIp from "public-ip";
 import React, { Component } from "react";
 
 import { db } from "../firebase/firebase";
+
+import firebase from 'firebase/app';
+import "firebase/firestore";
 
 import classes from "./components.module.css";
 
@@ -27,6 +29,24 @@ class Home extends Component {
     this.startFunc(true);
   }
 
+  hitCount = async (docid,author) => {
+    const hitref = db.collection('hits').doc(docid);
+      try {
+        await hitref.update({
+          hits: firebase.firestore.FieldValue.increment(1),
+        });
+      }
+      catch(err){
+        //hit document is not created yet.
+        await hitref
+        .set({
+          hits: 1,
+          curl: docid,
+          author
+        });
+      }
+  }
+
   startFunc = (isLocked) => {
     this.setState({ loading: true });
     if (this.state.loc === "/") {
@@ -45,46 +65,31 @@ class Home extends Component {
           } else {
             if (!data.locked || !isLocked) {
               this.setState({ isLocked: false });
-              if (data.track === false) {
-                docref.update({
-                  hits: firebase.firestore.FieldValue.increment(1),
-                });
-                this.setState({ newloc: data.lurl });
-                window.location = data.lurl;
-              } else {
-                let ipv4 = "";
-                (async () => {
-                  ipv4 = await publicIp.v4();
-                  //update the hits count
-                  const hitref = db.collection('hits').doc(docid);
-                  hitref
-                  .update({
-                    hits: firebase.firestore.FieldValue.increment(1),
-                  })
-                  .catch(error=>{
-                    //hit document is not created yet.
-                    if(error.code)
-                    hitref
-                    .set({
-                      hits: 1,
-                      curl: docid,
-                      author: data.author
-                    });
-                  });
-                  docref
-                    .collection("tracking")
-                    .add({
-                      ipv4: ipv4,
-                      timestamp: new Date().toLocaleString(),
-                      useragent: navigator.userAgent,
-                      author: data.author
-                    })
-                    .then(() => {
-                      this.setState({ newloc: data.lurl });
-                      window.location = data.lurl;
-                    });
-                })();
-              }
+              //update the hits count
+              this.hitCount(docid,data.author)
+              .then(()=>{
+                if (data.track === false) {
+                  this.setState({ newloc: data.lurl });
+                  window.location = data.lurl;
+                } else {
+                  let ipv4 = "";
+                  (async () => {
+                    ipv4 = await publicIp.v4();
+                    docref
+                      .collection("tracking")
+                      .add({
+                        ipv4: ipv4,
+                        timestamp: new Date().toLocaleString(),
+                        useragent: navigator.userAgent,
+                        author: data.author
+                      })
+                      .then(() => {
+                        this.setState({ newloc: data.lurl });
+                        window.location = data.lurl;
+                      });
+                  })();
+                }
+              })
             } else {
               this.setState({ loading: false, isLocked: true });
             }
