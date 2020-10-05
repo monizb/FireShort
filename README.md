@@ -112,7 +112,7 @@ To contribute to this repository please first create an issue with the
 appropriate template, after which you can directly fork this repository,make
 changes and start a pull request to the master branch. Please also have a look
 at our Contribution guidelines
-[here](https://github.com/monizb/FireShort/blob/master/CONTRBUTING.md)
+[here](https://github.com/monizb/FireShort/blob/master/CONTRIBUTING.md)
 
 ### Live Demo
 
