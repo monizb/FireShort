@@ -33,7 +33,7 @@ this rep:
 The following features are under development/open for contributions.Please first
 create a feature issue to discuss about the feature you would like to take up.
 
-- [ ] Multiple Admin Panels and New User Registration
+- [x] Multiple Admin Panels and New User Registration
 - [ ] Ability to check for Custom URL clashes across all users instantly to
       verify if it has been taken already
 - [ ] Make a page for link analytics , with number of clicks,and all the
