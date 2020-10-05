@@ -43,7 +43,7 @@ export default function CardUrls(props) {
     const classes = useStyles();
 
     return (
-        <Container className={classes.cardGrid} maxWidth="md">
+        <Container className={classes.cardGrid} maxWidth="lg">
             <Grid container spacing={4}>
                 {props.shortUrls.map((card) => (
                     <Grid item key={card.id} xs={12} sm={6} md={4}>

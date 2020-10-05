@@ -7,7 +7,7 @@
 ![Contributions](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)
 [![GitHub license](https://img.shields.io/github/license/thedevs-network/kutt.svg)](https://github.com/monizb/FireShort/blob/master/LICENSE)
 ![Issues](https://img.shields.io/github/issues/monizb/FireShort)
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors-)
 ![Stars](https://img.shields.io/github/stars/monizb/FireShort)
 
 `Accepting Hacktoberfest Contributions`
@@ -33,7 +33,7 @@ this rep:
 The following features are under development/open for contributions.Please first
 create a feature issue to discuss about the feature you would like to take up.
 
-- [ ] Multiple Admin Panels and New User Registration
+- [x] Multiple Admin Panels and New User Registration
 - [ ] Ability to check for Custom URL clashes across all users instantly to
       verify if it has been taken already
 - [ ] Make a page for link analytics , with number of clicks,and all the
@@ -92,12 +92,10 @@ REACT_APP_MEAS_ID=
 ```
 
 Save the file and now in the Firebase Console Goto Authentication > SignIn
-Methods > Enable Email Sigin.Then UNder Users Tab Select Add User and add any
-one user of your choice which will be used for logging in to the admin panel.
+Methods > Enable Email Sigin. This now enables you to create a new account using Email And Password in the app.
 Next, Goto Cloud Firestore > Create Database and then navigate to the rules tab
 and copy paste the rules from
-[here](https://github.com/monizb/FireShort/blob/master/db-rules.json) (The rules
-are not the best right now, will be improved in the future)
+[here](https://github.com/monizb/FireShort/blob/master/firestore.rules)
 
 For the final step run:
 
@@ -114,7 +112,7 @@ To contribute to this repository please first create an issue with the
 appropriate template, after which you can directly fork this repository,make
 changes and start a pull request to the master branch. Please also have a look
 at our Contribution guidelines
-[here](https://github.com/monizb/FireShort/blob/master/CONTRBUTING.md)
+[here](https://github.com/monizb/FireShort/blob/master/CONTRIBUTING.md)
 
 ### Live Demo
 

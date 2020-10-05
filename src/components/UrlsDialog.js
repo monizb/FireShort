@@ -45,7 +45,7 @@ function isUrl(s) {
     return regexp.test(s);
 }
 
-function hasSpaces(s){
+function hasSpaces(s) {
     var regexp = /\s/;
     console.log(regexp.test(s))
     return regexp.test(s);
@@ -89,7 +89,7 @@ export default function UrlsDialog(props) {
                 {props.state.lurl.length > 0 && props.state.curl.length === 0 &&
                     (
                         <DialogContentText>
-                            Enter Short URL.
+                            Enter Short URL (optional).
                         </DialogContentText>
                     )
                 }

@@ -12,7 +12,7 @@ import { connect } from "react-redux";
 import { loginUser, logoutUser, resendConfirmationEmail } from "../actions";
 
 const styles = () => ({
-  "@global": { body: { backgroundColor: "#040404", backgroundImage: `url("../../public/Images/verify.png")` } },
+  "@global": { body: { backgroundColor: "#040404" } },
   paper: {
     marginTop: 100,
     display: "flex",

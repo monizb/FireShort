@@ -12,6 +12,7 @@ import {
   TablePagination,
   TableRow,
   Tooltip,
+  IconButton,
 } from "@material-ui/core";
 import Badge from "@material-ui/core/Badge";
 import { makeStyles } from "@material-ui/core/styles";
@@ -58,7 +59,7 @@ export default function ListUrls(props) {
   };
 
   return (
-    <Container className={classes.cardGrid} maxWidth="md">
+    <Container className={classes.cardGrid} maxWidth="lg">
       <Paper className={classes.root}>
         <TableContainer className={classes.container}>
           <Table stickyHeader aria-label="sticky table">
@@ -74,20 +75,20 @@ export default function ListUrls(props) {
                   Short URL
                 </TableCell>
                 <TableCell
-                  key="lurl"
-                  align="left"
-                  style={{ minWidth: "100px" }}
-                >
-                  Long URL
-                </TableCell>
-                <TableCell
                   key="action"
-                  align="right"
+                  align="center"
                   style={{
                     minWidth: "100px",
                   }}
                 >
                   Action
+                </TableCell>
+                <TableCell
+                  key="lurl"
+                  align="left"
+                  style={{ minWidth: "100px" }}
+                >
+                  Long URL
                 </TableCell>
               </TableRow>
             </TableHead>
@@ -114,33 +115,17 @@ export default function ListUrls(props) {
                           {card.data.curl}
                         </Button>
                         <Tooltip title={card.data.hits + " Hits"}>
-                          <Badge
-                            badgeContent={card.data.hits}
-                            color="secondary"
-                            max={Infinity}
-                            showZero
-                          >
-                            <OpenInBrowser />
-                          </Badge>
+                            <IconButton onClick={() => { props.openHits(card.data.curl) }} style={{ cursor: "pointer" }}>
+                                <Badge
+                                 badgeContent={card.data.hits}
+                                 color="secondary"
+                                 max={Infinity}
+                                 showZero
+                                >
+                                    <OpenInBrowser />
+                                </Badge>
+                          </IconButton>
                         </Tooltip>
-                      </TableCell>
-                      <TableCell
-                        key="lurl"
-                        align="left"
-                        style={{ minWidth: "100px" }}
-                      >
-                        <Box
-                          bgcolor="text.primary"
-                          color="background.paper"
-                          p={2}
-                          style={{
-                            overflowX: "auto",
-                            overflowY: "hidden",
-                            whiteSpace: "nowrap",
-                          }}
-                        >
-                          {card.data.lurl}
-                        </Box>
                       </TableCell>
                       <TableCell
                         key="action"
@@ -182,6 +167,25 @@ export default function ListUrls(props) {
                           </Button>
                         </ButtonGroup>
                       </TableCell>
+                      <TableCell
+                        key="lurl"
+                        align="left"
+                        style={{ minWidth: "100px" }}
+                      >
+                        <Box
+                          bgcolor="text.primary"
+                          color="background.paper"
+                          p={2}
+                          style={{
+                            overflowX: "auto",
+                            overflowY: "hidden",
+                            whiteSpace: "nowrap",
+                          }}
+                        >
+                          {card.data.lurl}
+                        </Box>
+                      </TableCell>
+
                     </TableRow>
                   );
                 })}
