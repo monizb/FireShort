@@ -87,6 +87,14 @@
         "code",
         "bug"
       ]
+    }, {
+      "login": "prashantacharya",
+      "name": "Prashant Acharya",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/23692097?s=460&u=939ea55a5c76d80f80395abe189fc3117fa896f8&v=4",
+      "profile": "https://bigomega.dev",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,

@@ -24,6 +24,7 @@ import {
   LinearProgress,
   Snackbar,
   Toolbar,
+  Tooltip,
   Typography,
 } from '@material-ui/core';
 
@@ -85,6 +86,7 @@ class Admin extends Component {
       inputBackdrop: false,
       newPsw: '',
       currUrl: null,
+      isToolTipOpen: true
     };
     this.handleLurlChange = this.handleLurlChange.bind(this);
     this.handleCurlChange = this.handleCurlChange.bind(this);
@@ -350,6 +352,10 @@ class Admin extends Component {
         self.setState({ user: null });
       }
     });
+
+    setTimeout(() => {
+      this.setState({ isToolTipOpen: false })
+    }, 5000)
   }
 
   handleLogout = () => {
@@ -374,6 +380,8 @@ class Admin extends Component {
       alert('Password cannot be empty.');
     }
   };
+
+  
 
   render() {
     const { classes } = this.props;
@@ -461,14 +469,23 @@ class Admin extends Component {
               </div>
             )}
 
-          <Fab
-            aria-label='Add'
-            className={classes.fab}
-            color='primary'
-            onClick={this.handleClickOpen}
+          <Tooltip 
+            title="Create new url" 
+            open={this.state.isToolTipOpen} 
+            placement="top"
+            arrow
           >
-            <AddIcon />
-          </Fab>
+            <Fab
+              aria-label='Add'
+              className={classes.fab}
+              color='primary'
+              onClick={this.handleClickOpen}
+              onMouseEnter={() => { this.setState({ isToolTipOpen: true }) }}
+              onMouseLeave={() => { this.setState({ isToolTipOpen: false }) }}
+            >
+              <AddIcon />
+            </Fab>
+          </Tooltip>
 
           <Backdrop className={classes.backdrop} open={this.state.backdrop}>
             <CircularProgress color='inherit' />
