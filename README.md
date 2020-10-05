@@ -96,8 +96,7 @@ Methods > Enable Email Sigin.Then UNder Users Tab Select Add User and add any
 one user of your choice which will be used for logging in to the admin panel.
 Next, Goto Cloud Firestore > Create Database and then navigate to the rules tab
 and copy paste the rules from
-[here](https://github.com/monizb/FireShort/blob/master/db-rules.json) (The rules
-are not the best right now, will be improved in the future)
+[here](https://github.com/monizb/FireShort/blob/master/firestore.rules)
 
 For the final step run:
 
