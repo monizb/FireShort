@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Box,
@@ -13,17 +14,15 @@ import {
   TableHead,
   TablePagination,
   TableRow,
-  Tooltip,
 } from '@material-ui/core';
 import {
   FileCopyOutlined as FileCopyOutlinedIcon,
   Edit as EditIcon,
   Visibility as VisibilityIcon,
   DeleteForever as DeleteForeverIcon,
+  Assessment as AnalyticsIcon,
 } from '@material-ui/icons';
-import Badge from '@material-ui/core/Badge';
-import { OpenInBrowser } from '@material-ui/icons';
-
+import { useHistory } from 'react-router';
 import LockIcon from '@material-ui/icons/Lock';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 
@@ -45,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ListUrls(props) {
   const classes = useStyles();
+  const history = useHistory();
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -96,16 +96,6 @@ export default function ListUrls(props) {
                         >
                           {card.data.curl}
                         </Button>
-                        <Tooltip title={card.data.hits + ' Hits'}>
-                          <Badge
-                            badgeContent={card.data.hits}
-                            color='secondary'
-                            max={Infinity}
-                            showZero
-                          >
-                            <OpenInBrowser />
-                          </Badge>
-                        </Tooltip>
                       </TableCell>
                       <TableCell key='lurl' align='left' style={{ minWidth: '100px' }}>
                         <Box
@@ -130,6 +120,13 @@ export default function ListUrls(props) {
                             target='_blank'
                           >
                             <VisibilityIcon />
+                          </Button>
+                          <Button
+                            size='small'
+                            disabled={!card.data.track}
+                            onClick={() => history.push(`/analytics/${card.data.curl}`)}
+                          >
+                            <AnalyticsIcon />
                           </Button>
                           <Button
                             size='small'

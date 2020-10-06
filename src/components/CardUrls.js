@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Box, Button, Card, CardContent, CardHeader, Container, CardActions, Grid, IconButton, Tooltip, Typography } from '@material-ui/core';
 import { FileCopyOutlined as FileCopyOutlinedIcon } from '@material-ui/icons';
 import Badge from '@material-ui/core/Badge';
-import { OpenInBrowser } from '@material-ui/icons';
+import { useHistory } from 'react-router';
 
 const useStyles = makeStyles((theme) => ({
     cardGrid: {
@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function CardUrls(props) {
+    const history = useHistory();
     const classes = useStyles();
 
     return (
@@ -70,16 +71,16 @@ export default function CardUrls(props) {
                                 <Button size="small" onClick={() => props.handleEditShortUrl(card.data.curl)}>
                                     Edit
                                 </Button>
+                                <Button
+                                    size='small'
+                                    disabled={!card.data.track}
+                                    onClick={() => history.push(`/analytics/${card.data.curl}`)}
+                                >
+                                    Track
+                                </Button>
                                 <Button size="small" color="secondary" onClick={() => props.handleDeleteShortUrl(card.data.curl)}>
                                     Delete
                                 </Button>
-                                <Tooltip title={card.data.hits + " Hits"}>
-                                    <div onClick={() => { props.openHits(card.data.curl) }} style={{ cursor: "pointer" }}>
-                                        <Badge badgeContent={card.data.hits} color="secondary" max={Infinity} showZero>
-                                            <OpenInBrowser />
-                                        </Badge>
-                                    </div>
-                                </Tooltip>
                             </CardActions>
                         </Card>
                     </Grid>

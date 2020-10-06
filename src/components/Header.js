@@ -1,5 +1,5 @@
 import { AppBar, Button, Toolbar, Typography, withStyles } from '@material-ui/core';
-import React, { useCallback } from 'react';
+import React, { memo, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { logoutUser } from '../actions';
 
@@ -43,4 +43,4 @@ function Header({ classes }) {
     );
 }
 
-export default withStyles(styles)(Header);
+export default memo(withStyles(styles)(Header));

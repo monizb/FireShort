@@ -37,7 +37,7 @@ const styles = (theme) => ({
     flexGrow: 1,
   },
   passInput: {
-    padfing: 15
+    padding: 15,
   },
   menuButton: {
     marginRight: theme.spacing(2),
