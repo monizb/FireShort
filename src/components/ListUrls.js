@@ -2,10 +2,12 @@ import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import {
+  Badge,
   Box,
   Button,
   ButtonGroup,
   Container,
+  IconButton,
   Paper,
   Table,
   TableBody,
@@ -14,13 +16,14 @@ import {
   TableHead,
   TablePagination,
   TableRow,
+  Tooltip,
 } from '@material-ui/core';
 import {
   DeleteForever as DeleteForeverIcon,
   Edit as EditIcon,
   FileCopyOutlined as FileCopyOutlinedIcon,
   Visibility as VisibilityIcon,
-  Assessment as AnalyticsIcon,
+  Assessment as AnalyticsIcon, OpenInBrowser
 } from '@material-ui/icons';
 import { useHistory } from 'react-router';
 import LockIcon from '@material-ui/icons/Lock';
@@ -103,17 +106,31 @@ export default function ListUrls(props) {
                         align="left"
                         style={{ minWidth: "100px" }}
                       >
-                        <Button
-                          startIcon={<FileCopyOutlinedIcon />}
-                          onClick={() => {
-                            navigator.clipboard.writeText(
-                              window.location.origin + "/" + card.data.curl
-                            );
-                          }}
-                          classes={{ label: classes.label }}
-                        >
-                          {card.data.curl}
-                        </Button>
+                        <Tooltip title="Copy to clipboard">
+                          <Button
+                            startIcon={<FileCopyOutlinedIcon />}
+                            onClick={() => {
+                              navigator.clipboard.writeText(
+                                window.location.origin + "/" + card.data.curl
+                              );
+                            }}
+                            classes={{ label: classes.label }}
+                          >
+                            {card.data.curl}
+                          </Button>
+                        </Tooltip>
+                        <Tooltip title={card.data.hits + " Hits"}>
+                          <IconButton onClick={() => { props.openHits(card.data.curl) }} style={{ cursor: "pointer" }}>
+                            <Badge
+                              badgeContent={card.data.hits}
+                              color="secondary"
+                              max={Infinity}
+                              showZero
+                            >
+                              <OpenInBrowser />
+                            </Badge>
+                          </IconButton>
+                        </Tooltip>
                       </TableCell>
                       <TableCell
                         key="action"
@@ -121,43 +138,55 @@ export default function ListUrls(props) {
                         style={{ minWidth: "100px" }}
                       >
                         <ButtonGroup variant="outlined" color="default">
-                          <Button
-                            size="small"
-                            color="primary"
-                            href={card.data.lurl}
-                            target="_blank"
-                          >
-                            <VisibilityIcon />
-                          </Button>
-                          <Button
-                            size='small'
-                            disabled={!card.data.track}
-                            onClick={() => history.push(`/analytics/${card.data.curl}`)}
-                          >
-                            <AnalyticsIcon />
-                          </Button>
-                          <Button
-                            size='small'
-                            onClick={() => props.handleEditShortUrl(card.data.curl)}
-                          >
-                            <EditIcon />
-                          </Button>
-                          <Button
-                            size="small"
-                            color="secondary"
-                            onClick={() =>
-                              props.handleDeleteShortUrl(card.data.curl)
-                            }
-                          >
-                            <DeleteForeverIcon />
-                          </Button>
-                          <Button
-                            size="small"
-                            color="default"
-                            onClick={() => props.toggleSecurity(card.data.curl)}
-                          >
-                            {card.data.locked ? <LockIcon /> : <LockOpenIcon />}
-                          </Button>
+                          <Tooltip title="Preview link">
+                            <Button
+                              size="small"
+                              color="primary"
+                              href={card.data.lurl}
+                              target="_blank"
+                            >
+                              <VisibilityIcon />
+                            </Button>
+                          </Tooltip>
+                          <Tooltip title="Analytics">
+                            <Button
+                              size='small'
+                              disabled={!card.data.track}
+                              onClick={() => history.push(`/analytics/${card.data.curl}`)}
+                            >
+                              <AnalyticsIcon />
+                            </Button>
+                          </Tooltip>
+                          <Tooltip title="Edit link">
+                            <Button
+                              size="small"
+                              onClick={() =>
+                                props.handleEditShortUrl(card.data.curl)
+                              }
+                            >
+                              <EditIcon />
+                            </Button>
+                          </Tooltip>
+                          <Tooltip title="Delete link">
+                            <Button
+                              size="small"
+                              color="secondary"
+                              onClick={() =>
+                                props.handleDeleteShortUrl(card.data.curl)
+                              }
+                            >
+                              <DeleteForeverIcon />
+                            </Button>
+                          </Tooltip>
+                          <Tooltip title="Toggle link protection">
+                            <Button
+                              size="small"
+                              color="default"
+                              onClick={() => props.toggleSecurity(card.data.curl)}
+                            >
+                              {card.data.locked ? <LockIcon /> : <LockOpenIcon />}
+                            </Button>
+                          </Tooltip>
                         </ButtonGroup>
                       </TableCell>
                       <TableCell

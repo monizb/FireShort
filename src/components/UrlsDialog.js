@@ -65,7 +65,11 @@ export default function UrlsDialog(props) {
         setOpen(false);
     };
     return (
-        <Dialog open={props.state.formopen} onClose={props.handleClose} aria-labelledby="form-dialog-title">
+        <Dialog
+            open={props.state.formopen}
+            onClose={props.handleClose}
+            aria-labelledby="form-dialog-title"
+        >
             <DialogTitle id="form-dialog-title">FireShort URL</DialogTitle>
             <DialogContent>
                 {props.state.lurl.length === 0 && props.state.curl.length === 0 &&
@@ -115,13 +119,52 @@ export default function UrlsDialog(props) {
                     value={props.state.curl}
                     onChange={props.handleCurlChange}
                 />
-                <Grid component="label" container alignItems="center" spacing={1} style={{ marginTop: "15px", marginBottom: "15px" }}>
+                <Grid
+                    component="label"
+                    container
+                    alignItems="center"
+                    spacing={1}
+                    style={{ marginTop: "15px", marginBottom: "15px" }}
+                >
                     <Grid item><b>Track Link Activity:</b></Grid>
-                    <Grid item>Off</Grid>
+                    {/*<Grid item>Off</Grid>*/}
                     <Grid item>
-                        <AntSwitch checked={props.state.track} onChange={props.handleTrackChange} name="checked" />
+                        <AntSwitch
+                            checked={props.state.track}
+                            onChange={props.handleTrackChange} name="checked"
+                        />
                     </Grid>
-                    <Grid item>On</Grid>
+                    {/*<Grid item>On</Grid>*/}
+                </Grid>
+                <Grid
+                    component="label"
+                    container
+                    alignItems="center"
+                    spacing={1}
+                    style={{marginBottom: "15px" }}
+                >
+                    <Grid item><b>Protect Link:</b></Grid>
+                    {/*<Grid item>Off</Grid>*/}
+                    <Grid item>
+                        <AntSwitch
+                            checked={props.state.locked}
+                            onChange={props.handleProtectChange} name="checked"
+                        />
+                    </Grid>
+                    {
+                        props.state.locked ?
+                        <Grid item style={{ marginLeft: "15px", padding: "0px"}}>
+                            <TextField
+                                autoFocus
+                                margin="dense"
+                                type="password"
+                                value={props.state.newPsw}
+                                onChange={props.handlePswChange}
+                            />
+                        </Grid>
+                        : null
+                    }
+                    {/*<Grid item>On</Grid>*/}
                 </Grid>
             </DialogContent>
             <DialogActions>
@@ -139,7 +182,11 @@ export default function UrlsDialog(props) {
               </Button>
                 <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
                     <Alert onClose={handleClose} severity="error" variant="filled">
-                        {!isUrl(props.state.lurl) ? "Enter a valid URL to shorten" : "Enter a custom URL without spaces"}
+                        {
+                            !isUrl(props.state.lurl) ?
+                            "Enter a valid URL to shorten" :
+                            "Enter a custom URL without spaces"
+                        }
                     </Alert>
                 </Snackbar>
             </DialogActions>
