@@ -103,17 +103,19 @@ export default function ListUrls(props) {
                         align="left"
                         style={{ minWidth: "100px" }}
                       >
-                        <Button
-                          startIcon={<FileCopyOutlinedIcon />}
-                          onClick={() => {
-                            navigator.clipboard.writeText(
-                              window.location.origin + "/" + card.data.curl
-                            );
-                          }}
-                          classes={{ label: classes.label }}
-                        >
-                          {card.data.curl}
-                        </Button>
+                        <Tooltip title="Copy to clipboard">
+                          <Button
+                            startIcon={<FileCopyOutlinedIcon />}
+                            onClick={() => {
+                              navigator.clipboard.writeText(
+                                window.location.origin + "/" + card.data.curl
+                              );
+                            }}
+                            classes={{ label: classes.label }}
+                          >
+                            {card.data.curl}
+                          </Button>
+                        </Tooltip>
                         <Tooltip title={card.data.hits + " Hits"}>
                             <IconButton onClick={() => { props.openHits(card.data.curl) }} style={{ cursor: "pointer" }}>
                                 <Badge
@@ -133,38 +135,46 @@ export default function ListUrls(props) {
                         style={{ minWidth: "100px" }}
                       >
                         <ButtonGroup variant="outlined" color="default">
-                          <Button
-                            size="small"
-                            color="primary"
-                            href={card.data.lurl}
-                            target="_blank"
-                          >
-                            <VisibilityIcon />
-                          </Button>
-                          <Button
-                            size="small"
-                            onClick={() =>
-                              props.handleEditShortUrl(card.data.curl)
-                            }
-                          >
-                            <EditIcon />
-                          </Button>
-                          <Button
-                            size="small"
-                            color="secondary"
-                            onClick={() =>
-                              props.handleDeleteShortUrl(card.data.curl)
-                            }
-                          >
-                            <DeleteForeverIcon />
-                          </Button>
-                          <Button
-                            size="small"
-                            color="default"
-                            onClick={() => props.toggleSecurity(card.data.curl)}
-                          >
-                            {card.data.locked ? <LockIcon /> : <LockOpenIcon />}
-                          </Button>
+                          <Tooltip title="Preview link">
+                            <Button
+                              size="small"
+                              color="primary"
+                              href={card.data.lurl}
+                              target="_blank"
+                            >
+                              <VisibilityIcon />
+                            </Button>
+                          </Tooltip>
+                          <Tooltip title="Edit link">
+                            <Button
+                              size="small"
+                              onClick={() =>
+                                props.handleEditShortUrl(card.data.curl)
+                              }
+                            >
+                              <EditIcon />
+                            </Button>
+                          </Tooltip>
+                          <Tooltip title="Delete link">
+                            <Button
+                              size="small"
+                              color="secondary"
+                              onClick={() =>
+                                props.handleDeleteShortUrl(card.data.curl)
+                              }
+                            >
+                              <DeleteForeverIcon />
+                            </Button>
+                          </Tooltip>
+                          <Tooltip title="Toggle link protection">
+                            <Button
+                              size="small"
+                              color="default"
+                              onClick={() => props.toggleSecurity(card.data.curl)}
+                            >
+                              {card.data.locked ? <LockIcon /> : <LockOpenIcon />}
+                            </Button>
+                          </Tooltip>
                         </ButtonGroup>
                       </TableCell>
                       <TableCell
