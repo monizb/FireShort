@@ -144,12 +144,12 @@ Thanks goes to these wonderful people
   <tr>
     <td align="center"><a href="https://github.com/rahul1995"><img src="https://avatars0.githubusercontent.com/u/7647789?v=4" width="50px;" alt=""/><br /><sub><b>rahul1995</b></sub></a><br /><a href="https://github.com/monizb/FireShort/commits?author=rahul1995" title="Code">💻</a></td>
     <td align="center"><a href="https://me.avitechlab.com"><img src="https://avatars1.githubusercontent.com/u/15830206?v=4" width="50px;" alt=""/><br /><sub><b>Abhinav Kumar</b></sub></a><br /><a href="https://github.com/monizb/FireShort/commits?author=abhinavkrin" title="Code">💻</a> <a href="https://github.com/monizb/FireShort/issues?q=author%3Aabhinavkrin" title="Bug reports">🐛</a></td>
+    <td align="center"><a href="https://github.com/pyplacca"><img src="https://avatars3.githubusercontent.com/u/36242450?v=4" width="50px;" alt=""/><br /><sub><b>David Placca</b></sub></a><br /><a href="https://github.com/monizb/FireShort/commits?author=pyplacca" title="Code">💻</a></td>
   </tr>
 </table>
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
-
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the
