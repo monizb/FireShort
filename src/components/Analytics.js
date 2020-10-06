@@ -3,6 +3,7 @@ import React, { Fragment, memo, useCallback, useEffect, useMemo, useState } from
 import { Card, CardContent, Container, CssBaseline, Grid, LinearProgress, makeStyles, Typography } from '@material-ui/core';
 import { Chart } from "react-google-charts";
 import moment from 'moment';
+import firebase from "firebase/app";
 import UAParser from 'ua-parser-js';
 
 import { db } from '../firebase/firebase';
@@ -50,7 +51,7 @@ const AnalyticsChart = memo(({ data, chartType, title, height = '400px' }) => {
   )
 });
 
-function Analytics() {
+const Analytics = () => {
   const { id } = useParams();
 
   const classes = useStyles();
@@ -59,10 +60,12 @@ function Analytics() {
 
   const getUrlAnalytics = useCallback(async () => {
     setLoading(true);
+    var user = firebase.auth().currentUser;
     const clicks = await db
       .collection('shorturls')
       .doc(id)
       .collection('tracking')
+      .where("author", "==", user.uid)
       .get()
       .then(snapshot => snapshot.docs.map(doc => doc.data()));
 
