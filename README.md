@@ -92,9 +92,9 @@ REACT_APP_MEAS_ID=
 ```
 
 Save the file and now in the Firebase Console Goto Authentication > SignIn
-Methods > Enable Email Sigin. This now enables you to create a new account using Email And Password in the app.
-Next, Goto Cloud Firestore > Create Database and then navigate to the rules tab
-and copy paste the rules from
+Methods > Enable Email Sigin. This now enables you to create a new account using
+Email And Password in the app. Next, Goto Cloud Firestore > Create Database and
+then navigate to the rules tab and copy paste the rules from
 [here](https://github.com/monizb/FireShort/blob/master/firestore.rules)
 
 For the final step run:
@@ -150,6 +150,7 @@ Thanks goes to these wonderful people
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the
