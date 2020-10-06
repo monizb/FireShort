@@ -92,7 +92,7 @@ export default function CardUrls(props) {
                                         <EditIcon />
                                     </IconButton>
                                 </Tooltip>
-                                <Tooltip title={"Edit link"}>
+                                <Tooltip title={"Analytics"}>
                                     <IconButton size="small" disabled={!card.data.track} onClick={() => history.push(`/analytics/${card.data.curl}`)}>
                                         <AnalyticsIcon />
                                     </IconButton>

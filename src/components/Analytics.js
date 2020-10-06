@@ -30,6 +30,7 @@ const chartOptions = {
     startup: true,
   },
   legend: { position: 'bottom', alignment: 'start' },
+  colorAxis: { colors: ['#4285f4'] },
 };
 
 const AnalyticsChart = memo(({ data, chartType, title, height = '400px' }) => {
@@ -56,12 +57,12 @@ const Analytics = () => {
 
   const classes = useStyles();
   const [loading, setLoading] = useState(true);
-  const [allClicks, setAllClicks] = useState([]);
+  const [allHits, setAllHits] = useState([]);
 
   const getUrlAnalytics = useCallback(async () => {
     setLoading(true);
     var user = firebase.auth().currentUser;
-    const clicks = await db
+    const hits = await db
       .collection('shorturls')
       .doc(id)
       .collection('tracking')
@@ -69,21 +70,21 @@ const Analytics = () => {
       .get()
       .then(snapshot => snapshot.docs.map(doc => doc.data()));
 
-    setAllClicks(clicks);
+    setAllHits(hits);
     setLoading(false);
   }, [id]);
 
-  const todayClicks = useMemo(() => {
+  const todayHits = useMemo(() => {
     const today = moment().format('YYYY-MM-DD');;
-    return allClicks.filter(click => {
+    return allHits.filter(click => {
       const clickDate = moment(click.timestamp).format('YYYY-MM-DD');
       return clickDate === today;
     }).length;
-  }, [allClicks]);
+  }, [allHits]);
 
   const groupByBrowser = useMemo(() => {
     var parser = new UAParser();
-    return allClicks.reduce((acc, curr) => {
+    return allHits.reduce((acc, curr) => {
       parser.setUA(curr.useragent);
       const { browser } = parser.getResult();
       const currentBrowserInArray = acc.find(item => item[0] === browser.name);
@@ -95,12 +96,12 @@ const Analytics = () => {
       }
 
       return acc;
-    }, [['Browser', 'Clicks']]);
-  }, [allClicks]);
+    }, [['Browser', 'Hits']]);
+  }, [allHits]);
 
   const groupBySO = useMemo(() => {
     var parser = new UAParser();
-    return allClicks.reduce((acc, curr) => {
+    return allHits.reduce((acc, curr) => {
       parser.setUA(curr.useragent);
       const { os } = parser.getResult();
       const currentSOInArray = acc.find(item => item[0] === os.name);
@@ -112,11 +113,13 @@ const Analytics = () => {
       }
 
       return acc;
-    }, [['Operational system', 'Clicks']]);
-  }, [allClicks]);
+    }, [['Operational system', 'Hits']]);
+  }, [allHits]);
 
-  const clicksByDate = useMemo(() => {
-    return allClicks
+  const hitsByDate = useMemo(() => {
+    const defaultValue = [{ type: 'date', label: 'Date' }, 'Hits'];
+    if (!allHits.length) return defaultValue;
+    return allHits
       .sort((a, b) => {
         return new Date(a.timestamp) - new Date(b.timestamp);
       })
@@ -134,8 +137,34 @@ const Analytics = () => {
         }
 
         return acc;
-      }, [[{ type: 'date', label: 'Date' }, 'Clicks']]);
-  }, [allClicks]);
+      }, [defaultValue]);
+  }, [allHits]);
+
+  const hitsByCountry = useMemo(() => {
+    const defaultValue = ['Country', 'Hits'];
+    if (!allHits.length) return defaultValue;
+    return allHits
+      .filter(click => Boolean(click.country))
+      .sort((a, b) => {
+        return new Date(a.timestamp) - new Date(b.timestamp);
+      })
+      .reduce((acc, curr) => {
+        const groupedClickByCountry = acc.find(group => group[0] === curr.country);
+
+        if (groupedClickByCountry) {
+          groupedClickByCountry[1] += 1;
+        } else {
+          acc.push([
+            curr.country,
+            1,
+          ]);
+        }
+
+        return acc;
+      }, [defaultValue]);
+  }, [allHits]);
+
+  console.log(hitsByCountry);
 
   useEffect(() => {
     getUrlAnalytics();
@@ -152,10 +181,10 @@ const Analytics = () => {
             <Card>
               <CardContent>
                 <Typography className={classes.title} color="textSecondary" gutterBottom>
-                  Total clicks
+                  Total hits
                 </Typography>
                 <Typography variant="h5" component="h2">
-                  {allClicks.length}
+                  {allHits.length}
                 </Typography>
               </CardContent>
             </Card>
@@ -164,10 +193,10 @@ const Analytics = () => {
             <Card>
               <CardContent>
                 <Typography className={classes.title} color="textSecondary" gutterBottom>
-                  Clicks today
+                  Hits today
                 </Typography>
                 <Typography variant="h5" component="h2">
-                  {todayClicks}
+                  {todayHits}
                 </Typography>
               </CardContent>
             </Card>
@@ -176,9 +205,18 @@ const Analytics = () => {
         <Card className={classes.chart}>
           <CardContent>
             <AnalyticsChart
-              title="Total Clicks"
+              title="Total Hits"
               chartType="AreaChart"
-              data={clicksByDate}
+              data={hitsByDate}
+            />
+          </CardContent>
+        </Card>
+        <Card className={classes.chart}>
+          <CardContent>
+            <AnalyticsChart
+              title="Total Hits"
+              chartType="GeoChart"
+              data={hitsByCountry}
             />
           </CardContent>
         </Card>
