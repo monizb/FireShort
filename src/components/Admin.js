@@ -72,6 +72,7 @@ class Admin extends Component {
       lurl: '',
       curl: '',
       track: true,
+      locked: false,
       successToast: false,
       viewMode: 'module',
       backdrop: false,
@@ -82,6 +83,8 @@ class Admin extends Component {
     this.handleLurlChange = this.handleLurlChange.bind(this);
     this.handleCurlChange = this.handleCurlChange.bind(this);
     this.handleTrackChange = this.handleTrackChange.bind(this);
+    this.handleProtectChange = this.handleProtectChange.bind(this);
+    this.handlePswChange = this.handlePswChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -94,8 +97,17 @@ class Admin extends Component {
   };
 
   handleTrackChange = (event) => {
-    this.setState({ track: this.state.track === true ? false : true });
+    this.setState({ track: !this.state.track });
   };
+
+  handleProtectChange = (event) => {
+    console.log(event, 'toggle protect')
+    this.setState({ locked: !this.state.locked });
+  };
+
+  handlePswChange = ({target}) => {
+    this.setState({ newPsw: target.value})
+  }
 
   createLink = (curl, data) => {
     const self = this;
@@ -108,9 +120,7 @@ class Admin extends Component {
   };
 
   handleSubmit = (event) => {
-    var lurl = this.state.lurl;
-    let curl = this.state.curl;
-    let track = this.state.track;
+    let {lurl, curl, track, locked, newPsw} = this.state
     const self = this;
     if (curl === '') {
       curl = nanoid(8);
@@ -119,9 +129,10 @@ class Admin extends Component {
       lurl: lurl,
       curl: curl,
       track: track,
+      locked: locked,
+      password: locked ? newPsw : '',
       hits: 0,
-      locked: false,
-      password: '',
+      author: this.props.user.uid
     };
     db.collection('shorturls')
       .doc(curl)
@@ -129,23 +140,37 @@ class Admin extends Component {
       .then(function (docSnapshot) {
         if (docSnapshot.exists) {
           self.handleClose();
-          confirmAlert({
-            title: 'Custom URL overwrite confirm',
-            message:
-              'The Custom URL you entered is alread associated with some other link, clicking ok will overwrite that link to the new one. Continue?',
-            buttons: [
-              {
-                label: 'Yes',
-                onClick: () => {
-                  self.createLink(curl, data);
-                  self.updateUrls();
+          if(docSnapshot.data().author === self.props.user.uid){
+            confirmAlert({
+              title: 'Custom URL overwrite confirm',
+              message:
+                'The Custom URL you entered is already associated with some other link, clicking ok will overwrite that link to the new one. Continue?',
+              buttons: [
+                {
+                  label: 'Yes',
+                  onClick: () => {
+                    self.createLink(curl, data);
+                    self.updateUrls();
+                  },
                 },
-              },
-              {
-                label: 'No',
-              },
-            ],
-          });
+                {
+                  label: 'No',
+                },
+              ],
+            });
+          } else {
+            confirmAlert({
+              title: 'Custom URL already created by other user.',
+              message:
+                'The Custom URL you entered is already associated with some other link and owned by another user.',
+              buttons: [
+                {
+                  label: 'Ok'
+                },
+              ],
+            });
+          }
+
         } else {
           self.createLink(curl, data);
           self.updateUrls();
@@ -195,7 +220,6 @@ class Admin extends Component {
     });
   }
 
-
   handleEditShortUrl = (curl) => {
     this.setState({ backdrop: true });
     const self = this;
@@ -207,12 +231,16 @@ class Admin extends Component {
           console.log('No such document!');
         } else {
           var data = doc.data();
-
-          self.setState({ lurl: data.lurl });
-          self.setState({ curl: data.curl });
-          self.setState({ track: data.track });
-          this.setState({ backdrop: false });
-          self.setState({ formopen: true });
+          // reduce number of calls to setState
+          self.setState({
+            lurl: data.lurl,
+            curl: data.curl,
+            track: data.track,
+            locked: data.locked,
+            newPsw: data.password,
+            backdrop: false,
+            formopen: true
+          });
         }
       })
       .catch((err) => {
@@ -222,8 +250,9 @@ class Admin extends Component {
 
   handleClickOpen = () => {
     this.setState({ formopen: true });
-    this.setState({ lurl: '' });
-    this.setState({ curl: '' });
+    this.setState({
+      lurl: '', curl: '', newPsw: '', locked: false
+    });
   };
 
   handleClose = () => {
@@ -238,28 +267,41 @@ class Admin extends Component {
     this.setState({ successToast: false });
   };
 
-  updateUrls = () => {
+  updateUrls = async  () => {
     this.setState({ backdrop: true });
     const self = this;
     self.setState({ loading: true });
     self.setState({ shortUrls: [] });
-
-    db.collection('shorturls')
-      .get()
-      .then((snapshot) => {
-        snapshot.forEach((doc) => {
-          self.setState({
-            shortUrls: [...self.state.shortUrls, { id: doc.id, data: doc.data() }],
-          });
-        });
-        self.props.setLink(self.state.shortUrls)
-        self.setState({ loading: false });
-        this.setState({ backdrop: false });
-      })
-      .catch((err) => {
-        console.log('Error getting documents', err);
-        self.setState({ loading: false });
+    try{
+      const shortUrls = new Map();
+      const curlSnaps = await db.collection('shorturls')
+                        .where("author","==",this.props.user.uid)
+                        .get();
+      const hitSnaps =  await db.collection('hits')
+                        .where("author","==",this.props.user.uid)
+                        .get();
+      curlSnaps.forEach(curl=>{
+        shortUrls.set(curl.data().curl,curl.data());
       });
+      hitSnaps.forEach(hit=>{
+        const curl = shortUrls.get(hit.data().curl);
+        if(curl){
+          curl.hits = hit.data().hits;
+        }
+      });
+      const shortUrlFinalList = [];
+      shortUrls.forEach(curl=>{
+        shortUrlFinalList.push({id: curl.curl, data: curl});
+      });
+      self.setState({shortUrls: shortUrlFinalList});
+      self.props.setLink(self.state.shortUrls)
+      self.setState({ loading: false });
+      this.setState({ backdrop: false });
+    }
+    catch(err){
+      console.log('Error getting documents', err);
+      self.setState({ loading: false });
+    }
   };
 
   getHits = (id) => {
@@ -270,6 +312,7 @@ class Admin extends Component {
     db.collection('shorturls')
       .doc(id)
       .collection('tracking')
+      .where("author","==",this.props.user.uid)
       .get()
       .then((snapshot) => {
         snapshot.forEach((hit) => {
@@ -287,7 +330,7 @@ class Admin extends Component {
 
   updateViewMode = (mode) => {
     this.setState({ viewMode: mode });
-    db.collection('settings').doc('viewMode').set({ value: mode });
+    db.collection('settings').doc(this.props.user.uid).set({ viewMode: mode });
   };
 
   componentDidMount() {
@@ -296,7 +339,7 @@ class Admin extends Component {
       if (user) {
         self.setState({ user });
         self.updateUrls();
-        var viewModeRef = db.collection('settings').doc('viewMode');
+        var viewModeRef = db.collection('settings').doc(user.uid);
         viewModeRef
           .get()
           .then((doc) => {
@@ -304,7 +347,7 @@ class Admin extends Component {
               console.log('No viewMode set!');
             } else {
               var data = doc.data();
-              self.setState({ viewMode: data.value });
+              self.setState({ viewMode: data.viewMode });
             }
           })
           .catch((err) => {
@@ -317,8 +360,8 @@ class Admin extends Component {
   }
 
   handleLogout = () => {
-    const { dispatch } = this.props;
-    dispatch(logoutUser());
+    const { logout } = this.props;
+    logout();
   };
 
   onPswSave = (e) => {
@@ -410,6 +453,7 @@ class Admin extends Component {
                     handleEditShortUrl={this.handleEditShortUrl}
                     handleDeleteShortUrl={this.handleDeleteShortUrl}
                     toggleSecurity={this.toggleSecurity}
+                    openHits={this.getHits}
                   />
                 ) : (
                     <ListUrls
@@ -446,6 +490,8 @@ class Admin extends Component {
             handleCurlChange={this.handleCurlChange}
             handleSubmit={this.handleSubmit}
             handleTrackChange={this.handleTrackChange}
+            handleProtectChange={this.handleProtectChange}
+            handlePswChange={this.handlePswChange}
           />
 
           <HitsDialog
@@ -472,14 +518,16 @@ class Admin extends Component {
 function mapStateToProps(state) {
   return {
     isLoggingOut: state.auth.isLoggingOut,
-    links: getFilteredLinks(state.links, state.filter)
+    links: getFilteredLinks(state.links, state.filter),
+    user: state.auth.user
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     addLink: (data) => dispatch(addLink(data)),
-    setLink: (data) => dispatch(setLinks(data))
+    setLink: (data) => dispatch(setLinks(data)),
+    logout: () => dispatch(logoutUser())
   };
 }
 

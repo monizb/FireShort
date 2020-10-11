@@ -57,7 +57,7 @@ const LoginLeftComponent = ({ classes }) => {
         <FeatureCard feature="Custom Tiny URLs" />
         <FeatureCard feature="Hit Tracker" />
         <FeatureCard feature="Admin Panel" />
-        <FeatureCard feature="Passowrd Protected URLs" />
+        <FeatureCard feature="Password Protected URLs" />
       </div>
     </Grid>
   );

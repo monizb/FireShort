@@ -8,6 +8,9 @@ import Login from "./components/Login";
 import Home from "./components/Home";
 import Admin from "./components/Admin";
 import Settings from "./components/Settings";
+import SignUp from "./components/Signup";
+import ForgotPassword from "./components/ForgotPassword";
+
 
 function App(props) {
   const { isAuthenticated, isVerifying } = props;
@@ -22,6 +25,8 @@ function App(props) {
       />
       <Route path="/login" component={Login} />
       <Route path="/admin/settings/api" component={Settings} />
+      <Route path="/signup" component={SignUp} />
+      <Route path="/forgot-password" component={ForgotPassword} />
       <Route path="/" component={Home} />
     </Switch>
   );

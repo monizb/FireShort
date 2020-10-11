@@ -41,7 +41,13 @@ const AntSwitch = withStyles((theme) => ({
 }))(Switch);
 
 function isUrl(s) {
-    var regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
+    var regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?/
+    return regexp.test(s);
+}
+
+function hasSpaces(s) {
+    var regexp = /\s/;
+    console.log(regexp.test(s))
     return regexp.test(s);
 }
 
@@ -59,7 +65,11 @@ export default function UrlsDialog(props) {
         setOpen(false);
     };
     return (
-        <Dialog open={props.state.formopen} onClose={props.handleClose} aria-labelledby="form-dialog-title">
+        <Dialog
+            open={props.state.formopen}
+            onClose={props.handleClose}
+            aria-labelledby="form-dialog-title"
+        >
             <DialogTitle id="form-dialog-title">FireShort URL</DialogTitle>
             <DialogContent>
                 {props.state.lurl.length === 0 && props.state.curl.length === 0 &&
@@ -79,7 +89,7 @@ export default function UrlsDialog(props) {
                 {props.state.lurl.length > 0 && props.state.curl.length === 0 &&
                     (
                         <DialogContentText>
-                            Enter Short URL.
+                            Enter Short URL (optional).
                         </DialogContentText>
                     )
                 }
@@ -109,13 +119,52 @@ export default function UrlsDialog(props) {
                     value={props.state.curl}
                     onChange={props.handleCurlChange}
                 />
-                <Grid component="label" container alignItems="center" spacing={1} style={{ marginTop: "15px", marginBottom: "15px" }}>
+                <Grid
+                    component="label"
+                    container
+                    alignItems="center"
+                    spacing={1}
+                    style={{ marginTop: "15px", marginBottom: "15px" }}
+                >
                     <Grid item><b>Track Link Activity:</b></Grid>
-                    <Grid item>Off</Grid>
+                    {/*<Grid item>Off</Grid>*/}
                     <Grid item>
-                        <AntSwitch checked={props.state.track} onChange={props.handleTrackChange} name="checked" />
+                        <AntSwitch
+                            checked={props.state.track}
+                            onChange={props.handleTrackChange} name="checked"
+                        />
                     </Grid>
-                    <Grid item>On</Grid>
+                    {/*<Grid item>On</Grid>*/}
+                </Grid>
+                <Grid
+                    component="label"
+                    container
+                    alignItems="center"
+                    spacing={1}
+                    style={{marginBottom: "15px" }}
+                >
+                    <Grid item><b>Protect Link:</b></Grid>
+                    {/*<Grid item>Off</Grid>*/}
+                    <Grid item>
+                        <AntSwitch
+                            checked={props.state.locked}
+                            onChange={props.handleProtectChange} name="checked"
+                        />
+                    </Grid>
+                    {
+                        props.state.locked ?
+                        <Grid item style={{ marginLeft: "15px", padding: "0px"}}>
+                            <TextField
+                                autoFocus
+                                margin="dense"
+                                type="password"
+                                value={props.state.newPsw}
+                                onChange={props.handlePswChange}
+                            />
+                        </Grid>
+                        : null
+                    }
+                    {/*<Grid item>On</Grid>*/}
                 </Grid>
             </DialogContent>
             <DialogActions>
@@ -123,7 +172,7 @@ export default function UrlsDialog(props) {
                     Cancel
               </Button>
                 <Button onClick={() => {
-                    if (isUrl(props.state.lurl)) {
+                    if (isUrl(props.state.lurl) && !hasSpaces(props.state.curl)) {
                         props.handleSubmit()
                     } else {
                         handleClick()
@@ -133,8 +182,12 @@ export default function UrlsDialog(props) {
               </Button>
                 <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
                     <Alert onClose={handleClose} severity="error" variant="filled">
-                        Enter a valid URL to shorten
-  </Alert>
+                        {
+                            !isUrl(props.state.lurl) ?
+                            "Enter a valid URL to shorten" :
+                            "Enter a custom URL without spaces"
+                        }
+                    </Alert>
                 </Snackbar>
             </DialogActions>
         </Dialog>
