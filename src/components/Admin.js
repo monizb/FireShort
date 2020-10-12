@@ -82,11 +82,12 @@ class Admin extends Component {
       viewMode: "module",
       backdrop: false,
       shareOpen: false,
-      url: null,
       QRlink: null,
       imgurl: null,
+      url: null,
       jpgShareOpen: false,
       jpgimg: null,
+      snackOpen: false,
     };
     this.handleLurlChange = this.handleLurlChange.bind(this);
     this.handleCurlChange = this.handleCurlChange.bind(this);
@@ -112,7 +113,12 @@ class Admin extends Component {
       .doc(curl)
       .set(data)
       .then(function () {
-        self.setState({ successToast: true });
+        self.setState({
+          successToast: true,
+          shareOpen: true,
+          QRlink: data.lurl,
+          curl: data.curl,
+        });
       });
   };
 
@@ -158,7 +164,6 @@ class Admin extends Component {
           self.updateUrls();
         }
       });
-    this.setState({ shareOpen: true, QRlink: this.state.lurl });
     self.handleClose();
   };
 
@@ -209,10 +214,6 @@ class Admin extends Component {
     });
   };
 
-  handleShareClose = () => {
-    this.setState({ shareOpen: false, QRlink: null, url: null });
-  };
-
   handleShareOpen = (curl) => {
     this.setState({ shareOpen: true });
     var docref = db.collection("shorturls").doc(curl);
@@ -223,12 +224,20 @@ class Admin extends Component {
           console.log("No such document!");
         } else {
           var data = doc.data();
-          this.setState({ QRlink: data.lurl });
+          this.setState({ QRlink: data.lurl, curl: data.curl });
         }
       })
       .catch((err) => {
         console.log("Error getting document", err);
       });
+  };
+
+  handleSnackClose = () => {
+    this.setState({ snackOpen: false });
+  };
+
+  handleShareClose = () => {
+    this.setState({ shareOpen: false, QRlink: null, url: null });
   };
 
   handleShareJPGClose = () => {
@@ -242,7 +251,10 @@ class Admin extends Component {
   handlEmailShare = () => {};
 
   handleCopy = () => {
-    navigator.clipboard.writeText(this.state.QRlink);
+    navigator.clipboard.writeText(
+      window.location.origin + "/" + this.state.curl
+    );
+    this.setState({ snackOpen: true });
   };
 
   handleJPGShare = () => {
@@ -261,15 +273,15 @@ class Admin extends Component {
   handleFacebookShare = () => {
     const share = shareFacebook({
       app_id: "2782057852009688",
+      display: "page",
       href: this.state.QRlink,
-      quote: "Share url",
     });
     window.open(share);
   };
 
   handleTwitterShare = () => {
     const share = shareTwitterURL({
-      url: this.state.QRlink,
+      url: window.location.origin + "/" + this.state.curl,
     });
     window.open(share);
   };
@@ -453,13 +465,16 @@ class Admin extends Component {
 
           <ShareDialog
             url={this.state.url}
+            surl={this.state.curl}
             open={this.state.shareOpen}
-            handleQRCode={this.handleQRCode}
-            handleJPG={this.handleJPGShare}
+            snackOpen={this.state.snackOpen}
             handleCopy={this.handleCopy}
+            handleJPG={this.handleJPGShare}
+            handleQRCode={this.handleQRCode}
             handleMail={this.handlEmailShare}
             handleClose={this.handleShareClose}
             handleTwitter={this.handleTwitterShare}
+            handleSnackClose={this.handleSnackClose}
             handleFacebook={this.handleFacebookShare}
           />
 
