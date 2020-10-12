@@ -1,9 +1,7 @@
-<<<<<<< HEAD
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Box,
-  Button,
   Card,
   CardContent,
   CardHeader,
@@ -14,13 +12,17 @@ import {
   Tooltip,
   Typography,
 } from "@material-ui/core";
+import Badge from "@material-ui/core/Badge";
 import {
   FileCopyOutlined as FileCopyOutlinedIcon,
+  OpenInBrowser,
+  Edit as EditIcon,
+  Visibility as VisibilityIcon,
+  DeleteForever as DeleteForeverIcon,
+  Lock as LockIcon,
+  LockOpen as LockOpenIcon,
   ShareOutlined,
 } from "@material-ui/icons";
-import Chip from "@material-ui/core/Chip";
-import Badge from "@material-ui/core/Badge";
-import { OpenInBrowser } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   cardGrid: {
@@ -38,68 +40,29 @@ const useStyles = makeStyles((theme) => ({
   cardContent: {
     flexGrow: 1,
   },
+  cardActions: {
+    justifyContent: "space-around",
+  },
   copyButton: {
     justifyContent: "flex-end",
   },
   chip: {
     color: "white",
   },
-=======
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { Box, Card, CardContent, CardHeader, Container, CardActions, Grid, IconButton, Tooltip, Typography } from '@material-ui/core';
-import Badge from '@material-ui/core/Badge';
-import {
-    FileCopyOutlined as FileCopyOutlinedIcon,
-    OpenInBrowser,
-    Edit as EditIcon,
-    Visibility as VisibilityIcon,
-    DeleteForever as DeleteForeverIcon,
-    Lock as LockIcon,
-    LockOpen as LockOpenIcon
- } from '@material-ui/icons';
-
-const useStyles = makeStyles((theme) => ({
-    cardGrid: {
-        paddingTop: theme.spacing(8),
-        paddingBottom: theme.spacing(8),
-    },
-    card: {
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column'
-    },
-    cardMedia: {
-        paddingTop: '56.25%', // 16:9
-    },
-    cardContent: {
-        flexGrow: 1,
-    },
-    cardActions: {
-        justifyContent: "space-around",
-    },
-    copyButton: {
-        justifyContent: "flex-end",
-    },
-    chip: {
-        color: "white"
-    }
->>>>>>> 30577770a12101ffe292b530fe624245f323b59b
 }));
 
 export default function CardUrls(props) {
   const classes = useStyles();
 
-<<<<<<< HEAD
   return (
-    <Container className={classes.cardGrid} maxWidth='md'>
+    <Container className={classes.cardGrid} maxWidth='lg'>
       <Grid container spacing={4}>
         {props.shortUrls.map((card) => (
           <Grid item key={card.id} xs={12} sm={6} md={4}>
             <Card className={classes.card}>
               <CardHeader
                 action={
-                  <Box>
+                  <Tooltip title={"Copy to clipboard"}>
                     <IconButton
                       color='primary'
                       className={classes.copyButton}
@@ -110,10 +73,7 @@ export default function CardUrls(props) {
                       }}>
                       <FileCopyOutlinedIcon />
                     </IconButton>
-                    <IconButton onClick={() => props.handleShareOpen(card.data.curl)}>
-                      <ShareOutlined />
-                    </IconButton>
-                  </Box>
+                  </Tooltip>
                 }
                 title={
                   <Tooltip
@@ -145,27 +105,39 @@ export default function CardUrls(props) {
                   {card.data.lurl}
                 </Box>
               </CardContent>
-              <CardActions>
-                <Button
-                  size='small'
-                  color='primary'
-                  href={card.data.lurl}
-                  target='_blank'>
-                  Open
-                </Button>
-                <Button
-                  size='small'
-                  onClick={() => props.handleEditShortUrl(card.data.curl)}>
-                  Edit
-                </Button>
-                <Button
-                  size='small'
-                  color='secondary'
-                  onClick={() => props.handleDeleteShortUrl(card.data.curl)}>
-                  Delete
-                </Button>
+              <CardActions className={classes.cardActions}>
+                <Tooltip title={"Preview link"}>
+                  <IconButton
+                    size='small'
+                    color='primary'
+                    href={card.data.lurl}
+                    target='_blank'>
+                    <VisibilityIcon />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title={"Edit link"}>
+                  <IconButton
+                    size='small'
+                    onClick={() => props.handleEditShortUrl(card.data.curl)}>
+                    <EditIcon />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title={"Delete link"}>
+                  <IconButton
+                    size='small'
+                    color='secondary'
+                    onClick={() => props.handleDeleteShortUrl(card.data.curl)}>
+                    <DeleteForeverIcon />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title='Share'>
+                  <IconButton
+                    onClick={() => props.handleShareOpen(card.data.curl)}>
+                    <ShareOutlined />
+                  </IconButton>
+                </Tooltip>
                 <Tooltip title={card.data.hits + " Hits"}>
-                  <div
+                  <IconButton
                     onClick={() => {
                       props.openHits(card.data.curl);
                     }}
@@ -177,7 +149,15 @@ export default function CardUrls(props) {
                       showZero>
                       <OpenInBrowser />
                     </Badge>
-                  </div>
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title={"Password protect"}>
+                  <IconButton
+                    size='small'
+                    color='default'
+                    onClick={() => props.toggleSecurity(card.data.curl)}>
+                    {card.data.locked ? <LockIcon /> : <LockOpenIcon />}
+                  </IconButton>
                 </Tooltip>
               </CardActions>
             </Card>
@@ -187,73 +167,3 @@ export default function CardUrls(props) {
     </Container>
   );
 }
-=======
-    return (
-        <Container className={classes.cardGrid} maxWidth="lg">
-            <Grid container spacing={4}>
-                {props.shortUrls.map((card) => (
-                    <Grid item key={card.id} xs={12} sm={6} md={4}>
-                        <Card className={classes.card}>
-                            <CardHeader
-                                action={
-                                    <Tooltip title={"Copy to clipboard"}>
-                                        <IconButton color="primary" className={classes.copyButton} onClick={() => { navigator.clipboard.writeText(window.location.origin + "/" + card.data.curl) }}>
-                                            <FileCopyOutlinedIcon />
-                                        </IconButton>
-                                    </Tooltip>
-                                }
-                                title={
-                                    <Tooltip title={card.data.track === true ? "Link Tracking ON" : "Link Tracking OFF"}>
-                                        <Badge color={card.data.track === true ? "primary" : "error"} variant="dot">
-                                            <Typography>{card.data.curl}</Typography>
-                                        </Badge>
-                                    </Tooltip>
-                                }
-                                titleTypographyProps={{
-                                    variant: "subtitle1"
-                                }}
-                            >
-
-                            </CardHeader>
-                            <CardContent className={classes.cardContent}>
-                                <Box bgcolor="text.primary" color="background.paper" p={2} style={{ overflowX: 'auto', overflowY: 'hidden', whiteSpace: "nowrap" }}>
-                                    {card.data.lurl}
-                                </Box>
-                            </CardContent>
-                            <CardActions className={classes.cardActions}>
-                                 <Tooltip title={"Preview link"}>
-                                    <IconButton size="small" color="primary" href={card.data.lurl} target="_blank">
-                                        <VisibilityIcon />
-                                    </IconButton>
-                                </Tooltip>
-                                <Tooltip title={"Edit link"}>
-                                    <IconButton size="small" onClick={() => props.handleEditShortUrl(card.data.curl)}>
-                                        <EditIcon />
-                                    </IconButton>
-                                </Tooltip>
-                                <Tooltip title={"Delete link"}>
-                                    <IconButton size="small" color="secondary" onClick={() => props.handleDeleteShortUrl(card.data.curl)}>
-                                        <DeleteForeverIcon />
-                                    </IconButton>
-                                </Tooltip>
-                                <Tooltip title={card.data.hits + " Hits"}>
-                                    <IconButton onClick={() => { props.openHits(card.data.curl) }} style={{ cursor: "pointer" }}>
-                                        <Badge badgeContent={card.data.hits} color="secondary" max={Infinity} showZero>
-                                            <OpenInBrowser />
-                                        </Badge>
-                                    </IconButton>
-                                </Tooltip>
-                                <Tooltip title={"Password protect"}>
-                                    <IconButton size='small' color='default' onClick={() => props.toggleSecurity(card.data.curl)}>
-                                        {card.data.locked ? <LockIcon /> : <LockOpenIcon />}
-                                    </IconButton>
-                                </Tooltip>
-                            </CardActions>
-                        </Card>
-                    </Grid>
-                ))}
-            </Grid>
-        </Container>
-    );
-}
->>>>>>> 30577770a12101ffe292b530fe624245f323b59b

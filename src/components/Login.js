@@ -80,95 +80,95 @@ class Login extends Component {
   render() {
     const { classes, loginError, isAuthenticated, isLoading } = this.props;
     if (isAuthenticated) {
-      return <Redirect to="/admin" />;
+      return <Redirect to='/admin' />;
     } else {
       return (
         <Container className={classes.mainContainer}>
           <Paper className={classes.paper} elevation={24}>
-            <Grid container alignItems="stretch" direction="row">
+            <Grid container alignItems='stretch' direction='row'>
               <LoginLeftComponent />
               <Grid item className={classes.loginRightPart}>
                 <div className={classes.logoTextContainer}>
                   <img
                     className={classes.logoTextImage}
-                    src="./images/fireshortLogoText.gif"
-                    alt="Fireshort Text Logo"
+                    src='./images/fireshortLogoText.gif'
+                    alt='Fireshort Text Logo'
                   />
                 </div>
                 <Typography
                   className={classes.loginText}
-                  component="h1"
-                  variant="h5"
-                >
+                  component='h1'
+                  variant='h5'>
                   Login
                 </Typography>
                 <form onSubmit={this.handleSubmit} className={classes.form}>
                   <TextField
-                    variant="outlined"
-                    margin="normal"
+                    variant='outlined'
+                    margin='normal'
                     fullWidth
-                    id="email"
-                    label="Email Address"
-                    name="email"
+                    id='email'
+                    label='Email Address'
+                    name='email'
                     onChange={this.handleEmailChange}
                   />
                   <TextField
-                    variant="outlined"
-                    margin="normal"
+                    variant='outlined'
+                    margin='normal'
                     fullWidth
-                    name="password"
-                    label="Password"
-                    type="password"
-                    id="password"
+                    name='password'
+                    label='Password'
+                    type='password'
+                    id='password'
                     onChange={this.handlePasswordChange}
                   />
                   {loginError && (
-                    <Typography component="p" className={classes.errorText}>
+                    <Typography component='p' className={classes.errorText}>
                       Incorrect email or password.
                     </Typography>
                   )}
-                <br />
+                  <br />
                   <Button
-                    type="submit"
-                    size="large"
+                    type='submit'
+                    size='large'
                     fullWidth
-                    variant="contained"
-                    color="primary"
-                    className={classes.submit}
-                  >
+                    variant='contained'
+                    color='primary'
+                    className={classes.submit}>
                     <MuiThemeProvider theme={theme}>
                       {isLoading && !loginError ? (
                         <CircularProgress
                           className={classes.loader}
-                          color="secondary"
+                          color='secondary'
                         />
                       ) : (
-                          "Sign In"
-                        )}
+                        "Sign In"
+                      )}
                     </MuiThemeProvider>
                   </Button>
-              <br/>
-              <br/>
-              <Link to="/signup" style={{textDecoration: "none"}}>
-                <Button
-                  type="button"
-                  fullWidth
-                  size="large"
-                  variant="outlined"
-                  color="primary"
-                  className={classes.submit}
-                >
-                  Sign Up
-                </Button>
-              </Link>
-            </form>
-            <div style={{padding: "0.5rem", widht: "100%", textAlign:"center"}}>
-                <Link to="/forgot-password">
-                  <Typography component="p">
-                    Forgot Password?
-                  </Typography>
-                </Link>
-            </div>
+                  <br />
+                  <br />
+                  <Link to='/signup' style={{ textDecoration: "none" }}>
+                    <Button
+                      type='button'
+                      fullWidth
+                      size='large'
+                      variant='outlined'
+                      color='primary'
+                      className={classes.submit}>
+                      Sign Up
+                    </Button>
+                  </Link>
+                </form>
+                <div
+                  style={{
+                    padding: "0.5rem",
+                    widht: "100%",
+                    textAlign: "center",
+                  }}>
+                  <Link to='/forgot-password'>
+                    <Typography component='p'>Forgot Password?</Typography>
+                  </Link>
+                </div>
               </Grid>
             </Grid>
           </Paper>
