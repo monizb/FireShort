@@ -126,11 +126,7 @@ function ShareButton({ click, color, label, icon, href }) {
   );
 }
 
-export function ShareAsJPG({ url, imgurl, handleClose, open }) {
-  const onTwitterShare = () => {
-    console.log(imgurl);
-  };
-
+export function ShareAsJPG({ handleClose, open }) {
   return (
     <Dialog maxWidth='xs' onClose={handleClose} open={open}>
       <DialogTitle>Share as JPG</DialogTitle>
@@ -140,7 +136,7 @@ export function ShareAsJPG({ url, imgurl, handleClose, open }) {
           flexWrap='wrap'
           justifyContent='center'
           flexDirection='row'>
-          <ShareButton click={onTwitterShare} icon={<TwitterIcon />} />
+          <ShareButton icon={<TwitterIcon />} />
           <ShareButton icon={<MailIcon />} />
           <ShareButton icon={<FacebookIcon />} />
         </Box>

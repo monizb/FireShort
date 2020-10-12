@@ -248,8 +248,6 @@ class Admin extends Component {
     this.setState({ url: this.state.QRlink });
   };
 
-  handlEmailShare = () => {};
-
   handleCopy = () => {
     navigator.clipboard.writeText(
       window.location.origin + "/" + this.state.curl
