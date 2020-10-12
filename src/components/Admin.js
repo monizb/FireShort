@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { Component } from "react";
 import MainToolBar from "./MainToolBar.js";
 import CardUrls from "./CardUrls.js";
@@ -17,6 +18,25 @@ import { myFirebase, db } from "../firebase/firebase";
 import "./components.module.css";
 import { shareTwitterURL } from "share-twitter";
 import shareFacebook from "share-facebook";
+=======
+import React, { Component } from 'react';
+import MainToolBar from './MainToolBar.js';
+import CardUrls from './CardUrls.js';
+import ListUrls from './ListUrls.js';
+import HitsDialog from './HitsDialog.js';
+import UrlsDialog from './UrlsDialog.js';
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { nanoid } from 'nanoid';
+import { connect } from 'react-redux';
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+import { logoutUser, addLink, setLinks } from "../actions";
+import { getFilteredLinks } from '../selectors';
+import { myFirebase, db } from '../firebase/firebase';
+import './components.module.css';
+
+>>>>>>> 30577770a12101ffe292b530fe624245f323b59b
 import {
   AppBar,
   Button,
@@ -27,11 +47,19 @@ import {
   Snackbar,
   Toolbar,
   Typography,
+<<<<<<< HEAD
 } from "@material-ui/core";
 
 import { withStyles } from "@material-ui/core/styles";
 import AddIcon from "@material-ui/icons/Add";
 import MuiAlert from "@material-ui/lab/Alert";
+=======
+} from '@material-ui/core';
+
+import { withStyles } from '@material-ui/core/styles';
+import AddIcon from '@material-ui/icons/Add';
+import MuiAlert from '@material-ui/lab/Alert';
+>>>>>>> 30577770a12101ffe292b530fe624245f323b59b
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant='filled' {...props} />;
@@ -41,19 +69,28 @@ const styles = (theme) => ({
   root: {
     flexGrow: 1,
   },
+  passInput: {
+    padfing: 15
+  },
   menuButton: {
     marginRight: theme.spacing(2),
   },
   title: {
     flexGrow: 1,
+<<<<<<< HEAD
     fontFamily: "Pacifico, cursive",
     userSelect: "none",
     color: "white",
+=======
+    fontFamily: 'Pacifico, cursive',
+    userSelect: 'none',
+    color: 'white',
+>>>>>>> 30577770a12101ffe292b530fe624245f323b59b
   },
   fab: {
     position: "fixed",
     bottom: theme.spacing(2),
-    backgroundColor: "#212121",
+    backgroundColor: '#212121',
     right: theme.spacing(2),
   },
   backdrop: {
@@ -61,7 +98,11 @@ const styles = (theme) => ({
     color: "#fff",
   },
   appbar: {
+<<<<<<< HEAD
     backgroundColor: "#212121",
+=======
+    backgroundColor: '#212121',
+>>>>>>> 30577770a12101ffe292b530fe624245f323b59b
   },
 });
 
@@ -75,10 +116,12 @@ class Admin extends Component {
       hits: [],
       formopen: false,
       hitsopen: false,
-      lurl: "",
-      curl: "",
+      lurl: '',
+      curl: '',
       track: true,
+      locked: false,
       successToast: false,
+<<<<<<< HEAD
       viewMode: "module",
       backdrop: false,
       shareOpen: false,
@@ -88,10 +131,19 @@ class Admin extends Component {
       jpgShareOpen: false,
       jpgimg: null,
       snackOpen: false,
+=======
+      viewMode: 'module',
+      backdrop: false,
+      inputBackdrop: false,
+      newPsw: '',
+      currUrl: null,
+>>>>>>> 30577770a12101ffe292b530fe624245f323b59b
     };
     this.handleLurlChange = this.handleLurlChange.bind(this);
     this.handleCurlChange = this.handleCurlChange.bind(this);
     this.handleTrackChange = this.handleTrackChange.bind(this);
+    this.handleProtectChange = this.handleProtectChange.bind(this);
+    this.handlePswChange = this.handlePswChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -104,6 +156,7 @@ class Admin extends Component {
   };
 
   handleTrackChange = (event) => {
+<<<<<<< HEAD
     this.setState({ track: this.state.track === true ? false : true });
   };
 
@@ -119,29 +172,62 @@ class Admin extends Component {
           QRlink: data.lurl,
           curl: data.curl,
         });
+=======
+    this.setState({ track: !this.state.track });
+  };
+
+  handleProtectChange = (event) => {
+    console.log(event, 'toggle protect')
+    this.setState({ locked: !this.state.locked });
+  };
+
+  handlePswChange = ({target}) => {
+    this.setState({ newPsw: target.value})
+  }
+
+  createLink = (curl, data) => {
+    const self = this;
+    db.collection('shorturls')
+      .doc(curl)
+      .set(data)
+      .then(function () {
+        self.setState({ successToast: true });
+>>>>>>> 30577770a12101ffe292b530fe624245f323b59b
       });
   };
 
   handleSubmit = (event) => {
-    var lurl = this.state.lurl;
-    let curl = this.state.curl;
-    let track = this.state.track;
+    let {lurl, curl, track, locked, newPsw} = this.state
     const self = this;
+<<<<<<< HEAD
     if (curl === "") {
+=======
+    if (curl === '') {
+>>>>>>> 30577770a12101ffe292b530fe624245f323b59b
       curl = nanoid(8);
     }
     let data = {
       lurl: lurl,
       curl: curl,
       track: track,
+<<<<<<< HEAD
       hits: 0,
     };
     db.collection("shorturls")
+=======
+      locked: locked,
+      password: locked ? newPsw : '',
+      hits: 0,
+      author: this.props.user.uid
+    };
+    db.collection('shorturls')
+>>>>>>> 30577770a12101ffe292b530fe624245f323b59b
       .doc(curl)
       .get()
       .then(function (docSnapshot) {
         if (docSnapshot.exists) {
           self.handleClose();
+<<<<<<< HEAD
           confirmAlert({
             title: "Custom URL overwrite confirm",
             message:
@@ -159,11 +245,45 @@ class Admin extends Component {
               },
             ],
           });
+=======
+          if(docSnapshot.data().author === self.props.user.uid){
+            confirmAlert({
+              title: 'Custom URL overwrite confirm',
+              message:
+                'The Custom URL you entered is already associated with some other link, clicking ok will overwrite that link to the new one. Continue?',
+              buttons: [
+                {
+                  label: 'Yes',
+                  onClick: () => {
+                    self.createLink(curl, data);
+                    self.updateUrls();
+                  },
+                },
+                {
+                  label: 'No',
+                },
+              ],
+            });
+          } else {
+            confirmAlert({
+              title: 'Custom URL already created by other user.',
+              message:
+                'The Custom URL you entered is already associated with some other link and owned by another user.',
+              buttons: [
+                {
+                  label: 'Ok'
+                },
+              ],
+            });
+          }
+
+>>>>>>> 30577770a12101ffe292b530fe624245f323b59b
         } else {
           self.createLink(curl, data);
           self.updateUrls();
         }
       });
+<<<<<<< HEAD
     self.handleClose();
   };
 
@@ -176,15 +296,65 @@ class Admin extends Component {
         self.updateUrls();
       });
   };
+=======
+
+    self.handleClose();
+  };
+
+  toggleSecurity = (curl, psw) => {
+    const { shortUrls } = this.state;
+    const url = shortUrls[shortUrls.findIndex((url) => url.id === curl)].data;
+    this.setState({ currUrl: url });
+    if (url.locked) {
+      db.collection('shorturls')
+        .doc(curl)
+        .update({
+          locked: false,
+          password: '',
+        })
+        .then(() => this.updateUrls());
+    } else {
+      this.setState({ inputBackdrop: true });
+    }
+  };
+
+  handleDeleteShortUrl = (curl) => {
+    const self = this;
+
+    confirmAlert({
+      title: 'Confirm Deletion',
+      message: 'Are you sure you want to delete this URL?',
+      buttons: [
+        {
+          label: 'Delete',
+          onClick: () => {
+            db.collection('shorturls').doc(curl).delete().then(function () {
+              self.updateUrls();
+            });
+          }
+        },
+        {
+          label: 'Back',
+          onClick: () => { return; }
+        }
+      ]
+    });
+  }
+>>>>>>> 30577770a12101ffe292b530fe624245f323b59b
 
   handleEditShortUrl = (curl) => {
     this.setState({ backdrop: true });
     const self = this;
+<<<<<<< HEAD
     var docref = db.collection("shorturls").doc(curl);
+=======
+    var docref = db.collection('shorturls').doc(curl);
+>>>>>>> 30577770a12101ffe292b530fe624245f323b59b
     docref
       .get()
       .then((doc) => {
         if (!doc.exists) {
+<<<<<<< HEAD
           console.log("No such document!");
         } else {
           var data = doc.data();
@@ -198,16 +368,37 @@ class Admin extends Component {
       })
       .catch((err) => {
         console.log("Error getting document", err);
+=======
+          console.log('No such document!');
+        } else {
+          var data = doc.data();
+          // reduce number of calls to setState
+          self.setState({
+            lurl: data.lurl,
+            curl: data.curl,
+            track: data.track,
+            locked: data.locked,
+            newPsw: data.password,
+            backdrop: false,
+            formopen: true
+          });
+        }
+      })
+      .catch((err) => {
+        console.log('Error getting document', err);
+>>>>>>> 30577770a12101ffe292b530fe624245f323b59b
       });
   };
 
   handleClickOpen = () => {
     this.setState({ formopen: true });
-    this.setState({ lurl: "" });
-    this.setState({ curl: "" });
+    this.setState({
+      lurl: '', curl: '', newPsw: '', locked: false
+    });
   };
 
   handleClose = () => {
+<<<<<<< HEAD
     this.setState({
       formopen: false,
       hitsopen: false,
@@ -282,6 +473,9 @@ class Admin extends Component {
       url: window.location.origin + "/" + this.state.curl,
     });
     window.open(share);
+=======
+    this.setState({ formopen: false, hitsopen: false });
+>>>>>>> 30577770a12101ffe292b530fe624245f323b59b
   };
 
   handleToastClose = (event, reason) => {
@@ -292,11 +486,12 @@ class Admin extends Component {
     this.setState({ successToast: false });
   };
 
-  updateUrls = () => {
+  updateUrls = async  () => {
     this.setState({ backdrop: true });
     const self = this;
     self.setState({ loading: true });
     self.setState({ shortUrls: [] });
+<<<<<<< HEAD
 
     db.collection("shorturls")
       .get()
@@ -316,6 +511,38 @@ class Admin extends Component {
         console.log("Error getting documents", err);
         self.setState({ loading: false });
       });
+=======
+    try{
+      const shortUrls = new Map();
+      const curlSnaps = await db.collection('shorturls')
+                        .where("author","==",this.props.user.uid)
+                        .get();
+      const hitSnaps =  await db.collection('hits')
+                        .where("author","==",this.props.user.uid)
+                        .get();
+      curlSnaps.forEach(curl=>{
+        shortUrls.set(curl.data().curl,curl.data());
+      });
+      hitSnaps.forEach(hit=>{
+        const curl = shortUrls.get(hit.data().curl);
+        if(curl){
+          curl.hits = hit.data().hits;
+        }
+      });
+      const shortUrlFinalList = [];
+      shortUrls.forEach(curl=>{
+        shortUrlFinalList.push({id: curl.curl, data: curl});
+      });
+      self.setState({shortUrls: shortUrlFinalList});
+      self.props.setLink(self.state.shortUrls)
+      self.setState({ loading: false });
+      this.setState({ backdrop: false });
+    }
+    catch(err){
+      console.log('Error getting documents', err);
+      self.setState({ loading: false });
+    }
+>>>>>>> 30577770a12101ffe292b530fe624245f323b59b
   };
 
   getHits = (id) => {
@@ -323,6 +550,7 @@ class Admin extends Component {
     this.setState({ backdrop: true });
     self.setState({ loading: true });
     self.setState({ hits: [] });
+<<<<<<< HEAD
     db.collection("shorturls")
       .doc(id)
       .collection("tracking")
@@ -332,6 +560,16 @@ class Admin extends Component {
           self.setState({
             hits: [...self.state.hits, { id: hit.id, data: hit.data() }],
           });
+=======
+    db.collection('shorturls')
+      .doc(id)
+      .collection('tracking')
+      .where("author","==",this.props.user.uid)
+      .get()
+      .then((snapshot) => {
+        snapshot.forEach((hit) => {
+          self.setState({ hits: [...self.state.hits, { id: hit.id, data: hit.data() }] });
+>>>>>>> 30577770a12101ffe292b530fe624245f323b59b
         });
         self.setState({ loading: false });
         this.setState({ backdrop: false });
@@ -345,7 +583,11 @@ class Admin extends Component {
 
   updateViewMode = (mode) => {
     this.setState({ viewMode: mode });
+<<<<<<< HEAD
     db.collection("settings").doc("viewMode").set({ value: mode });
+=======
+    db.collection('settings').doc(this.props.user.uid).set({ viewMode: mode });
+>>>>>>> 30577770a12101ffe292b530fe624245f323b59b
   };
 
   componentDidMount() {
@@ -354,7 +596,11 @@ class Admin extends Component {
       if (user) {
         self.setState({ user });
         self.updateUrls();
+<<<<<<< HEAD
         var viewModeRef = db.collection("settings").doc("viewMode");
+=======
+        var viewModeRef = db.collection('settings').doc(user.uid);
+>>>>>>> 30577770a12101ffe292b530fe624245f323b59b
         viewModeRef
           .get()
           .then((doc) => {
@@ -362,11 +608,19 @@ class Admin extends Component {
               console.log("No viewMode set!");
             } else {
               var data = doc.data();
+<<<<<<< HEAD
               self.setState({ viewMode: data.value });
             }
           })
           .catch((err) => {
             console.log("Error getting viewMode", err);
+=======
+              self.setState({ viewMode: data.viewMode });
+            }
+          })
+          .catch((err) => {
+            console.log('Error getting viewMode', err);
+>>>>>>> 30577770a12101ffe292b530fe624245f323b59b
           });
       } else {
         self.setState({ user: null });
@@ -375,15 +629,63 @@ class Admin extends Component {
   }
 
   handleLogout = () => {
-    const { dispatch } = this.props;
-    dispatch(logoutUser());
+    const { logout } = this.props;
+    logout();
+  };
+
+  onPswSave = (e) => {
+    const curl = this.state.currUrl.curl;
+    if (this.state.newPsw !== '') {
+      db.collection('shorturls')
+        .doc(curl)
+        .update({
+          locked: true,
+          password: this.state.newPsw,
+        })
+        .then(() => {
+          this.setState({ inputBackdrop: false });
+          this.updateUrls();
+        });
+    } else {
+      alert('Password cannot be empty.');
+    }
   };
 
   render() {
     const { classes } = this.props;
+    const { inputBackdrop, newPsw } = this.state;
 
     return (
       <React.Fragment>
+        {inputBackdrop ? (
+          <div
+            style={{
+              position: 'fixed',
+              width: '100vw',
+              height: '100vh',
+              background: 'rgb(0,0,0,.5)',
+              display: 'grid',
+              placeItems: 'center',
+              zIndex: 10,
+            }}
+          >
+            <div style={{ padding: "20px", backgroundColor: "white" }}>
+              <h3>Protect Link With Password</h3>
+              <div style={{ display: "block", padding: "20px" }}>
+                <input
+                  placeholder='Enter Password...'
+                  value={newPsw}
+                  style={{ padding: "15px", fontSize: "15px", borderRadius: "2px", width: "100%" }}
+                  onChange={(e) => this.setState({ newPsw: e.target.value })}
+                />
+                <div style={{ marginTop: "25px" }}>
+                  <button onClick={(e) => this.onPswSave(e)} style={{ padding: "12px", color: "white", backgroundColor: "black", fontSize: "15px", border: "none", marginRight: "15px", borderRadius: "5px", cursor: "pointer" }}>Save</button>
+                  <button onClick={(e) => this.setState({ inputBackdrop: false })} style={{ padding: "12px", color: "white", backgroundColor: "red", fontSize: "15px", border: "none", marginRight: "15px", borderRadius: "5px", cursor: "pointer" }}>Cancel</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : null}
         <CssBaseline />
         <div className={classes.root}>
           <AppBar position='fixed' className={classes.appbar}>
@@ -406,6 +708,7 @@ class Admin extends Component {
           />
           {this.state.shortUrls.length > 0 ? (
             <>
+<<<<<<< HEAD
               {this.state.viewMode === "module" ? (
                 <CardUrls
                   shortUrls={this.state.shortUrls}
@@ -433,12 +736,47 @@ class Admin extends Component {
               </Container>
             </div>
           )}
+=======
+              {this.state.viewMode === 'module' ? (
+                <CardUrls
+                  shortUrls={this.props.links}
+                  handleEditShortUrl={this.handleEditShortUrl}
+                  handleDeleteShortUrl={this.handleDeleteShortUrl}
+                  openHits={this.getHits}
+                // updateHits={this.updateUrls}
+                  toggleSecurity={this.toggleSecurity}
+                />
+              ) : (
+                  <ListUrls
+                    shortUrls={this.state.shortUrls}
+                    handleEditShortUrl={this.handleEditShortUrl}
+                    handleDeleteShortUrl={this.handleDeleteShortUrl}
+                    toggleSecurity={this.toggleSecurity}
+                    openHits={this.getHits}
+                  />
+                )}
+            </>
+          ) : (
+              <div className={classes.heroContent}>
+                <Container maxWidth='sm'>
+                  {/* <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
+                    Oops! Nothing here.
+                  </Typography> */}
+                </Container>
+              </div>
+            )}
+>>>>>>> 30577770a12101ffe292b530fe624245f323b59b
 
           <Fab
             aria-label='Add'
             className={classes.fab}
             color='primary'
+<<<<<<< HEAD
             onClick={this.handleClickOpen}>
+=======
+            onClick={this.handleClickOpen}
+          >
+>>>>>>> 30577770a12101ffe292b530fe624245f323b59b
             <AddIcon />
           </Fab>
 
@@ -453,6 +791,8 @@ class Admin extends Component {
             handleCurlChange={this.handleCurlChange}
             handleSubmit={this.handleSubmit}
             handleTrackChange={this.handleTrackChange}
+            handleProtectChange={this.handleProtectChange}
+            handlePswChange={this.handlePswChange}
           />
 
           <HitsDialog
@@ -461,6 +801,7 @@ class Admin extends Component {
             handleClose={this.handleClose}
           />
 
+<<<<<<< HEAD
           <ShareDialog
             url={this.state.url}
             surl={this.state.curl}
@@ -487,6 +828,13 @@ class Admin extends Component {
             open={this.state.successToast}
             autoHideDuration={6000}
             onClose={this.handleToastClose}>
+=======
+          <Snackbar
+            open={this.state.successToast}
+            autoHideDuration={6000}
+            onClose={this.handleToastClose}
+          >
+>>>>>>> 30577770a12101ffe292b530fe624245f323b59b
             <Alert onClose={this.handleToastClose} severity='success'>
               Successfully added!
             </Alert>
@@ -500,7 +848,24 @@ class Admin extends Component {
 function mapStateToProps(state) {
   return {
     isLoggingOut: state.auth.isLoggingOut,
+<<<<<<< HEAD
   };
 }
 
 export default withStyles(styles)(connect(mapStateToProps)(Admin));
+=======
+    links: getFilteredLinks(state.links, state.filter),
+    user: state.auth.user
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    addLink: (data) => dispatch(addLink(data)),
+    setLink: (data) => dispatch(setLinks(data)),
+    logout: () => dispatch(logoutUser())
+  };
+}
+
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(Admin));
+>>>>>>> 30577770a12101ffe292b530fe624245f323b59b

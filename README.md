@@ -7,7 +7,8 @@
 ![Contributions](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)
 [![GitHub license](https://img.shields.io/github/license/thedevs-network/kutt.svg)](https://github.com/monizb/FireShort/blob/master/LICENSE)
 ![Issues](https://img.shields.io/github/issues/monizb/FireShort)
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors-)
+![Stars](https://img.shields.io/github/stars/monizb/FireShort)
 
 `Accepting Hacktoberfest Contributions`
 
@@ -21,8 +22,8 @@ this rep:
 - The generated links now track the number of hits on them
 - The Custom URL is an optional field now, if left black it generates a random 8
   character long code using NanoID
-- Ability to track link activity : The links can now track the
-  timestamp,ipv4,ipv6 and User-Agent of the Request source
+- Ability to track link activity : The links can now track the timestamp,ipv4
+  and User-Agent of the Request source
 - The Link Tracking feature for any link can be switched on/off at anytime from
   Admin Panel
 - A lot of UI Changes
@@ -32,7 +33,7 @@ this rep:
 The following features are under development/open for contributions.Please first
 create a feature issue to discuss about the feature you would like to take up.
 
-- [ ] Multiple Admin Panels and New User Registration
+- [x] Multiple Admin Panels and New User Registration
 - [ ] Ability to check for Custom URL clashes across all users instantly to
       verify if it has been taken already
 - [ ] Make a page for link analytics , with number of clicks,and all the
@@ -42,10 +43,9 @@ create a feature issue to discuss about the feature you would like to take up.
       way to show QR Codes (and a way to track every qr scan) for the same
 - [ ] Add a homepage showcasing the tool with animations
 - [ ] Revamp the dashboard
-- [ ] Add Protected Links With Password
 - [ ] Develop APIs for all the tasks for easy management
 - [ ] Add Link Expiry
-- [ ] Add Password Protected Links
+- [x] Add Password Protected Links
 
 Valid Feature Requests will be added to the above list over time.
 
@@ -70,7 +70,7 @@ $ git clone https://github.com/monizb/FireShort.git
 Head inside the cloned folder and install the dependencies using NPM
 
 ```sh
-$ cd FireShort-master
+$ cd FireShort
 $ npm install
 ```
 
@@ -92,12 +92,10 @@ REACT_APP_MEAS_ID=
 ```
 
 Save the file and now in the Firebase Console Goto Authentication > SignIn
-Methods > Enable Email Sigin.Then UNder Users Tab Select Add User and add any
-one user of your choice which will be used for logging in to the admin panel.
-Next, Goto Cloud Firestore > Create Database and then navigate to the rules tab
-and copy paste the rules from
-[here](https://github.com/monizb/FireShort/blob/master/db-rules.json) (The rules
-are not the best right now, will be improved in the future)
+Methods > Enable Email Sigin. This now enables you to create a new account using
+Email And Password in the app. Next, Goto Cloud Firestore > Create Database and
+then navigate to the rules tab and copy paste the rules from
+[here](https://github.com/monizb/FireShort/blob/master/firestore.rules)
 
 For the final step run:
 
@@ -112,7 +110,9 @@ server for you on the PORT:3000 and take you to the login page
 
 To contribute to this repository please first create an issue with the
 appropriate template, after which you can directly fork this repository,make
-changes and start a pull request to the master branch.
+changes and start a pull request to the master branch. Please also have a look
+at our Contribution guidelines
+[here](https://github.com/monizb/FireShort/blob/master/CONTRIBUTING.md)
 
 ### Live Demo
 
@@ -133,7 +133,18 @@ Thanks goes to these wonderful people
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="https://alii13.github.io/portfolio/"><img src="https://avatars1.githubusercontent.com/u/48530814?v=4" width="100px;" alt=""/><br /><sub><b>Shekh Aliul</b></sub></a><br /><a href="#a11y-alii13" title="Accessibility">️️️️♿️</a></td>
+    <td align="center"><a href="https://alii13.github.io/portfolio/"><img src="https://avatars1.githubusercontent.com/u/48530814?v=4" width="50px;" alt=""/><br /><sub><b>Shekh Aliul</b></sub></a><br /><a href="#a11y-alii13" title="Accessibility">️️️️♿️</a></td>
+    <td align="center"><a href="https://github.com/OverthinkersArea"><img src="https://avatars2.githubusercontent.com/u/53104897?v=4" width="50px;" alt=""/><br /><sub><b>0ver3inker</b></sub></a><br /><a href="https://github.com/monizb/FireShort/commits?author=OverthinkersArea" title="Documentation">📖</a></td>
+    <td align="center"><a href="http://harshvats.vercel.app"><img src="https://avatars0.githubusercontent.com/u/45518343?v=4" width="50px;" alt=""/><br /><sub><b>HARSH VATS</b></sub></a><br /><a href="https://github.com/monizb/FireShort/commits?author=harshvats2000" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/asi309"><img src="https://avatars0.githubusercontent.com/u/22616656?v=4" width="50px;" alt=""/><br /><sub><b>Asidipta</b></sub></a><br /><a href="https://github.com/monizb/FireShort/commits?author=asi309" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/vikashgaya916"><img src="https://avatars1.githubusercontent.com/u/62158550?v=4" width="50px;" alt=""/><br /><sub><b>Vikash Kumar</b></sub></a><br /><a href="https://github.com/monizb/FireShort/issues?q=author%3Avikashgaya916" title="Bug reports">🐛</a> <a href="#design-vikashgaya916" title="Design">🎨</a></td>
+    <td align="center"><a href="http://aryanverma.in"><img src="https://avatars1.githubusercontent.com/u/12378189?v=4" width="50px;" alt=""/><br /><sub><b>Aryan Verma</b></sub></a><br /><a href="https://github.com/monizb/FireShort/commits?author=i-aryan" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/TaarnStar"><img src="https://avatars3.githubusercontent.com/u/17704741?v=4" width="50px;" alt=""/><br /><sub><b>Marko Milošević</b></sub></a><br /><a href="https://github.com/monizb/FireShort/issues?q=author%3ATaarnStar" title="Bug reports">🐛</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/rahul1995"><img src="https://avatars0.githubusercontent.com/u/7647789?v=4" width="50px;" alt=""/><br /><sub><b>rahul1995</b></sub></a><br /><a href="https://github.com/monizb/FireShort/commits?author=rahul1995" title="Code">💻</a></td>
+    <td align="center"><a href="https://me.avitechlab.com"><img src="https://avatars1.githubusercontent.com/u/15830206?v=4" width="50px;" alt=""/><br /><sub><b>Abhinav Kumar</b></sub></a><br /><a href="https://github.com/monizb/FireShort/commits?author=abhinavkrin" title="Code">💻</a> <a href="https://github.com/monizb/FireShort/issues?q=author%3Aabhinavkrin" title="Bug reports">🐛</a></td>
+    <td align="center"><a href="https://github.com/pyplacca"><img src="https://avatars3.githubusercontent.com/u/36242450?v=4" width="50px;" alt=""/><br /><sub><b>David Placca</b></sub></a><br /><a href="https://github.com/monizb/FireShort/commits?author=pyplacca" title="Code">💻</a></td>
   </tr>
 </table>
 

@@ -2,7 +2,7 @@
   "files": [
     "README.md"
   ],
-  "imageSize": 100,
+  "imageSize": 50,
   "commit": false,
   "contributors": [
     {
@@ -12,6 +12,89 @@
       "profile": "https://alii13.github.io/portfolio/",
       "contributions": [
         "a11y"
+      ]
+    },
+    {
+      "login": "OverthinkersArea",
+      "name": "0ver3inker",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/53104897?v=4",
+      "profile": "https://github.com/OverthinkersArea",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "harshvats2000",
+      "name": "HARSH VATS",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/45518343?v=4",
+      "profile": "http://harshvats.vercel.app",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "asi309",
+      "name": "Asidipta",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/22616656?v=4",
+      "profile": "https://github.com/asi309",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "vikashgaya916",
+      "name": "Vikash Kumar",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/62158550?v=4",
+      "profile": "https://github.com/vikashgaya916",
+      "contributions": [
+        "bug",
+        "design"
+      ]
+    },
+    {
+      "login": "i-aryan",
+      "name": "Aryan Verma",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/12378189?v=4",
+      "profile": "http://aryanverma.in",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "TaarnStar",
+      "name": "Marko Milošević",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/17704741?v=4",
+      "profile": "https://github.com/TaarnStar",
+      "contributions": [
+        "bug"
+      ]
+    },
+    {
+      "login": "rahul1995",
+      "name": "rahul1995",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/7647789?v=4",
+      "profile": "https://github.com/rahul1995",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "abhinavkrin",
+      "name": "Abhinav Kumar",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/15830206?v=4",
+      "profile": "https://me.avitechlab.com",
+      "contributions": [
+        "code",
+        "bug"
+      ]
+    },
+    {
+      "login": "pyplacca",
+      "name": "David Placca",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/36242450?v=4",
+      "profile": "https://github.com/pyplacca",
+      "contributions": [
+        "code"
       ]
     }
   ],
