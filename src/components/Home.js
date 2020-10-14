@@ -40,6 +40,17 @@ class Home extends Component {
     }
   };
 
+  getGeoReference = async (ip) => {
+    try {
+      const response = await fetch('https://freegeoip.app/json/' + ip);
+      
+      return response.json();
+    } catch (ex) {
+      console.warn('Was not possible to fetch ip info', ex);
+      return {};
+    }
+  };
+
   startFunc = (isLocked) => {
     this.setState({ loading: true });
     if (this.state.loc === "/") {
@@ -67,12 +78,14 @@ class Home extends Component {
                   let ipv4 = "";
                   (async () => {
                     ipv4 = await publicIp.v4();
+                    const { country_code } = await this.getGeoReference(ipv4);
                     docref
                       .collection("tracking")
                       .add({
                         ipv4: ipv4,
-                        timestamp: new Date().toLocaleString(),
+                        timestamp: new Date().toISOString(),
                         useragent: navigator.userAgent,
+                        country: country_code,
                         author: data.author,
                       })
                       .then(() => {

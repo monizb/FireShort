@@ -1,4 +1,5 @@
-import Avatar from "@material-ui/core/Avatar";
+import React, { Component } from "react";
+
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Container from "@material-ui/core/Container";
@@ -6,7 +7,6 @@ import Paper from "@material-ui/core/Paper";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/styles";
-import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import { loginUser, logoutUser, resendConfirmationEmail } from "../actions";

@@ -1,7 +1,12 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Box, Card, CardContent, CardHeader, Container, CardActions, Grid, IconButton, Tooltip, Typography } from '@material-ui/core';
-import Badge from '@material-ui/core/Badge';
+import {
+    Box, Card, Container,
+    CardContent, CardHeader,
+    Tooltip, Typography, Badge,
+    CardActions, Grid, IconButton,
+} from '@material-ui/core';
+import { useHistory } from 'react-router';
 import {
     FileCopyOutlined as FileCopyOutlinedIcon,
     OpenInBrowser,
@@ -9,8 +14,9 @@ import {
     Visibility as VisibilityIcon,
     DeleteForever as DeleteForeverIcon,
     Lock as LockIcon,
-    LockOpen as LockOpenIcon
- } from '@material-ui/icons';
+    LockOpen as LockOpenIcon,
+    Assessment as AnalyticsIcon,
+} from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
     cardGrid: {
@@ -40,6 +46,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function CardUrls(props) {
+    const history = useHistory();
     const classes = useStyles();
 
     return (
@@ -75,7 +82,7 @@ export default function CardUrls(props) {
                                 </Box>
                             </CardContent>
                             <CardActions className={classes.cardActions}>
-                                 <Tooltip title={"Preview link"}>
+                                <Tooltip title={"Preview link"}>
                                     <IconButton size="small" color="primary" href={card.data.lurl} target="_blank">
                                         <VisibilityIcon />
                                     </IconButton>
@@ -83,6 +90,11 @@ export default function CardUrls(props) {
                                 <Tooltip title={"Edit link"}>
                                     <IconButton size="small" onClick={() => props.handleEditShortUrl(card.data.curl)}>
                                         <EditIcon />
+                                    </IconButton>
+                                </Tooltip>
+                                <Tooltip title={"Analytics"}>
+                                    <IconButton size="small" disabled={!card.data.track} onClick={() => history.push(`/analytics/${card.data.curl}`)}>
+                                        <AnalyticsIcon />
                                     </IconButton>
                                 </Tooltip>
                                 <Tooltip title={"Delete link"}>
