@@ -96,6 +96,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "WillianRod",
+      "name": "Willian Rodrigues",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/6539258?v=4",
+      "profile": "https://willianrod.com/",
+      "contributions": [
+        "code",
+        "design"
+      ]
     }
   ],
   "contributorsPerLine": 7,
