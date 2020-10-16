@@ -4,34 +4,31 @@ import CardUrls from "./CardUrls.js";
 import ListUrls from "./ListUrls.js";
 import HitsDialog from "./HitsDialog.js";
 import UrlsDialog from "./UrlsDialog.js";
-// import Footer from "./Footer.js";
-import ShareDialog, { ShareAsJPG } from "../components/ShareDialog";
 import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import ShareDialog, { ShareAsJPG } from "../components/ShareDialog";
+import shareFacebook from "share-facebook";
+import { shareTwitterURL } from "share-twitter";
 import { nanoid } from "nanoid";
 import { connect } from "react-redux";
 import { confirmAlert } from "react-confirm-alert"; // Import
 import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
-import { logoutUser, addLink, setLinks } from "../actions";
+import { addLink, setLinks } from "../actions";
+import { getFilteredLinks } from "../selectors";
 import { myFirebase, db } from "../firebase/firebase";
 import "./components.module.css";
-import { shareTwitterURL } from "share-twitter";
-import shareFacebook from "share-facebook";
-import { getFilteredLinks } from "../selectors";
+
 import {
-  AppBar,
-  Button,
   Container,
   CssBaseline,
   Fab,
   LinearProgress,
   Snackbar,
-  Toolbar,
-  Typography,
 } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import AddIcon from "@material-ui/icons/Add";
 import MuiAlert from "@material-ui/lab/Alert";
+import Header from "./Header.js";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant='filled' {...props} />;
@@ -42,7 +39,7 @@ const styles = (theme) => ({
     flexGrow: 1,
   },
   passInput: {
-    padfing: 15,
+    padding: 15,
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -463,11 +460,6 @@ class Admin extends Component {
     });
   }
 
-  handleLogout = () => {
-    const { logout } = this.props;
-    logout();
-  };
-
   onPswSave = (e) => {
     const curl = this.state.currUrl.curl;
     if (this.state.newPsw !== "") {
@@ -552,18 +544,7 @@ class Admin extends Component {
           </div>
         ) : null}
         <CssBaseline />
-        <div className={classes.root}>
-          <AppBar position='fixed' className={classes.appbar}>
-            <Toolbar>
-              <Typography variant='h6' className={classes.title}>
-                FireShort
-              </Typography>
-              <Button color='inherit' onClick={this.handleLogout}>
-                Logout
-              </Button>
-            </Toolbar>
-          </AppBar>
-        </div>
+        <Header />
         {this.state.loading && <LinearProgress color='secondary' />}
         <main>
           <MainToolBar
@@ -679,7 +660,6 @@ function mapDispatchToProps(dispatch) {
   return {
     addLink: (data) => dispatch(addLink(data)),
     setLink: (data) => dispatch(setLinks(data)),
-    logout: () => dispatch(logoutUser()),
   };
 }
 

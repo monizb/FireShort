@@ -7,6 +7,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Login from "./components/Login";
 import Home from "./components/Home";
 import Admin from "./components/Admin";
+import Analytics from "./components/Analytics";
 import SignUp from "./components/Signup";
 import ForgotPassword from "./components/ForgotPassword";
 
@@ -14,6 +15,13 @@ function App(props) {
   const { isAuthenticated, isVerifying } = props;
   return (
     <Switch>
+      <ProtectedRoute
+        exact
+        path="/analytics/:id"
+        component={Analytics}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
       <ProtectedRoute
         exact
         path="/admin"

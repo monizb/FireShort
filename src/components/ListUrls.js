@@ -1,10 +1,12 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
+  Badge,
   Box,
   Button,
   ButtonGroup,
   Container,
+  IconButton,
   Paper,
   Table,
   TableBody,
@@ -14,20 +16,18 @@ import {
   TablePagination,
   TableRow,
   Tooltip,
-  IconButton,
 } from "@material-ui/core";
-import Badge from "@material-ui/core/Badge";
-// import { makeStyles } from "@material-ui/core/styles";
 import {
   DeleteForever as DeleteForeverIcon,
   Edit as EditIcon,
   FileCopyOutlined as FileCopyOutlinedIcon,
   Visibility as VisibilityIcon,
-  ShareOutlined,
-} from "@material-ui/icons";
-import { OpenInBrowser } from "@material-ui/icons";
-import LockIcon from "@material-ui/icons/Lock";
-import LockOpenIcon from "@material-ui/icons/LockOpen";
+  Assessment as AnalyticsIcon, OpenInBrowser,
+  ShareOutlined
+} from '@material-ui/icons';
+import { useHistory } from 'react-router';
+import LockIcon from '@material-ui/icons/Lock';
+import LockOpenIcon from '@material-ui/icons/LockOpen';
 
 const useStyles = makeStyles((theme) => ({
   cardGrid: {
@@ -47,6 +47,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ListUrls(props) {
   const classes = useStyles();
+  const history = useHistory();
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -114,16 +115,13 @@ export default function ListUrls(props) {
                           </Button>
                         </Tooltip>
                         <Tooltip title={card.data.hits + " Hits"}>
-                          <IconButton
-                            onClick={() => {
-                              props.openHits(card.data.curl);
-                            }}
-                            style={{ cursor: "pointer" }}>
+                          <IconButton onClick={() => { props.openHits(card.data.curl) }} style={{ cursor: "pointer" }}>
                             <Badge
                               badgeContent={card.data.hits}
-                              color='secondary'
+                              color="secondary"
                               max={Infinity}
-                              showZero>
+                              showZero
+                            >
                               <OpenInBrowser />
                             </Badge>
                           </IconButton>
@@ -143,7 +141,16 @@ export default function ListUrls(props) {
                               <VisibilityIcon />
                             </Button>
                           </Tooltip>
-                          <Tooltip title='Edit link'>
+                          <Tooltip title="Analytics">
+                            <Button
+                              size='small'
+                              disabled={!card.data.track}
+                              onClick={() => history.push(`/analytics/${card.data.curl}`)}
+                            >
+                              <AnalyticsIcon />
+                            </Button>
+                          </Tooltip>
+                          <Tooltip title="Edit link">
                             <Button
                               size='small'
                               onClick={() =>
