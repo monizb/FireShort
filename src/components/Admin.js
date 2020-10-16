@@ -4,7 +4,7 @@ import CardUrls from "./CardUrls.js";
 import ListUrls from "./ListUrls.js";
 import HitsDialog from "./HitsDialog.js";
 import UrlsDialog from "./UrlsDialog.js";
-import Footer from "./Footer.js";
+// import Footer from "./Footer.js";
 import ShareDialog, { ShareAsJPG } from "../components/ShareDialog";
 import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
