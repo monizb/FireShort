@@ -1,13 +1,12 @@
-import "../config";
-import "firebase/firestore";
-
 import firebase from "firebase/app";
-import publicIp from "public-ip";
+import "firebase/firestore";
 import React, { Component } from "react";
-
+import "../config";
 import { db } from "../firebase/firebase";
-
+import { getUserIP } from "../services/ip";
 import classes from "./components.module.css";
+
+
 
 class Home extends Component {
   constructor() {
@@ -75,15 +74,14 @@ class Home extends Component {
                   this.setState({ newloc: data.lurl });
                   window.location = data.lurl;
                 } else {
-                  let ipv4 = "";
-                  (async () => {
-                    ipv4 = await publicIp.v4();
-                    const { country_code } = await this.getGeoReference(ipv4);
-                    docref
+                  getUserIP()
+                    .then(async (ip) => {
+                      const { country_code } = await this.getGeoReference(ip);
+                      docref
                       .collection("tracking")
                       .add({
-                        ipv4: ipv4,
-                        timestamp: new Date().toISOString(),
+                        ipv4: ip,
+                        timestamp: new Date().toLocaleString(),
                         useragent: navigator.userAgent,
                         country: country_code,
                         author: data.author,
@@ -92,7 +90,7 @@ class Home extends Component {
                         this.setState({ newloc: data.lurl });
                         window.location = data.lurl;
                       });
-                  })();
+                    });
                 }
               });
             } else {
