@@ -5,5 +5,5 @@ export const getUserIP = async () => {
   if (data.includes("ip")) {
     const lines = data.split("\n");
     return lines[2].split("=")[1];
-  }    
+  }
 };
