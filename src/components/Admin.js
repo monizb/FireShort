@@ -77,7 +77,8 @@ class Admin extends Component {
       curl: '',
       track: true,
       locked: false,
-      timedOut:false,
+      expired:false,
+      endDate:'',
       successToast: false,
       viewMode: 'module',
       backdrop: false,
@@ -202,34 +203,27 @@ class Admin extends Component {
     }
   };
 
-  handleLinkExpire=(curl) =>{
+  handleLinkExpire=(curl) => {
     this.setState({ backdrop:true})
-    var endDate='';
-    var currentDate = new Date();
-    db.collection('shorturls')
+    const self = this;
+    var docref = db.collection('shorturls').doc(curl);
+    docref
     .get()
     .then((doc) => {
       if (!doc.exists) {
         console.log('No such document!');
-      } else {
+      } 
+      else {
         var data = doc.data();
         // reduce number of calls to setState
-        this.setState({
-          lurl: data.lurl,
-          curl: data.curl,
-          track: data.track,
-          locked: data.locked,
-          newPsw: data.password,
+        self.setState({
+          expire:true,
           backdrop: false,
-          formopen: true
+          //formopen: true
         });
       }
-    })
-    .catch((err) => {
-      console.log('Error getting document', err);
     });
-    
-  };
+  }
 
   handleDeleteShortUrl = (curl) => {
     const self = this;
