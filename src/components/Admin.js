@@ -206,23 +206,13 @@ class Admin extends Component {
   handleLinkExpire=(curl) => {
     this.setState({ backdrop:true})
     const self = this;
-    var docref = db.collection('shorturls').doc(curl);
-    docref
-    .get()
-    .then((doc) => {
-      if (!doc.exists) {
-        console.log('No such document!');
-      } 
-      else {
-        var data = doc.data();
-        // reduce number of calls to setState
-        self.setState({
-          expire:true,
-          backdrop: false,
-          //formopen: true
-        });
-      }
-    });
+    db.collection('shorturls')
+      .doc(curl)
+          self.setState({
+          expired:true,
+          backdrop:true,
+          })
+    
   }
 
   handleDeleteShortUrl = (curl) => {
