@@ -16,6 +16,7 @@ import {
     Lock as LockIcon,
     LockOpen as LockOpenIcon,
     Assessment as AnalyticsIcon,
+    Alarm as AlarmIcon,
 } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
@@ -85,6 +86,11 @@ export default function CardUrls(props) {
                                 <Tooltip title={"Preview link"}>
                                     <IconButton size="small" color="primary" href={card.data.lurl} target="_blank">
                                         <VisibilityIcon />
+                                    </IconButton>
+                                </Tooltip>
+                                <Tooltip title={"Link Expiry"}>
+                                    <IconButton size="small" onClick={() => props.handleLinkExpire(card.data.curl)}>
+                                        <AlarmIcon />
                                     </IconButton>
                                 </Tooltip>
                                 <Tooltip title={"Edit link"}>

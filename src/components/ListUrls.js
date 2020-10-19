@@ -23,7 +23,9 @@ import {
   Edit as EditIcon,
   FileCopyOutlined as FileCopyOutlinedIcon,
   Visibility as VisibilityIcon,
-  Assessment as AnalyticsIcon, OpenInBrowser
+  Assessment as AnalyticsIcon, 
+  Alarm as AlarmIcon,
+  OpenInBrowser,
 } from '@material-ui/icons';
 import { useHistory } from 'react-router';
 import LockIcon from '@material-ui/icons/Lock';
@@ -147,6 +149,14 @@ export default function ListUrls(props) {
                             >
                               <VisibilityIcon />
                             </Button>
+                          </Tooltip>
+                          <Tooltip title={"Link Expiry"}>
+                            <Button
+                              size="small"
+                              onClick={() => props.handleLinkExpire(card.data.curl)}
+                              >
+                                <AlarmIcon />
+                              </Button>
                           </Tooltip>
                           <Tooltip title="Analytics">
                             <Button

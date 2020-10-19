@@ -77,6 +77,7 @@ class Admin extends Component {
       curl: '',
       track: true,
       locked: false,
+      timedOut:false,
       successToast: false,
       viewMode: 'module',
       backdrop: false,
@@ -199,6 +200,35 @@ class Admin extends Component {
     } else {
       this.setState({ inputBackdrop: true });
     }
+  };
+
+  handleLinkExpire=(curl) =>{
+    this.setState({ backdrop:true})
+    var endDate='';
+    var currentDate = new Date();
+    db.collection('shorturls')
+    .get()
+    .then((doc) => {
+      if (!doc.exists) {
+        console.log('No such document!');
+      } else {
+        var data = doc.data();
+        // reduce number of calls to setState
+        this.setState({
+          lurl: data.lurl,
+          curl: data.curl,
+          track: data.track,
+          locked: data.locked,
+          newPsw: data.password,
+          backdrop: false,
+          formopen: true
+        });
+      }
+    })
+    .catch((err) => {
+      console.log('Error getting document', err);
+    });
+    
   };
 
   handleDeleteShortUrl = (curl) => {
@@ -430,6 +460,7 @@ class Admin extends Component {
               {this.state.viewMode === 'module' ? (
                 <CardUrls
                   shortUrls={this.props.links}
+                  handleLinkExpire={this.handleLinkExpire}
                   handleEditShortUrl={this.handleEditShortUrl}
                   handleDeleteShortUrl={this.handleDeleteShortUrl}
                   openHits={this.getHits}
@@ -439,6 +470,7 @@ class Admin extends Component {
               ) : (
                   <ListUrls
                     shortUrls={this.state.shortUrls}
+                    handleLinkExpire={this.handleLinkExpire}
                     handleEditShortUrl={this.handleEditShortUrl}
                     handleDeleteShortUrl={this.handleDeleteShortUrl}
                     toggleSecurity={this.toggleSecurity}
