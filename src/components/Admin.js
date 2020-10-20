@@ -90,10 +90,13 @@ class Admin extends Component {
     this.handleCurlChange = this.handleCurlChange.bind(this);
     this.handleTrackChange = this.handleTrackChange.bind(this);
     this.handleProtectChange = this.handleProtectChange.bind(this);
+    this.handleExpireChange = this.handleExpireChange.bind(this);
     this.handlePswChange = this.handlePswChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
+  handleExpireChange=(event) =>{
+    this.setState({curl:event.target.value})
+  };
   handleLurlChange = (event) => {
     this.setState({ lurl: event.target.value });
   };
@@ -126,7 +129,7 @@ class Admin extends Component {
   };
 
   handleSubmit = (event) => {
-    let {lurl, curl, track, locked, newPsw} = this.state
+    let {lurl, curl, track, locked, expired, endDate, newPsw} = this.state
     const self = this;
     if (curl === '') {
       curl = nanoid(8);
@@ -135,6 +138,8 @@ class Admin extends Component {
       lurl: lurl,
       curl: curl,
       track: track,
+      expired:expired,
+      expiration: expired ? endDate:'',
       locked: locked,
       password: locked ? newPsw : '',
       hits: 0,
@@ -205,15 +210,21 @@ class Admin extends Component {
 
   handleLinkExpire=(curl) => {
     this.setState({ backdrop:true})
-    const self = this;
-    db.collection('shorturls')
-      .doc(curl)
-          self.setState({
-          expired:true,
-          backdrop:true,
-          })
-    
-  }
+    const {shortUrls} = this.state;
+    const url = shortUrls[shortUrls.findIndex((url) => url.id === curl)].data;
+    this.setState({ currUrl: url });
+    if(url.expired){
+      db.collection('shorturls')
+        .doc(curl)
+        .update({
+              expiration:false,
+              endDate:'',
+            })
+        .then(()=>this.updateUrls())
+    }else{
+      this.setState({inputExpired:true});
+    }
+  };
 
   handleDeleteShortUrl = (curl) => {
     const self = this;
@@ -376,7 +387,31 @@ class Admin extends Component {
       }
     });
   }
-
+  onNewDate = (e) =>{
+    const curl = this.state.currUrl.curl;
+    if (this.state.endDate !== '') {
+      db.collection('shorturls')
+        .doc(curl)
+        .update({
+          expiration: true,
+          endDate: this.state.endDate,
+        })
+        .then(() => {
+          this.setState({ inputExpired: false });
+          this.updateUrls();
+        });
+    } else {
+        db.collection('shorturls')
+        .doc(curl)
+        .update({
+          expiration:false,
+        })
+        .then(() =>{
+          this.setState({inputExpired:false});
+          this.updateUrls();
+        });
+    }
+  }
   onPswSave = (e) => {
     const curl = this.state.currUrl.curl;
     if (this.state.newPsw !== '') {
@@ -397,7 +432,8 @@ class Admin extends Component {
 
   render() {
     const { classes } = this.props;
-    const { inputBackdrop, newPsw } = this.state;
+    const { inputBackdrop, inputExpired, newPsw, endDate } = this.state;
+ 
 
     return (
       <React.Fragment>
@@ -427,9 +463,38 @@ class Admin extends Component {
                   <button onClick={(e) => this.setState({ inputBackdrop: false })} style={{ padding: "12px", color: "white", backgroundColor: "red", fontSize: "15px", border: "none", marginRight: "15px", borderRadius: "5px", cursor: "pointer" }}>Cancel</button>
                 </div>
               </div>
-            </div>
+            </div> 
           </div>
         ) : null}
+        {inputExpired ? (
+          <div
+           style={{
+             position: 'fixed',
+             width: '100vw',
+             height: '100vh',
+             background: 'rgb(0,0,0,.5)',
+             display: 'grid',
+             placeItems: 'center',
+             zIndex: 10,
+           }}
+          >
+            <div style={{ padding: "20px", backgroundColor: "white" }}>
+              <h3>Pick a time for link to expire.</h3>
+              <div style={{ display: "block", padding: "20px" }}>
+                <input
+                  placeholder='Select a date and time'
+                  value={endDate}
+                  style={{ padding: "15px", fontSize: "15px", borderRadius: "2px", width: "100%" }}
+                  onChange={(e) => this.setState({ endDate: e.target.value })}
+                />
+                <div style={{ marginTop: "25px" }}>
+                  <button onClick={(e) => this.onNewDate(e)} style={{ padding: "12px", color: "white", backgroundColor: "black", fontSize: "15px", border: "none", marginRight: "15px", borderRadius: "5px", cursor: "pointer" }}>Set Time</button>
+                  <button onClick={(e) => this.setState({ inputBackdrop: false })} style={{ padding: "12px", color: "white", backgroundColor: "red", fontSize: "15px", border: "none", marginRight: "15px", borderRadius: "5px", cursor: "pointer" }}>Cancel</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        ):null}
         <CssBaseline />
         <Header />
         {this.state.loading && <LinearProgress color='secondary' />}
@@ -492,6 +557,7 @@ class Admin extends Component {
             handleCurlChange={this.handleCurlChange}
             handleSubmit={this.handleSubmit}
             handleTrackChange={this.handleTrackChange}
+            handleExpireChange={this.handleExpireChange}
             handleProtectChange={this.handleProtectChange}
             handlePswChange={this.handlePswChange}
           />
