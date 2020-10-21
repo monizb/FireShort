@@ -21,6 +21,9 @@ import {
   Fab,
   LinearProgress,
   Snackbar,
+  Toolbar,
+  Typography,
+  Card
 } from '@material-ui/core';
 
 import { withStyles } from '@material-ui/core/styles';
@@ -446,14 +449,19 @@ class Admin extends Component {
                   />
                 )}
             </>
-          ) : (
-              <div className={classes.heroContent}>
-                <Container maxWidth='sm'>
-                  {/* <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-                    Oops! Nothing here.
-                  </Typography> */}
-                </Container>
-              </div>
+          ) : (  
+              <>                            
+                  {this.state.loading == false &&                      
+                    <Container maxWidth='md'>
+                      <img src={'/Images/pixeltrue-search.svg'} style={{margin: "30px auto", display: "block", width: "100%", maxHeight: "400px" }} />
+                      <Card className={classes.toolBarRoot} style={{marginBottom: "30px"}}>
+                        <Typography align="center" style={{padding: "30px 60px"}} variant="h6">
+                          Oops! Looks like you don't have any links. Press the "+" icon below to start adding links.
+                        </Typography>   
+                      </Card>                                
+                    </Container>              
+                  }
+              </>                                
             )}
 
           <Fab
