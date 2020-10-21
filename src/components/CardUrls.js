@@ -1,10 +1,22 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Box, Button, Card, CardContent, CardHeader, Container, CardActions, Grid, IconButton, Tooltip, Typography } from '@material-ui/core';
-import { FileCopyOutlined as FileCopyOutlinedIcon } from '@material-ui/icons';
-import Chip from '@material-ui/core/Chip';
-import Badge from '@material-ui/core/Badge';
-import { OpenInBrowser } from '@material-ui/icons';
+import {
+    Box, Card, Container,
+    CardContent, CardHeader,
+    Tooltip, Typography, Badge,
+    CardActions, Grid, IconButton,
+} from '@material-ui/core';
+import { useHistory } from 'react-router';
+import {
+    FileCopyOutlined as FileCopyOutlinedIcon,
+    OpenInBrowser,
+    Edit as EditIcon,
+    Visibility as VisibilityIcon,
+    DeleteForever as DeleteForeverIcon,
+    Lock as LockIcon,
+    LockOpen as LockOpenIcon,
+    Assessment as AnalyticsIcon,
+} from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
     cardGrid: {
@@ -22,6 +34,9 @@ const useStyles = makeStyles((theme) => ({
     cardContent: {
         flexGrow: 1,
     },
+    cardActions: {
+        justifyContent: "space-around",
+    },
     copyButton: {
         justifyContent: "flex-end",
     },
@@ -31,20 +46,22 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function CardUrls(props) {
+    const history = useHistory();
     const classes = useStyles();
 
     return (
-        <Container className={classes.cardGrid} maxWidth="md">
+        <Container className={classes.cardGrid} maxWidth="lg">
             <Grid container spacing={4}>
                 {props.shortUrls.map((card) => (
                     <Grid item key={card.id} xs={12} sm={6} md={4}>
                         <Card className={classes.card}>
                             <CardHeader
                                 action={
-
-                                    <IconButton color="primary" className={classes.copyButton} onClick={() => { navigator.clipboard.writeText(window.location.origin + "/" + card.data.curl) }}>
-                                        <FileCopyOutlinedIcon />
-                                    </IconButton>
+                                    <Tooltip title={"Copy to clipboard"}>
+                                        <IconButton color="primary" className={classes.copyButton} onClick={() => { navigator.clipboard.writeText(window.location.origin + "/" + card.data.curl) }}>
+                                            <FileCopyOutlinedIcon />
+                                        </IconButton>
+                                    </Tooltip>
                                 }
                                 title={
                                     <Tooltip title={card.data.track === true ? "Link Tracking ON" : "Link Tracking OFF"}>
@@ -64,22 +81,38 @@ export default function CardUrls(props) {
                                     {card.data.lurl}
                                 </Box>
                             </CardContent>
-                            <CardActions>
-                                <Button size="small" color="primary" href={card.data.lurl} target="_blank">
-                                    Open
-                                </Button>
-                                <Button size="small" onClick={() => props.handleEditShortUrl(card.data.curl)}>
-                                    Edit
-                                </Button>
-                                <Button size="small" color="secondary" onClick={() => props.handleDeleteShortUrl(card.data.curl)}>
-                                    Delete
-                                </Button>
+                            <CardActions className={classes.cardActions}>
+                                <Tooltip title={"Preview link"}>
+                                    <IconButton size="small" color="primary" href={card.data.lurl} target="_blank">
+                                        <VisibilityIcon />
+                                    </IconButton>
+                                </Tooltip>
+                                <Tooltip title={"Edit link"}>
+                                    <IconButton size="small" onClick={() => props.handleEditShortUrl(card.data.curl)}>
+                                        <EditIcon />
+                                    </IconButton>
+                                </Tooltip>
+                                <Tooltip title={"Analytics"}>
+                                    <IconButton size="small" disabled={!card.data.track} onClick={() => history.push(`/analytics/${card.data.curl}`)}>
+                                        <AnalyticsIcon />
+                                    </IconButton>
+                                </Tooltip>
+                                <Tooltip title={"Delete link"}>
+                                    <IconButton size="small" color="secondary" onClick={() => props.handleDeleteShortUrl(card.data.curl)}>
+                                        <DeleteForeverIcon />
+                                    </IconButton>
+                                </Tooltip>
                                 <Tooltip title={card.data.hits + " Hits"}>
-                                    <div onClick={() => { props.openHits(card.data.curl) }} style={{ cursor: "pointer" }}>
+                                    <IconButton onClick={() => { props.openHits(card.data.curl) }} style={{ cursor: "pointer" }}>
                                         <Badge badgeContent={card.data.hits} color="secondary" max={Infinity} showZero>
                                             <OpenInBrowser />
                                         </Badge>
-                                    </div>
+                                    </IconButton>
+                                </Tooltip>
+                                <Tooltip title={"Password protect"}>
+                                    <IconButton size='small' color='default' onClick={() => props.toggleSecurity(card.data.curl)}>
+                                        {card.data.locked ? <LockIcon /> : <LockOpenIcon />}
+                                    </IconButton>
                                 </Tooltip>
                             </CardActions>
                         </Card>
