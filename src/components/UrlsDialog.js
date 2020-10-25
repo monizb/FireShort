@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from 'react';
+import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Switch from '@material-ui/core/Switch';
 import Grid from '@material-ui/core/Grid';
@@ -55,7 +55,7 @@ function hasSpaces(s) {
 }
  
 export default function UrlsDialog(props) {
-    const [expiryDate, setExpiryDate] = useState(new Date());
+    const [expiryDate, setExpiryDate] = React.useState(new Date());
     const [open, setOpen] = React.useState(false);
     const handleClick = () => {
         setOpen(true);
