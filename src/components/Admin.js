@@ -80,6 +80,7 @@ class Admin extends Component {
       curl: '',
       track: true,
       locked: false,
+      expiryDate: new Date(),
       successToast: false,
       viewMode: 'module',
       backdrop: false,
@@ -87,6 +88,7 @@ class Admin extends Component {
       newPsw: '',
       currUrl: null,
     };
+    this.handleExpiryChange = this.handleExpiryChange.bind(this);
     this.handleLurlChange = this.handleLurlChange.bind(this);
     this.handleCurlChange = this.handleCurlChange.bind(this);
     this.handleTrackChange = this.handleTrackChange.bind(this);
@@ -95,6 +97,10 @@ class Admin extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  handleExpiryChange = (date) => {
+    this.setState({expiryDate:date})
+
+  }
   handleLurlChange = (event) => {
     this.setState({ lurl: event.target.value });
   };
@@ -127,7 +133,7 @@ class Admin extends Component {
   };
 
   handleSubmit = (event) => {
-    let {lurl, curl, track, locked, newPsw} = this.state
+    let {lurl, curl, expiryDate, track, locked, newPsw} = this.state
     const self = this;
     if (curl === '') {
       curl = nanoid(8);
@@ -135,6 +141,7 @@ class Admin extends Component {
     let data = {
       lurl: lurl,
       curl: curl,
+      expiryDate:expiryDate,
       track: track,
       locked: locked,
       password: locked ? newPsw : '',
@@ -242,7 +249,9 @@ class Admin extends Component {
           self.setState({
             lurl: data.lurl,
             curl: data.curl,
+            expiryDate:data.expiryDate,
             track: data.track,
+            expiryDate:data.expiryDate,
             locked: data.locked,
             newPsw: data.password,
             backdrop: false,
@@ -480,6 +489,7 @@ class Admin extends Component {
           <UrlsDialog
             state={this.state}
             handleClose={this.handleClose}
+            handleExpiryChange={this.handleExpiryChange}
             handleLurlChange={this.handleLurlChange}
             handleCurlChange={this.handleCurlChange}
             handleSubmit={this.handleSubmit}

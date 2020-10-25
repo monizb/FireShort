@@ -59,20 +59,10 @@ export default function UrlsDialog(props) {
     const handleClick = () => {
         setOpen(true);
     };
-    
-    const setDate = (date)=>{
-        oldDate=expiryDate;
-        setExpiryDate(date);
-        console.log(oldDate);
-        console.log(expiryDate);
-
-    }
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
-            setExpiryDate(oldDate);
             return;
         }
-        setExpiryDate(oldDate);
         setOpen(false);
     };
     /*const linkExpired = () =>{
@@ -150,8 +140,8 @@ export default function UrlsDialog(props) {
                     onChange={props.handleCurlChange}
                 />
                 <DatePicker 
-                    selected={expiryDate} 
-                    onChange={setDate}
+                    selected={props.state.expiryDate} 
+                    onChange={date => props.handleExpiryChange(date)}
                     isClearable
                     minDate={new Date()}
                     timeInputLabel="Time:"
