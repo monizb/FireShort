@@ -5,9 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';
 import DatePicker from 'react-datepicker';
-
 import "react-datepicker/dist/react-datepicker.css";
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from '@material-ui/core';
 const AntSwitch = withStyles((theme) => ({
     root: {
@@ -55,18 +53,26 @@ function hasSpaces(s) {
 }
  
 export default function UrlsDialog(props) {
+    var oldDate=new Date();
     const [expiryDate, setExpiryDate] = React.useState(new Date());
     const [open, setOpen] = React.useState(false);
     const handleClick = () => {
         setOpen(true);
     };
-
     
+    const setDate = (date)=>{
+        oldDate=expiryDate;
+        setExpiryDate(date);
+        console.log(oldDate);
+        console.log(expiryDate);
+
+    }
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
+            setExpiryDate(oldDate);
             return;
         }
-
+        setExpiryDate(oldDate);
         setOpen(false);
     };
     /*const linkExpired = () =>{
@@ -145,7 +151,7 @@ export default function UrlsDialog(props) {
                 />
                 <DatePicker 
                     selected={expiryDate} 
-                    onChange={date=>setExpiryDate(date)}
+                    onChange={setDate}
                     isClearable
                     minDate={new Date()}
                     timeInputLabel="Time:"
