@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState, useReducer } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Switch from '@material-ui/core/Switch';
 import Grid from '@material-ui/core/Grid';
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from '@material-ui/core';
+import DatePicker from 'react-datepicker';
 
+import "react-datepicker/dist/react-datepicker.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from '@material-ui/core';
 const AntSwitch = withStyles((theme) => ({
     root: {
         width: 28,
@@ -50,13 +53,15 @@ function hasSpaces(s) {
     console.log(regexp.test(s))
     return regexp.test(s);
 }
-
+ 
 export default function UrlsDialog(props) {
+    const [expiryDate, setExpiryDate] = useState(new Date());
     const [open, setOpen] = React.useState(false);
     const handleClick = () => {
         setOpen(true);
     };
 
+    
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
             return;
@@ -64,6 +69,25 @@ export default function UrlsDialog(props) {
 
         setOpen(false);
     };
+    /*const linkExpired = () =>{
+        const timeClicked = new Date(new Date().getTime() + 60 * 60 * 24 * 1000);
+        if(expiryDate>timeClicked ){
+          console.log("open the link")
+        }
+        else{
+          confirmAlert({
+            title: 'Link has Expired!',
+            message:
+              'The Custom URL link you are trying to access expired at :' + props.endDate,
+            buttons: [
+              {
+                label: 'Ok'
+              },
+            ],
+          });
+        }
+    
+      };*/
     return (
         <Dialog
             open={props.state.formopen}
@@ -119,6 +143,16 @@ export default function UrlsDialog(props) {
                     value={props.state.curl}
                     onChange={props.handleCurlChange}
                 />
+                <DatePicker 
+                    selected={expiryDate} 
+                    onChange={date=>setExpiryDate(date)}
+                    isClearable
+                    minDate={new Date()}
+                    timeInputLabel="Time:"
+                    dateFormat="MM/dd/yyyy h:mm aa"
+                    showTimeInput
+                    placeholderText="No Expiration!"                         
+                />               
                 <Grid
                     component="label"
                     container
@@ -136,6 +170,7 @@ export default function UrlsDialog(props) {
                     </Grid>
                     {/*<Grid item>On</Grid>*/}
                 </Grid>
+                
                 <Grid
                     component="label"
                     container
