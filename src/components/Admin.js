@@ -8,7 +8,6 @@ import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { nanoid } from 'nanoid';
 import { connect } from 'react-redux';
-import {format} from 'date-fns';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import { addLink, setLinks } from "../actions";
