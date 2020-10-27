@@ -53,18 +53,18 @@ function hasSpaces(s) {
 }
  
 export default function UrlsDialog(props) {
-    var oldDate=new Date();
-    const [expiryDate, setExpiryDate] = React.useState(new Date());
     const [open, setOpen] = React.useState(false);
     const handleClick = () => {
         setOpen(true);
     };
+
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
             return;
         }
         setOpen(false);
     };
+    
     /*const linkExpired = () =>{
         const timeClicked = new Date(new Date().getTime() + 60 * 60 * 24 * 1000);
         if(expiryDate>timeClicked ){
@@ -140,10 +140,9 @@ export default function UrlsDialog(props) {
                     onChange={props.handleCurlChange}
                 />
                 <DatePicker 
-                    selected={props.state.expiryDate} 
-                    onChange={date => props.handleExpiryChange(date)}
+                    onChange={props.handleDateChange} 
+                    selected={props.state.expiryDate}
                     isClearable
-                    minDate={new Date()}
                     timeInputLabel="Time:"
                     dateFormat="MM/dd/yyyy h:mm aa"
                     showTimeInput

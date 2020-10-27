@@ -8,11 +8,13 @@ import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { nanoid } from 'nanoid';
 import { connect } from 'react-redux';
+import {format} from 'date-fns';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import { addLink, setLinks } from "../actions";
 import { getFilteredLinks } from '../selectors';
 import { myFirebase, db } from '../firebase/firebase';
+
 import './components.module.css';
 
 import {
@@ -80,7 +82,7 @@ class Admin extends Component {
       curl: '',
       track: true,
       locked: false,
-      expiryDate: new Date(),
+      expiryDate:new Date(),
       successToast: false,
       viewMode: 'module',
       backdrop: false,
@@ -88,7 +90,7 @@ class Admin extends Component {
       newPsw: '',
       currUrl: null,
     };
-    this.handleExpiryChange = this.handleExpiryChange.bind(this);
+    this.handleDateChange = this.handleDateChange.bind(this);
     this.handleLurlChange = this.handleLurlChange.bind(this);
     this.handleCurlChange = this.handleCurlChange.bind(this);
     this.handleTrackChange = this.handleTrackChange.bind(this);
@@ -96,11 +98,10 @@ class Admin extends Component {
     this.handlePswChange = this.handlePswChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
-  handleExpiryChange = (date) => {
-    this.setState({expiryDate:date})
-
-  }
+  handleDateChange =(date)=>{
+    this.setState({expiryDate: date});
+    console.log(this.state.expiryDate)
+  };
   handleLurlChange = (event) => {
     this.setState({ lurl: event.target.value });
   };
@@ -141,7 +142,7 @@ class Admin extends Component {
     let data = {
       lurl: lurl,
       curl: curl,
-      expiryDate:expiryDate,
+      expiryDate: expiryDate,
       track: track,
       locked: locked,
       password: locked ? newPsw : '',
@@ -190,7 +191,7 @@ class Admin extends Component {
           self.updateUrls();
         }
       });
-
+      console.log(data.expiryDate)
     self.handleClose();
   };
 
@@ -245,13 +246,13 @@ class Admin extends Component {
           console.log('No such document!');
         } else {
           var data = doc.data();
+          console.log(new Date(data.expiryDate*1000))
           // reduce number of calls to setState
           self.setState({
             lurl: data.lurl,
             curl: data.curl,
-            expiryDate:data.expiryDate,
+            expiryDate: new Date(data.expiryDate*1000),
             track: data.track,
-            expiryDate:data.expiryDate,
             locked: data.locked,
             newPsw: data.password,
             backdrop: false,
@@ -267,11 +268,12 @@ class Admin extends Component {
   handleClickOpen = () => {
     this.setState({ formopen: true });
     this.setState({
-      lurl: '', curl: '', newPsw: '', locked: false
+      lurl: '', curl: '', expiryDate:new Date(), newPsw: '', locked: false
     });
   };
 
   handleClose = () => {
+    console.log(this.state.expiryDate)
     this.setState({ formopen: false, hitsopen: false });
   };
 
@@ -489,6 +491,7 @@ class Admin extends Component {
           <UrlsDialog
             state={this.state}
             handleClose={this.handleClose}
+            handleDateChange={this.handleDateChange}
             handleExpiryChange={this.handleExpiryChange}
             handleLurlChange={this.handleLurlChange}
             handleCurlChange={this.handleCurlChange}
