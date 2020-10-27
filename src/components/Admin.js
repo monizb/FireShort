@@ -81,7 +81,8 @@ class Admin extends Component {
       curl: '',
       track: true,
       locked: false,
-      expiryDate:new Date(),
+      expiration:false,
+      expiryDate:'',
       successToast: false,
       viewMode: 'module',
       backdrop: false,
@@ -100,6 +101,10 @@ class Admin extends Component {
   handleDateChange =(date)=>{
     this.setState({expiryDate: date});
     console.log(this.state.expiryDate)
+    if(this.state.expiryDate !== null){
+      this.setState({expiration: true})
+    };
+    console.log(this.state.expiration);
   };
   handleLurlChange = (event) => {
     this.setState({ lurl: event.target.value });
@@ -131,9 +136,25 @@ class Admin extends Component {
         self.setState({ successToast: true });
       });
   };
-
+  checkLinkExpired = (curl) =>{
+    var docref = db.collection('shorturls').doc(curl);
+    docref
+      .get()
+      .then((doc) => {
+        if (!doc.exists) {
+          console.log('No such document!');
+        } else {
+          var data = doc.data();
+          if(data.expiration){
+            if( data.expiryDate < Date.now){
+              Alert('Short link has expired')
+            }
+          };
+        };
+      });
+  }
   handleSubmit = (event) => {
-    let {lurl, curl, expiryDate, track, locked, newPsw} = this.state
+    let {lurl, curl, expiryDate, expiration, track, locked, newPsw} = this.state
     const self = this;
     if (curl === '') {
       curl = nanoid(8);
@@ -141,6 +162,7 @@ class Admin extends Component {
     let data = {
       lurl: lurl,
       curl: curl,
+      expiration: expiration,
       expiryDate: expiryDate,
       track: track,
       locked: locked,
@@ -463,7 +485,7 @@ class Admin extends Component {
               <>                            
                   {this.state.loading == false &&                      
                     <Container maxWidth='md'>
-                      <img src={'/Images/pixeltrue-search.svg'} style={{margin: "30px auto", display: "block", width: "100%", maxHeight: "400px" }} />
+                      <img src={'/Images/pixeltrue-search.svg'} alt={'Add links to get started!'} style={{margin: "30px auto", display: "block", width: "100%", maxHeight: "400px" }} />
                       <Card className={classes.toolBarRoot} style={{marginBottom: "30px"}}>
                         <Typography align="center" style={{padding: "30px 60px"}} variant="h6">
                           Oops! Looks like you don't have any links. Press the "+" icon below to start adding links.

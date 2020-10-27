@@ -65,25 +65,7 @@ export default function UrlsDialog(props) {
         setOpen(false);
     };
     
-    /*const linkExpired = () =>{
-        const timeClicked = new Date(new Date().getTime() + 60 * 60 * 24 * 1000);
-        if(expiryDate>timeClicked ){
-          console.log("open the link")
-        }
-        else{
-          confirmAlert({
-            title: 'Link has Expired!',
-            message:
-              'The Custom URL link you are trying to access expired at :' + props.endDate,
-            buttons: [
-              {
-                label: 'Ok'
-              },
-            ],
-          });
-        }
-    
-      };*/
+    /**/
     return (
         <Dialog
             open={props.state.formopen}
@@ -143,6 +125,8 @@ export default function UrlsDialog(props) {
                     onChange={props.handleDateChange} 
                     selected={props.state.expiryDate}
                     isClearable
+                    minDate={new Date()}
+                    minTime={new Date()}
                     timeInputLabel="Time:"
                     dateFormat="MM/dd/yyyy h:mm aa"
                     showTimeInput
