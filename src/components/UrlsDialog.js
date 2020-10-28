@@ -126,7 +126,6 @@ export default function UrlsDialog(props) {
                     selected={props.state.expiryDate}
                     isClearable
                     minDate={new Date()}
-                    minTime={new Date()}
                     timeInputLabel="Time:"
                     dateFormat="MM/dd/yyyy h:mm aa"
                     showTimeInput
