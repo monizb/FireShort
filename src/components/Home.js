@@ -68,15 +68,14 @@ class Home extends Component {
           if (!doc.exists) {
             window.location.pathname = "/";
           } else {
-              if( data.expires){
-                if(new Date(Date.now()).getTime() > data.expiryDate){
-                alert("Oops, the short link you are trying to access has expired");
-                window.location.pathname = "/login";
-                }
-              }else{   
-
                 if (!data.locked || !isLocked) {
                   this.setState({ isLocked: false });
+                  if( data.expires){
+                    if(new Date(Date.now()).getTime() > data.expiryDate){
+                    alert("Oops, the short link you are trying to access has expired");
+                    window.location.pathname = "/login";
+                    }
+                  }else{   
                   // update the hits count
                   this.hitCount(docid, data.author).then(() => {
                     if (data.track === false) {
@@ -103,10 +102,11 @@ class Home extends Component {
                       })();
                     }
                   });
-                } else {
-                  this.setState({ loading: false, isLocked: true });
                 }
               }
+                else {
+                  this.setState({ loading: false, isLocked: true });
+                }
             }
             })
             .catch((err) => {
