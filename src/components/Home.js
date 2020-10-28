@@ -16,8 +16,6 @@ class Home extends Component {
       loc: window.location.pathname,
       newloc: "",
       loading: true,
-      expires: false,
-      expirationDate: "",
       isLocked: true,
       realPassword: "",
       password: "",
@@ -52,61 +50,8 @@ class Home extends Component {
       return {};
     }
   };
-  checkLinkExpired = () =>{
-    this.setState({loading: true});
-    if(this.state.loc === "/"){
-      this.setState({ newloc: global.config.mainsite });
-      window.location = global.config.mainsite;
-    } else {
-      var docid = this.state.loc.substring(1);
-      var docref = db.collection("shorturls").doc(docid);
-      docref
-        .get()
-        .then((doc) => {
-          var data = doc.data();
-          this.setState({expirationDate: data.expiryDate});
-          if (!doc.exists) {
-            window.location.pathname = "/login";
-          }else{
-            if(!data.expiration || new Date(Date.now())<this.state.expirationDate){
-              this.hitCount(docid, data.author).then(() => {
-                if (data.track === false) {
-                  this.setState({ newloc: data.lurl });
-                  window.location = data.lurl;
-                } else {
-                  let ipv4 = "";
-                  (async () => {
-                    ipv4 = await publicIp.v4();
-                    const { country_code } = await this.getGeoReference(ipv4);
-                    docref
-                      .collection("tracking")
-                      .add({
-                        ipv4: ipv4,
-                        timestamp: new Date().toISOString(),
-                        useragent: navigator.userAgent,
-                        country: country_code,
-                        author: data.author,
-                      })
-                      .then(() => {
-                        this.setState({ newloc: data.lurl });
-                        window.location = data.lurl;
-                      });
-                  })();
-                }
-              });
-            }else{
-              if(new Date(Date.now()) >=this.state.expirationDate){
-                alert("This short link has expired, sorry.");
-              }
-            }
-          }
-        })
-        .catch((err) => {
-          console.log("Error getting document", err);
-        });
-      }
-    };
-
+  
+          
   startFunc = (isLocked) => {
     this.setState({ loading: true });
     if (this.state.loc === "/") {
@@ -121,46 +66,54 @@ class Home extends Component {
           var data = doc.data();
           this.setState({ realPassword: data.password });
           if (!doc.exists) {
-            window.location.pathname = "/login";
+            window.location.pathname = "/";
           } else {
-            if (!data.locked || !isLocked) {
-              this.setState({ isLocked: false });
-              // update the hits count
-              this.hitCount(docid, data.author).then(() => {
-                if (data.track === false) {
-                  this.setState({ newloc: data.lurl });
-                  window.location = data.lurl;
-                } else {
-                  let ipv4 = "";
-                  (async () => {
-                    ipv4 = await publicIp.v4();
-                    const { country_code } = await this.getGeoReference(ipv4);
-                    docref
-                      .collection("tracking")
-                      .add({
-                        ipv4: ipv4,
-                        timestamp: new Date().toISOString(),
-                        useragent: navigator.userAgent,
-                        country: country_code,
-                        author: data.author,
-                      })
-                      .then(() => {
-                        this.setState({ newloc: data.lurl });
-                        window.location = data.lurl;
-                      });
-                  })();
+              if( data.expires){
+                if(new Date(Date.now()).getTime() > data.expiryDate){
+                alert("Oops, the short link you are trying to access has expired");
+                window.location.pathname = "/login";
                 }
-              });
-            } else {
-              this.setState({ loading: false, isLocked: true });
+              }else{   
+
+                if (!data.locked || !isLocked) {
+                  this.setState({ isLocked: false });
+                  // update the hits count
+                  this.hitCount(docid, data.author).then(() => {
+                    if (data.track === false) {
+                      this.setState({ newloc: data.lurl });
+                      window.location = data.lurl;
+                    } else {
+                      let ipv4 = "";
+                      (async () => {
+                        ipv4 = await publicIp.v4();
+                        const { country_code } = await this.getGeoReference(ipv4);
+                        docref
+                          .collection("tracking")
+                          .add({
+                            ipv4: ipv4,
+                            timestamp: new Date().toISOString(),
+                            useragent: navigator.userAgent,
+                            country: country_code,
+                            author: data.author,
+                          })
+                          .then(() => {
+                            this.setState({ newloc: data.lurl });
+                            window.location = data.lurl;
+                          });
+                      })();
+                    }
+                  });
+                } else {
+                  this.setState({ loading: false, isLocked: true });
+                }
+              }
             }
-          }
-        })
-        .catch((err) => {
-          console.log("Error getting document", err);
-        });
-    }
-  };
+            })
+            .catch((err) => {
+              console.log("Error getting document", err);
+            });
+        }
+      };
 
   checkpassword = () => {
     const { realPassword } = this.state;

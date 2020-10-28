@@ -81,7 +81,7 @@ class Admin extends Component {
       curl: '',
       track: true,
       locked: false,
-      expiration:false,
+      expires:false,
       expiryDate:'',
       successToast: false,
       viewMode: 'module',
@@ -99,12 +99,15 @@ class Admin extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleDateChange =(date)=>{
-    this.setState({expiryDate: date});
-    console.log(this.state.expiryDate)
-    if(this.state.expiryDate !== null){
-      this.setState({expiration: true})
-    };
-    console.log(this.state.expiration);
+    let exp = true;
+    let time = new Date(date).getTime()
+    if(time > 0 ){
+      exp = true;
+    }else{
+      exp = false;
+    }
+    this.setState({expiryDate: time, expires: exp});
+
   };
   handleLurlChange = (event) => {
     this.setState({ lurl: event.target.value });
@@ -136,34 +139,24 @@ class Admin extends Component {
         self.setState({ successToast: true });
       });
   };
-  checkLinkExpired = (curl) =>{
-    var docref = db.collection('shorturls').doc(curl);
-    docref
-      .get()
-      .then((doc) => {
-        if (!doc.exists) {
-          console.log('No such document!');
-        } else {
-          var data = doc.data();
-          if(data.expiration){
-            if( data.expiryDate < Date.now){
-              Alert('Short link has expired')
-            }
-          };
-        };
-      });
-  }
+
   handleSubmit = (event) => {
-    let {lurl, curl, expiryDate, expiration, track, locked, newPsw} = this.state
+    let {lurl, curl, expiryDate, expires, track, locked, newPsw} = this.state
+    let time;
     const self = this;
     if (curl === '') {
-      curl = nanoid(8);
+      curl = nanoid(8);  
+    };     
+    if(self.state.expires === false){
+      time = null;
+    }else{
+     time = expiryDate;
     }
     let data = {
       lurl: lurl,
       curl: curl,
-      expiration: expiration,
-      expiryDate: expiryDate,
+      expires:expires,
+      expiryDate: time,
       track: track,
       locked: locked,
       password: locked ? newPsw : '',
@@ -212,7 +205,6 @@ class Admin extends Component {
           self.updateUrls();
         }
       });
-      console.log(data.expiryDate)
     self.handleClose();
   };
 
@@ -267,12 +259,17 @@ class Admin extends Component {
           console.log('No such document!');
         } else {
           var data = doc.data();
-          console.log(new Date(data.expiryDate*1000))
+          if(data.expires === false){
+            self.setState({expiryDate: null})
+            console.log(data.expiryDate)
+          }else{
+            self.setState({expiryDate: new Date(data.expiryDate)})
+          }
           // reduce number of calls to setState
           self.setState({
             lurl: data.lurl,
             curl: data.curl,
-            expiryDate: new Date(data.expiryDate*1000),
+            expires: data.expires,
             track: data.track,
             locked: data.locked,
             newPsw: data.password,
@@ -294,7 +291,6 @@ class Admin extends Component {
   };
 
   handleClose = () => {
-    console.log(this.state.expiryDate)
     this.setState({ formopen: false, hitsopen: false });
   };
 
@@ -372,7 +368,7 @@ class Admin extends Component {
     db.collection('settings').doc(this.props.user.uid).set({ viewMode: mode });
   };
 
-  componentDidMount() {
+  componentDidMount(){
     const self = this;
     myFirebase.auth().onAuthStateChanged(function (user) {
       if (user) {
