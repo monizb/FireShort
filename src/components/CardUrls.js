@@ -23,6 +23,10 @@ const useStyles = makeStyles((theme) => ({
         paddingTop: theme.spacing(8),
         paddingBottom: theme.spacing(8),
     },
+    cardExpiration:{
+        opacity:'0.6',
+        paddingLeft: theme.spacing(4),
+    },
     card: {
         height: '100%',
         display: 'flex',
@@ -67,7 +71,9 @@ export default function CardUrls(props) {
                                     <Tooltip title={card.data.track === true ? "Link Tracking ON" : "Link Tracking OFF"}>
                                         <Badge color={card.data.track === true ? "primary" : "error"} variant="dot">
                                             <Typography>{card.data.curl}</Typography>
+                                            <Typography className = {classes.cardExpiration}>Expires:{card.data.expiryDateDisplay}</Typography>
                                         </Badge>
+                                           
                                     </Tooltip>
                                 }
                                 titleTypographyProps={{

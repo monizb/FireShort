@@ -15,6 +15,7 @@ import {
   TableContainer,
   TableHead,
   TablePagination,
+  Typography,
   TableRow,
   Tooltip,
 } from '@material-ui/core';
@@ -34,6 +35,10 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: theme.spacing(8),
     paddingBottom: theme.spacing(8),
   },
+  cardExpiration:{
+    opacity:'0.6',
+    paddingLeft: theme.spacing(4),
+},
   root: {
     width: "100%",
   },
@@ -131,6 +136,7 @@ export default function ListUrls(props) {
                             </Badge>
                           </IconButton>
                         </Tooltip>
+                        <Typography className = {classes.cardExpiration}>Expires:{card.data.expiryDateDisplay}</Typography>
                       </TableCell>
                       <TableCell
                         key="action"

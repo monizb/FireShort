@@ -81,6 +81,7 @@ class Admin extends Component {
       curl: '',
       track: true,
       locked: false,
+      expiryDateDisplay:'',
       expires:false,
       expiryDate:'',
       successToast: false,
@@ -98,17 +99,7 @@ class Admin extends Component {
     this.handlePswChange = this.handlePswChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  handleDateChange =(date)=>{
-    let exp = true;
-    let time = new Date(date).getTime()
-    if(time > 0 ){
-      exp = true;
-    }else{
-      exp = false;
-    }
-    this.setState({expiryDate: time, expires: exp});
 
-  };
   handleLurlChange = (event) => {
     this.setState({ lurl: event.target.value });
   };
@@ -129,7 +120,20 @@ class Admin extends Component {
   handlePswChange = ({target}) => {
     this.setState({ newPsw: target.value})
   }
+  handleDateChange =(date)=>{
+    let expiryDateDisp;
+    let exp = true;
+    let time = new Date(date).getTime()
+    if(time > 0 ){
+      expiryDateDisp = new Date(date).toISOString().split('T')[0];
+      exp = true;
+    }else{
+      expiryDateDisp='';
+      exp = false;
+    }
+    this.setState({expiryDate: time, expires: exp, expiryDateDisplay: expiryDateDisp});
 
+  };
   createLink = (curl, data) => {
     const self = this;
     db.collection('shorturls')
@@ -141,7 +145,7 @@ class Admin extends Component {
   };
 
   handleSubmit = (event) => {
-    let {lurl, curl, expiryDate, expires, track, locked, newPsw} = this.state
+    let {lurl, curl, expiryDate, expiryDateDisplay, expires, track, locked, newPsw} = this.state
     let time;
     const self = this;
     if (curl === '') {
@@ -156,6 +160,7 @@ class Admin extends Component {
       lurl: lurl,
       curl: curl,
       expires:expires,
+      expiryDateDisplay:expiryDateDisplay,
       expiryDate: time,
       track: track,
       locked: locked,
@@ -269,6 +274,7 @@ class Admin extends Component {
           self.setState({
             lurl: data.lurl,
             curl: data.curl,
+            expiryDateDisplay:data.expiryDateDisplay,
             expires: data.expires,
             track: data.track,
             locked: data.locked,
@@ -286,7 +292,7 @@ class Admin extends Component {
   handleClickOpen = () => {
     this.setState({ formopen: true });
     this.setState({
-      lurl: '', curl: '', expiryDate:new Date(), newPsw: '', locked: false
+      lurl: '', curl: '', expiryDate:'', newPsw: '', locked: false
     });
   };
 

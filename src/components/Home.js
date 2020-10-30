@@ -16,6 +16,7 @@ class Home extends Component {
       loc: window.location.pathname,
       newloc: "",
       loading: true,
+      expired:true,
       isLocked: true,
       realPassword: "",
       password: "",
@@ -25,9 +26,22 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    this.startFunc(true);
+      this.checkExpired();
+      this.startFunc(true);
   }
-
+  checkExpired(){
+    db.collection("shorturls").doc(this.state.loc.substring(1))
+      .get()
+      .then((doc) => {
+          var data = doc.data();
+          if( data.expires){
+            if(new Date(Date.now()).getTime() > data.expiryDate){
+            alert("Oops, the short link you are trying to access has expired");
+            window.location.pathname = "/login";
+            }
+          }
+        });
+  };
   hitCount = async (docid, author) => {
     const hitref = db.collection("hits").doc(docid);
     try {
@@ -66,55 +80,46 @@ class Home extends Component {
           var data = doc.data();
           this.setState({ realPassword: data.password });
           if (!doc.exists) {
-            window.location.pathname = "/";
+            window.location.pathname = "/login";
           } else {
-                if (!data.locked || !isLocked) {
-                  this.setState({ isLocked: false });
-                  if( data.expires){
-                    if(new Date(Date.now()).getTime() > data.expiryDate){
-                    alert("Oops, the short link you are trying to access has expired");
-                    window.location.pathname = "/login";
-                    }
-                  }else{   
-                  // update the hits count
-                  this.hitCount(docid, data.author).then(() => {
-                    if (data.track === false) {
-                      this.setState({ newloc: data.lurl });
-                      window.location = data.lurl;
-                    } else {
-                      let ipv4 = "";
-                      (async () => {
-                        ipv4 = await publicIp.v4();
-                        const { country_code } = await this.getGeoReference(ipv4);
-                        docref
-                          .collection("tracking")
-                          .add({
-                            ipv4: ipv4,
-                            timestamp: new Date().toISOString(),
-                            useragent: navigator.userAgent,
-                            country: country_code,
-                            author: data.author,
-                          })
-                          .then(() => {
-                            this.setState({ newloc: data.lurl });
-                            window.location = data.lurl;
-                          });
-                      })();
-                    }
-                  });
+            if (!data.locked || !isLocked) {
+              this.setState({ isLocked: false });
+              // update the hits count
+              this.hitCount(docid, data.author).then(() => {
+                if (data.track === false) {
+                  this.setState({ newloc: data.lurl });
+                  window.location = data.lurl;
+                } else {
+                  let ipv4 = "";
+                  (async () => {
+                    ipv4 = await publicIp.v4();
+                    const { country_code } = await this.getGeoReference(ipv4);
+                    docref
+                      .collection("tracking")
+                      .add({
+                        ipv4: ipv4,
+                        timestamp: new Date().toISOString(),
+                        useragent: navigator.userAgent,
+                        country: country_code,
+                        author: data.author,
+                      })
+                      .then(() => {
+                        this.setState({ newloc: data.lurl });
+                        window.location = data.lurl;
+                      });
+                  })();
                 }
-              }
-                else {
-                  this.setState({ loading: false, isLocked: true });
-                }
+              });
+            } else {
+              this.setState({ loading: false, isLocked: true });
             }
-            })
-            .catch((err) => {
-              console.log("Error getting document", err);
-            });
-        }
-      };
-
+          }
+        })
+        .catch((err) => {
+          console.log("Error getting document", err);
+        });
+    }
+  };
   checkpassword = () => {
     const { realPassword } = this.state;
     if (realPassword !== "" && this.state.password === realPassword) {
