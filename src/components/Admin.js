@@ -269,7 +269,7 @@ class Admin extends Component {
             console.log(data.expiryDate)
           }else{
             if(new Date(Date.now()).getTime() > data.expiryDate){
-              self.setState({expiryDate: new Date()})
+              self.setState({expiryDate: new Date(new Date().getTime() + 86400000)})
             }else{
             self.setState({expiryDate: new Date(data.expiryDate)})
             }
