@@ -30,7 +30,13 @@ class Home extends Component {
       this.startFunc(true);
   }
   checkExpired(){
-    db.collection("shorturls").doc(this.state.loc.substring(1))
+    if (this.state.loc === "/") {
+    this.setState({ newloc: global.config.mainsite });
+    window.location = global.config.mainsite;
+    } else {
+    var docid = this.state.loc.substring(1);
+    var docref = db.collection("shorturls").doc(docid);
+    docref
       .get()
       .then((doc) => {
           var data = doc.data();
@@ -41,7 +47,8 @@ class Home extends Component {
             }
           }
         });
-  };
+    };
+  }
   hitCount = async (docid, author) => {
     const hitref = db.collection("hits").doc(docid);
     try {
