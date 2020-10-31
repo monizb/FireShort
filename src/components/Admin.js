@@ -268,7 +268,11 @@ class Admin extends Component {
             self.setState({expiryDate: null})
             console.log(data.expiryDate)
           }else{
+            if(new Date(Date.now()).getTime() > data.expiryDate){
+              self.setState({expiryDate: new Date()})
+            }else{
             self.setState({expiryDate: new Date(data.expiryDate)})
+            }
           }
           // reduce number of calls to setState
           self.setState({

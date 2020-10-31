@@ -126,7 +126,7 @@ export default function UrlsDialog(props) {
                     onChange={props.handleDateChange} 
                     selected={props.state.expiryDate}
                     isClearable
-                    //minDate={new Date(new Date().getTime() + 86400000)}
+                    minDate={new Date(new Date().getTime() + 86400000)}
                     dateFormat="MM/dd/yyyy h:mm aa"
                     placeholderText="No Expiration!"                         
                 />               
