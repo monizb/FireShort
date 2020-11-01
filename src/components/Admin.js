@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { isSameDay, startOfToday,endOfDay} from 'date-fns'
+import { isSameDay, startOfToday} from 'date-fns'
 import MainToolBar from './MainToolBar.js';
 import CardUrls from './CardUrls.js';
 import ListUrls from './ListUrls.js';
