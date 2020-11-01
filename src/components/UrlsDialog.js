@@ -1,4 +1,5 @@
 import React from 'react';
+import {endOfDay } from 'date-fns'
 import { withStyles } from '@material-ui/core/styles';
 import Switch from '@material-ui/core/Switch';
 import Grid from '@material-ui/core/Grid';
@@ -14,6 +15,7 @@ const AntSwitch = withStyles((theme) => ({
         padding: 0,
         display: 'flex',
     },
+
     switchBase: {
         padding: 2,
         color: theme.palette.grey[500],
@@ -56,6 +58,7 @@ export default function UrlsDialog(props) {
     const [open, setOpen] = React.useState(false);
     const handleClick = () => {
         setOpen(true);
+       
     };
 
 
@@ -68,7 +71,8 @@ export default function UrlsDialog(props) {
     
     /**/
     return (
-        <Dialog
+        <Dialog 
+
             open={props.state.formopen}
             onClose={props.handleClose}
             aria-labelledby="form-dialog-title"
@@ -126,7 +130,14 @@ export default function UrlsDialog(props) {
                     onChange={props.handleDateChange} 
                     selected={props.state.expiryDate}
                     isClearable
-                    minDate={new Date(new Date().getTime() + 86400000)}
+                    showTimeSelect
+                    timeFormat="hh:mm "
+                    timeCaption="Time"
+                    timeIntervals={30}
+                    popperPlacement="auto-right"
+                    minDate={new Date()}
+                    minTime={props.state.minTime}
+                    maxTime={endOfDay(new Date())}
                     dateFormat="MM/dd/yyyy h:mm aa"
                     placeholderText="No Expiration!"                         
                 />               

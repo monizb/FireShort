@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { isSameDay, startOfToday,endOfDay} from 'date-fns'
 import MainToolBar from './MainToolBar.js';
 import CardUrls from './CardUrls.js';
 import ListUrls from './ListUrls.js';
@@ -82,6 +83,7 @@ class Admin extends Component {
       track: true,
       locked: false,
       expiryDateDisplay:'',
+      minTime:this.calculateMinTime(new Date()),
       expires:false,
       expiryDate:'',
       successToast: false,
@@ -119,7 +121,9 @@ class Admin extends Component {
 
   handlePswChange = ({target}) => {
     this.setState({ newPsw: target.value})
-  }
+  };
+  calculateMinTime = date => isSameDay(date, new Date()) ? new Date() : startOfToday()
+
   handleDateChange =(date)=>{
     let expiryDateDisp;
     let exp = true;
@@ -131,8 +135,12 @@ class Admin extends Component {
       expiryDateDisp='';
       exp = false;
     }
-    this.setState({expiryDate: time, expires: exp, expiryDateDisplay: expiryDateDisp});
-
+    this.setState({
+      expiryDate: time, 
+      expires: exp, 
+      expiryDateDisplay: expiryDateDisp, 
+      minTime:this.calculateMinTime(date)
+    });
   };
   createLink = (curl, data) => {
     const self = this;
@@ -269,7 +277,7 @@ class Admin extends Component {
             console.log(data.expiryDate)
           }else{
             if(new Date(Date.now()).getTime() > data.expiryDate){
-              self.setState({expiryDate: new Date(new Date().getTime() + 86400000)})
+              self.setState({expiryDate: new Date()})
             }else{
             self.setState({expiryDate: new Date(data.expiryDate)})
             }

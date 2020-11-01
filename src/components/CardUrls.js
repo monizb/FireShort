@@ -71,17 +71,23 @@ export default function CardUrls(props) {
                                     <Tooltip title={card.data.track === true ? "Link Tracking ON" : "Link Tracking OFF"}>
                                         <Badge color={card.data.track === true ? "primary" : "error"} variant="dot">
                                             <Typography>{card.data.curl}</Typography>
-                                            <Typography className = {classes.cardExpiration}>Expires:{card.data.expiryDateDisplay}</Typography>
                                         </Badge>
                                            
                                     </Tooltip>
                                 }
                                 titleTypographyProps={{
                                     variant: "subtitle1"
+                                    
                                 }}
+                                
                             >
 
                             </CardHeader>
+                            <CardContent className={classes.cardExpiration}>
+                                 <Tooltip>
+                                     <Typography >Expires:{card.data.expiryDateDisplay}</Typography>
+                                 </Tooltip>
+                            </CardContent>
                             <CardContent className={classes.cardContent}>
                                 <Box bgcolor="text.primary" color="background.paper" p={2} style={{ overflowX: 'auto', overflowY: 'hidden', whiteSpace: "nowrap" }}>
                                     {card.data.lurl}
