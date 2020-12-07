@@ -9,7 +9,7 @@
     "firebase": "^7.22.0",
     "moment": "^2.29.0",
     "nanoid": "^3.1.12",
-    "public-ip": "^4.0.2",
+    "public-ip": "^4.0.3",
     "react": "^16.13.1",
     "react-confirm-alert": "^2.6.2",
     "react-dom": "^16.13.1",
