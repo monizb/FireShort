@@ -10,6 +10,8 @@
 [![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors-)
 ![Stars](https://img.shields.io/github/stars/monizb/FireShort)
 
+```Fireshort Now Accepting Submissions For Devscript Winter Of Code S01. Please Head Over To The Issues Sections For Available Issues```
+
 Fireshort is a URL shortener made using Google Firestore and React.JS The
 original repository has been forked from
 [here](https://github.com/xprilion/fireshort)
