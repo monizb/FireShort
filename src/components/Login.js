@@ -1,10 +1,6 @@
-import { Grid } from "@material-ui/core";
-import Button from "@material-ui/core/Button";
+
 import CircularProgress from "@material-ui/core/CircularProgress";
-import Container from "@material-ui/core/Container";
-import Paper from "@material-ui/core/Paper";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/styles";
 import React, { Component } from "react";
@@ -61,9 +57,7 @@ class Login extends Component {
                     <br></br>
                     <h2 className={classes.title}>LOGIN</h2>
                     <div className="input-field">
-                       <i >
-                        <EmailIcon/>
-                       </i>
+                       <i><EmailIcon/></i>
                        
                        <input type="email" name="email" id="email" placeholder="Email Address"
                         variant="outlined"
