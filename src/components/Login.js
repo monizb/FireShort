@@ -56,6 +56,7 @@ class Login extends Component {
                   />
                     <br></br>
                     <h2 className={classes.title}>LOGIN</h2>
+                   <form onSubmit={this.handleSubmit} className={classes.form}>
                     <div className="input-field">
                        <i><EmailIcon/></i>
                        <input type="email" name="email" id="email" placeholder="Email Address"
@@ -75,7 +76,7 @@ class Login extends Component {
                       Incorrect email or password.
                     </Typography>
                      )}
-                    <br />
+                    <br/>
 
                     <button
                     type="submit"
@@ -103,7 +104,7 @@ class Login extends Component {
                          Sign Up
                       </button>
                     </Link> 
-
+                   </form>
                     <br/>
                     <div>
                        <Link to="/forgot-password">
