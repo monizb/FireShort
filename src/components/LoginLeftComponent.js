@@ -1,14 +1,14 @@
 import { Grid } from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
 import React from "react";
-
+import "./logleft.css";
 import FeatureCard from "./FeatureCard";
 
 const styles = () => ({
   loginLeftPart: {
     width: "60%",
     height: "initial",
-    marginTop:"200px",
+    marginTop:"50px",
     padding: "50px 50px",
     display: "flex",
     flexDirection: "column",
@@ -22,22 +22,23 @@ const styles = () => ({
     width: "30rem",
     transition: "all 0.1s ease-in",
     "&:hover": { transform: "scale(1.05)" },
+
   },
   featureContainer: {
     width: "50%",
-    
     alignItems: "center",
-    colorEffect:"grey",
-    
-    marginTop:"20px",
+    colorEffect:"grey",    
     marginRight:"300px",
-    marginBottom:"30px"
   },
  "@media (max-width: 820px)":{
+    loginImage: {
+      transform:"translateY(300px)",
+      width:"200px",      
+    },
     loginLeftPart: {
-      transform:"translateX(0px)",
-      width:"200px"
-    }    
+      transform:"translateY(300px)",
+      width:"200px",
+    }   
  }
 });
 

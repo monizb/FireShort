@@ -47,14 +47,10 @@ class Login extends Component {
            <div className="paper">
                <div className="signin-signup">
                  
-                  <form action="" className="sign-in-form">
-                    <img
-                    className={classes.logoTextImage}
-                    src="./images/fireshortLogoText.gif"
-                    alt="Fireshort Text Logo"
-                  />
+                  <form action="" className="sign-in-form">                   
                     <br></br>
                     <h2 className={classes.title}>LOGIN</h2>
+                    <br></br>
                    <form onSubmit={this.handleSubmit} className={classes.form}>
                     <div className="input-field">
                        <i><EmailIcon/></i>
@@ -100,7 +96,7 @@ class Login extends Component {
                     </Link> 
                    </form>
                     <br/>
-                    <div>
+                    <div style={{padding: "0.5rem", widht: "100%", textAlign:"center",textDecoration:"none"}}>
                        <Link to="/forgot-password">
                          <Typography component="p">
                              Forgot Password?
@@ -111,6 +107,7 @@ class Login extends Component {
                 </div>
               <div className="panel-container">
                  <div className="panel left-panel">
+                    <h1>Fireshort</h1>
                     <LoginLeftComponent/>
                    
                  </div>
