@@ -1,4 +1,3 @@
-
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
@@ -62,22 +61,19 @@ class Login extends Component {
                        <input type="email" name="email" id="email" placeholder="Email Address"
                         variant="outlined"
                         onChange={this.handleEmailChange}/>
-
                     </div>
                     <div className="input-field">
                        <i><LockIcon/></i>
                        <input type="password" name="password" id="password" placeholder="Password"
                         variant="outlined"
                         onChange={this.handlePasswordChange}/>
-
-                    </div>
+                      </div>
                     {loginError && (
                     <Typography component="p" className={classes.errorText}>
                       Incorrect email or password.
                     </Typography>
                      )}
                     <br/>
-
                     <button
                     type="submit"
                     className={classes.submit}
@@ -94,8 +90,6 @@ class Login extends Component {
                     </MuiThemeProvider>
                     </button>
                      <br/>
-                     
-
                     <Link to="/signup" style={{textDecoration: "none"}}>
                       <button
                        type="button"
@@ -114,9 +108,7 @@ class Login extends Component {
                         </Link>
                     </div>
                   </form>
-
-                   
-               </div>
+                </div>
               <div className="panel-container">
                  <div className="panel left-panel">
                     <LoginLeftComponent/>
