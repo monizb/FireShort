@@ -11,7 +11,6 @@
     background-color: white;
     overflow: hidden;
 }
-
 .mainContainer:before{
     content: '';
     position: absolute;
@@ -19,13 +18,11 @@
     height: 2000px;
     border-radius: 55%;
     background: linear-gradient(-45deg, #5995fd,#4d84e2);
-   top: -10%;
-   right: 48%;
-   transform: translateY(-50%);
- 
-   transition: 1.8s ease-in-out;
+    top: -10%;
+    right: 48%;
+    transform: translateY(-50%);
+    transition: 1.8s ease-in-out;
 }
-
 .paper{
     position: absolute;
     width: 100%;
@@ -33,7 +30,6 @@
     top: 0;
     left: 0;
 }
-
 .signin-signup{
     position: absolute;
     top: 50%;
@@ -43,7 +39,6 @@
     display: grid;
     grid-template-columns: 1fr;
 }
-
 form{
     display: flex;
     align-items: center;
@@ -52,18 +47,15 @@ form{
     padding: 0.5rem;
     overflow: hidden;
     grid-column: 1/2;
-    grid-row: 1/2;
-    
+    grid-row: 1/2;    
 }
 h2{
     font-family: 'Montserrat', sans-serif;
     font-size: 30px;
 }
-
 form.sign-in-form{
     z-index: 2;
 }
-
 .input-field{
     max-width: 380px;
     width: 100%;
@@ -143,8 +135,7 @@ button:hover{
         top: 95%;
         transform: translate(-50%,-100%);
     }
-    .panel-container{
-        
+    .panel-container{        
         grid-template-columns: 1fr;
         grid-template-rows: 1fr 2fr 1fr;
     }
