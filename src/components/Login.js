@@ -58,7 +58,6 @@ class Login extends Component {
                     <h2 className={classes.title}>LOGIN</h2>
                     <div className="input-field">
                        <i><EmailIcon/></i>
-                       
                        <input type="email" name="email" id="email" placeholder="Email Address"
                         variant="outlined"
                         onChange={this.handleEmailChange}/>
