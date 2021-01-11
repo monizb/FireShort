@@ -55,7 +55,6 @@ const styles = () => ({
   errorText: { color: "#f50057", marginBottom: 5, textAlign: "center" },
   submit: { fontSize: "1.2rem" },
 });
-
 const theme = createMuiTheme({ palette: { secondary: { main: "#fff" } } });
 
 class Login extends Component {
