@@ -6,10 +6,10 @@ import FeatureCard from "./FeatureCard";
 
 const styles = () => ({
   loginLeftPart: {
-    width: "50%",
+    width: "60%",
     height: "initial",
-    backgroundColor: "rgb(40, 40, 40)",
-    padding: "50px 0px",
+    marginTop:"200px",
+    padding: "50px 50px",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
@@ -24,41 +24,38 @@ const styles = () => ({
     "&:hover": { transform: "scale(1.05)" },
   },
   featureContainer: {
-    width: "80%",
-    display: "flex",
-    justifyContent: "space-around",
+    width: "50%",
+    
     alignItems: "center",
-    flexWrap: "wrap",
-    columnGap: "1rem",
-    rowGap: "0.7rem",
+    colorEffect:"grey",
+    
+    marginTop:"20px",
+    marginRight:"300px",
+    marginBottom:"30px"
   },
-  "@keyframes colorEffect": {
-    "0%": {
-      backgroundColor: "rgb(20, 20, 20)",
-    },
-    "50%": {
-      backgroundColor: "rgb(60, 60, 60)",
-    },
-    "100%": {
-      backgroundColor: "rgb(20, 20, 20)",
-    },
-  },
+ "@media (max-width: 820px)":{
+    loginLeftPart: {
+      transform:"translateX(0px)",
+      width:"200px"
+    }    
+ }
 });
 
 const LoginLeftComponent = ({ classes }) => {
   return (
     <Grid item className={classes.loginLeftPart}>
-      <img
-        className={classes.loginImage}
-        src="./images/loginPageIllustration.svg"
-        alt="Login Welcome"
-      />
+      
       <div className={classes.featureContainer}>
         <FeatureCard feature="Custom Tiny URLs" />
         <FeatureCard feature="Hit Tracker" />
         <FeatureCard feature="Admin Panel" />
         <FeatureCard feature="Password Protected URLs" />
       </div>
+      <img
+        className={classes.loginImage}
+        src="./images/login.svg"
+        alt="Login Welcome"
+      />
     </Grid>
   );
 };
