@@ -1,15 +1,15 @@
 import { Grid } from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
 import React from "react";
-
+import "./logleft.css";
 import FeatureCard from "./FeatureCard";
 
 const styles = () => ({
   loginLeftPart: {
-    width: "50%",
+    width: "60%",
     height: "initial",
-    backgroundColor: "rgb(40, 40, 40)",
-    padding: "50px 0px",
+    marginTop:"50px",
+    padding: "50px 50px",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
@@ -22,43 +22,41 @@ const styles = () => ({
     width: "30rem",
     transition: "all 0.1s ease-in",
     "&:hover": { transform: "scale(1.05)" },
+
   },
   featureContainer: {
-    width: "80%",
-    display: "flex",
-    justifyContent: "space-around",
+    width: "50%",
     alignItems: "center",
-    flexWrap: "wrap",
-    columnGap: "1rem",
-    rowGap: "0.7rem",
+    colorEffect:"grey",    
+    marginRight:"300px",
   },
-  "@keyframes colorEffect": {
-    "0%": {
-      backgroundColor: "rgb(20, 20, 20)",
+ "@media (max-width: 820px)":{
+    loginImage: {
+      transform:"translateY(300px)",
+      width:"200px",      
     },
-    "50%": {
-      backgroundColor: "rgb(60, 60, 60)",
-    },
-    "100%": {
-      backgroundColor: "rgb(20, 20, 20)",
-    },
-  },
+    loginLeftPart: {
+      transform:"translateY(300px)",
+      width:"200px",
+    }   
+ }
 });
 
 const LoginLeftComponent = ({ classes }) => {
   return (
     <Grid item className={classes.loginLeftPart}>
-      <img
-        className={classes.loginImage}
-        src="./images/loginPageIllustration.svg"
-        alt="Login Welcome"
-      />
+      
       <div className={classes.featureContainer}>
         <FeatureCard feature="Custom Tiny URLs" />
         <FeatureCard feature="Hit Tracker" />
         <FeatureCard feature="Admin Panel" />
         <FeatureCard feature="Password Protected URLs" />
       </div>
+      <img
+        className={classes.loginImage}
+        src="./images/login.svg"
+        alt="Login Welcome"
+      />
     </Grid>
   );
 };

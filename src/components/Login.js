@@ -10,52 +10,17 @@ import { withStyles } from "@material-ui/styles";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
-
+import EmailIcon from '@material-ui/icons/Email';
 import { loginUser } from "../actions";
+import "./login.css";
+import LockIcon from '@material-ui/icons/Lock';
 import LoginLeftComponent from "./LoginLeftComponent";
 
-const styles = () => ({
-  "@global": { body: { background: `beige`, padding: 0, margin: 0 } },
-  mainContainer: {
-    height: "100vh",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  paper: { width: "60vw", overflow: "hidden", borderRadius: "20px" },
-  loginRightPart: {
-    width: "50%",
-    height: "initial",
-    padding: "50px 50px",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "stretch",
-    overflow: "hidden",
-  },
-  logoTextContainer: {
-    textAlign: "center",
-  },
-  logoTextImage: {
-    height: "50px",
-  },
-  loginText: {
-    textAlign: "center",
-  },
-  avatar: { width: "64px", height: "64px" },
-  form: {
-    width: "initial",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    margin: "0px",
-  },
-  errorText: { color: "#f50057", marginBottom: 5, textAlign: "center" },
-  submit: { fontSize: "1.2rem" },
-});
+const styles=()=>({
 
+errorText: { color: "#f50057", marginBottom: 5, textAlign: "center" },
+
+});
 const theme = createMuiTheme({ palette: { secondary: { main: "#fff" } } });
 
 class Login extends Component {
@@ -83,59 +48,36 @@ class Login extends Component {
       return <Redirect to="/admin" />;
     } else {
       return (
-        <Container className={classes.mainContainer}>
-          <Paper className={classes.paper} elevation={24}>
-            <Grid container alignItems="stretch" direction="row">
-              <LoginLeftComponent />
-              <Grid item className={classes.loginRightPart}>
-                <div className={classes.logoTextContainer}>
-                  <img
-                    className={classes.logoTextImage}
-                    src="./images/fireshortLogoText.gif"
-                    alt="Fireshort Text Logo"
-                  />
-                </div>
-                <Typography
-                  className={classes.loginText}
-                  component="h1"
-                  variant="h5"
-                >
-                  Login
-                </Typography>
-                <form onSubmit={this.handleSubmit} className={classes.form}>
-                  <TextField
-                    variant="outlined"
-                    margin="normal"
-                    fullWidth
-                    id="email"
-                    label="Email Address"
-                    name="email"
-                    onChange={this.handleEmailChange}
-                  />
-                  <TextField
-                    variant="outlined"
-                    margin="normal"
-                    fullWidth
-                    name="password"
-                    label="Password"
-                    type="password"
-                    id="password"
-                    onChange={this.handlePasswordChange}
-                  />
-                  {loginError && (
+        <div className="Container">
+           <div className="contain-paper">
+               <div className="signin-signup">                 
+                  <form action="" className="sign-in-form">                   
+                    <br></br>
+                    <h2 className={classes.title}>LOGIN</h2>
+                    <br></br>
+                   <form onSubmit={this.handleSubmit} className={classes.form}>
+                    <div className="input-field">
+                       <i><EmailIcon/></i>
+                       <input type="email" name="email" id="email" placeholder="Email Address"
+                        variant="outlined"
+                        onChange={this.handleEmailChange}/>
+                    </div>
+                    <div className="input-field">
+                       <i><LockIcon/></i>
+                       <input type="password" name="password" id="password" placeholder="Password"
+                        variant="outlined"
+                        onChange={this.handlePasswordChange}/>
+                      </div>
+                    {loginError && (
                     <Typography component="p" className={classes.errorText}>
                       Incorrect email or password.
                     </Typography>
-                  )}
-                <br />
-                  <Button
+                     )}
+                    <br/>
+                    <button
                     type="submit"
-                    size="large"
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    className={classes.submit}
-                  >
+                    className="submit"
+                    >
                     <MuiThemeProvider theme={theme}>
                       {isLoading && !loginError ? (
                         <CircularProgress
@@ -146,33 +88,37 @@ class Login extends Component {
                           "Sign In"
                         )}
                     </MuiThemeProvider>
-                  </Button>
-              <br/>
-              <br/>
-              <Link to="/signup" style={{textDecoration: "none"}}>
-                <Button
-                  type="button"
-                  fullWidth
-                  size="large"
-                  variant="outlined"
-                  color="primary"
-                  className={classes.submit}
-                >
-                  Sign Up
-                </Button>
-              </Link>
-            </form>
-            <div style={{padding: "0.5rem", widht: "100%", textAlign:"center"}}>
-                <Link to="/forgot-password">
-                  <Typography component="p">
-                    Forgot Password?
-                  </Typography>
-                </Link>
-            </div>
-              </Grid>
-            </Grid>
-          </Paper>
-        </Container>
+                    </button>
+                     <br/>
+                    <Link to="/signup" style={{textDecoration: "none"}}>
+                      <button
+                       type="button"
+                       className="submit"
+                      >
+                         Sign Up
+                      </button>
+                    </Link> 
+                   </form>
+                    <br/>
+                    <div style={{padding: "0.5rem", widht: "100%", textAlign:"center",textDecoration:"none"}}>
+                       <Link to="/forgot-password">
+                         <Typography component="p">
+                             Forgot Password?
+                          </Typography>
+                        </Link>
+                    </div>
+                  </form>
+                </div>
+              <div className="panel-container">
+                 <div className="panel left-panel">
+                    <h1>Fireshort</h1>
+                    <LoginLeftComponent/>
+                   
+                 </div>
+              </div>
+           </div>
+           
+        </div>
       );
     }
   }
