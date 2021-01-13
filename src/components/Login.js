@@ -1,10 +1,5 @@
-import { Grid } from "@material-ui/core";
-import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import Container from "@material-ui/core/Container";
-import Paper from "@material-ui/core/Paper";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/styles";
 import React, { Component } from "react";
@@ -12,9 +7,9 @@ import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import EmailIcon from '@material-ui/icons/Email';
 import { loginUser } from "../actions";
+import LoginLeftComponent from "./LoginLeftComponent";
 import "./login.css";
 import LockIcon from '@material-ui/icons/Lock';
-import LoginLeftComponent from "./LoginLeftComponent";
 
 const styles=()=>({
 
