@@ -1,11 +1,13 @@
 import React from 'react';
+import {endOfDay } from 'date-fns'
 import { withStyles } from '@material-ui/core/styles';
 import Switch from '@material-ui/core/Switch';
 import Grid from '@material-ui/core/Grid';
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from '@material-ui/core';
-
 const AntSwitch = withStyles((theme) => ({
     root: {
         width: 28,
@@ -13,6 +15,7 @@ const AntSwitch = withStyles((theme) => ({
         padding: 0,
         display: 'flex',
     },
+
     switchBase: {
         padding: 2,
         color: theme.palette.grey[500],
@@ -50,22 +53,26 @@ function hasSpaces(s) {
     console.log(regexp.test(s))
     return regexp.test(s);
 }
-
+ 
 export default function UrlsDialog(props) {
     const [open, setOpen] = React.useState(false);
     const handleClick = () => {
         setOpen(true);
+       
     };
+
 
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
             return;
         }
-
         setOpen(false);
     };
+    
+    /**/
     return (
-        <Dialog
+        <Dialog 
+
             open={props.state.formopen}
             onClose={props.handleClose}
             aria-labelledby="form-dialog-title"
@@ -119,6 +126,21 @@ export default function UrlsDialog(props) {
                     value={props.state.curl}
                     onChange={props.handleCurlChange}
                 />
+                <DatePicker 
+                    onChange={props.handleDateChange} 
+                    selected={props.state.expiryDate}
+                    isClearable
+                    showTimeSelect
+                    timeFormat="hh:mm "
+                    timeCaption="Time"
+                    timeIntervals={30}
+                    popperPlacement="auto-right"
+                    minDate={new Date()}
+                    minTime={props.state.minTime}
+                    maxTime={endOfDay(new Date())}
+                    dateFormat="MM/dd/yyyy h:mm aa"
+                    placeholderText="No Expiration!"                         
+                />               
                 <Grid
                     component="label"
                     container
@@ -136,6 +158,7 @@ export default function UrlsDialog(props) {
                     </Grid>
                     {/*<Grid item>On</Grid>*/}
                 </Grid>
+                
                 <Grid
                     component="label"
                     container

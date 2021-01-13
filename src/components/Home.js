@@ -16,6 +16,7 @@ class Home extends Component {
       loc: window.location.pathname,
       newloc: "",
       loading: true,
+      expired:true,
       isLocked: true,
       realPassword: "",
       password: "",
@@ -25,9 +26,29 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    this.startFunc(true);
+      this.checkExpired();
+      this.startFunc(true);
   }
-
+  checkExpired(){
+    if (this.state.loc === "/") {
+    this.setState({ newloc: global.config.mainsite });
+    window.location = global.config.mainsite;
+    } else {
+    var docid = this.state.loc.substring(1);
+    var docref = db.collection("shorturls").doc(docid);
+    docref
+      .get()
+      .then((doc) => {
+          var data = doc.data();
+          if( data.expires){
+            if(new Date(Date.now()).getTime() > data.expiryDate){
+            alert("Oops, the short link you are trying to access has expired");
+            window.location.pathname = "/login";
+            }
+          }
+        });
+    };
+  }
   hitCount = async (docid, author) => {
     const hitref = db.collection("hits").doc(docid);
     try {
@@ -50,7 +71,8 @@ class Home extends Component {
       return {};
     }
   };
-
+  
+          
   startFunc = (isLocked) => {
     this.setState({ loading: true });
     if (this.state.loc === "/") {
@@ -105,7 +127,6 @@ class Home extends Component {
         });
     }
   };
-
   checkpassword = () => {
     const { realPassword } = this.state;
     if (realPassword !== "" && this.state.password === realPassword) {
