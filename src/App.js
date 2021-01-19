@@ -1,38 +1,40 @@
-import React from "react";
+import React, {lazy, Suspense} from "react";
 
 import { Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 
-import ProtectedRoute from "./components/ProtectedRoute";
-import Login from "./components/Login";
-import Home from "./components/Home";
-import Admin from "./components/Admin";
-import Analytics from "./components/Analytics";
-import SignUp from "./components/Signup";
-import ForgotPassword from "./components/ForgotPassword";
+const ProtectedRoute = lazy(() => import("./components/ProtectedRoute"));
+const Login = lazy(() => import("./components/Login"));
+const SignUp = lazy(() => import("./components/Signup"));
+const Home = lazy(() => import("./components/Home"));
+const Admin = lazy(() => import("./components/Admin"));
+const ForgotPassword = lazy(() => import("./components/ForgotPassword"));
+const Analytics = lazy(() => import("./components/Analytics"));
 
 function App(props) {
   const { isAuthenticated, isVerifying } = props;
   return (
     <Switch>
-      <ProtectedRoute
-        exact
-        path="/analytics/:id"
-        component={Analytics}
-        isAuthenticated={isAuthenticated}
-        isVerifying={isVerifying}
-      />
-      <ProtectedRoute
-        exact
-        path="/admin"
-        component={Admin}
-        isAuthenticated={isAuthenticated}
-        isVerifying={isVerifying}
-      />
-      <Route path="/login" component={Login} />
-      <Route path="/signup" component={SignUp} />
-      <Route path="/forgot-password" component={ForgotPassword} />
-      <Route path="/" component={Home} />
+      <Suspense fallback={<div>Loading Page...</div>}>
+        <ProtectedRoute
+          exact
+          path="/analytics/:id"
+          component={Analytics}
+          isAuthenticated={isAuthenticated}
+          isVerifying={isVerifying}
+        />
+        <ProtectedRoute
+          exact
+          path="/admin"
+          component={Admin}
+          isAuthenticated={isAuthenticated}
+          isVerifying={isVerifying}
+        />
+        <Route path="/login" component={Login} />
+        <Route path="/signup" component={SignUp} />
+        <Route path="/forgot-password" component={ForgotPassword} />
+        <Route path="/" component={Home} />
+      </Suspense>
     </Switch>
   );
 }
