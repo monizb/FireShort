@@ -10,7 +10,7 @@
 [![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors-)
 ![Stars](https://img.shields.io/github/stars/monizb/FireShort)
 
-```Fireshort Now Accepting Submissions For Devscript Winter Of Code S01. Please Head Over To The Issues Sections For Available Issues```
+`Fireshort Now Accepting Submissions For Devscript Winter Of Code S01. Please Head Over To The Issues Sections For Available Issues`
 
 Fireshort is a URL shortener made using Google Firestore and React.JS The
 original repository has been forked from
@@ -103,8 +103,8 @@ For the final step run:
 $ npm start
 ```
 
-Wait for a few minutes after which it should automatically spin up a development
-server for you on the PORT:3000 and take you to the login page
+Wait for few minutes after that it automatically open a development server on
+the PORT:3000 it will direct you to login page
 
 ### Contributing
 
@@ -151,6 +151,7 @@ Thanks goes to these wonderful people
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the
