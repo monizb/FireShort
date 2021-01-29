@@ -103,8 +103,8 @@ For the final step run:
 $ npm start
 ```
 
-Wait for a few minutes after which it should automatically spin up a development
-server for you on the PORT:3000 and take you to the login page
+Wait for few minutes after that it automatically open a development server on
+the PORT:3000 it will direct you to login page
 
 ### Contributing
 
