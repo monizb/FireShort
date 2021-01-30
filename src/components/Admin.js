@@ -422,7 +422,7 @@ class Admin extends Component {
         <CssBaseline />
         <Header />
         {this.state.loading && <LinearProgress color='secondary' />}
-        <main>
+        <main style={{width:'100%'}}>
           <MainToolBar
             state={this.state}
             updateViewMode={this.updateViewMode}
