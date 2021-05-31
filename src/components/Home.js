@@ -123,18 +123,7 @@ class Home extends Component {
     const { loading, password, isLocked } = this.state;
     return (
       <div>
-        {loading ? (
-          <>
-            <p className={classes.mainlogo}>Fireshort</p>
-            <div className={classes.loader}>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-          </>
-        ) : isLocked ? (
+        {!loading && isLocked ? (
           <div>
             <p className={classes.mainlogo}>Fireshort</p>
             <div style={{ display: "flex" }}>
