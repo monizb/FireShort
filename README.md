@@ -37,7 +37,7 @@ create a feature issue to discuss about the feature you would like to take up.
 - [x] Make a page for link analytics , with number of clicks,and all the
       activity related to it
 - [x] Add a lot more Analytics options with different types of charts
-- [ ] Show a Dialog box with the created link wth different sharing option and a
+- [x] Show a Dialog box with the created link wth different sharing option and a
       way to show QR Codes (and a way to track every qr scan) for the same
 - [ ] Add a homepage showcasing the tool with animations
 - [ ] Revamp the dashboard
