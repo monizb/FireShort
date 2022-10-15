@@ -39,7 +39,7 @@ create a feature issue to discuss about the feature you would like to take up.
 - [x] Add a lot more Analytics options with different types of charts
 - [x] Show a Dialog box with the created link wth different sharing option and a
       way to show QR Codes (and a way to track every qr scan) for the same
-- [ ] Add a homepage showcasing the tool with animations
+- [x] Add a homepage showcasing the tool with animations
 - [ ] Revamp the dashboard
 - [ ] Develop APIs for all the tasks for easy management
 - [ ] Add Link Expiry
