@@ -50,7 +50,6 @@ Valid Feature Requests will be added to the above list over time.
 ### Running The Project
 
 Prerequisites For Running The Project Locally:
-
 - Node
 - NPM
 - A Firebase Project
