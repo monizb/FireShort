@@ -27,7 +27,6 @@ this rep:
 - A lot of UI Changes
 
 ### Features To Be Added
-
 The following features are under development/open for contributions.Please first
 create a feature issue to discuss about the feature you would like to take up.
 
