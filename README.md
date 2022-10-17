@@ -27,6 +27,7 @@ this rep:
 - A lot of UI Changes
 
 ### Features To Be Added
+
 The following features are under development/open for contributions.Please first
 create a feature issue to discuss about the feature you would like to take up.
 
@@ -49,6 +50,7 @@ Valid Feature Requests will be added to the above list over time.
 ### Running The Project
 
 Prerequisites For Running The Project Locally:
+
 - Node
 - NPM
 - A Firebase Project
@@ -147,6 +149,7 @@ Thanks goes to these wonderful people
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the
