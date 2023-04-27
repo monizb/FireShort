@@ -8,7 +8,7 @@
     "@material-ui/lab": "^4.0.0-alpha.51",
     "firebase": "^8.10.1",
     "moment": "^2.29.4",
-    "nanoid": "^3.1.31",
+    "nanoid": "^3.3.6",
     "public-ip": "^5.0.0",
     "react": "^16.13.1",
     "react-confirm-alert": "^2.6.2",
