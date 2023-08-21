@@ -6,7 +6,7 @@
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.51",
-    "firebase": "^8.10.1",
+    "firebase": "^10.2.0",
     "moment": "^2.29.4",
     "nanoid": "^3.1.31",
     "public-ip": "^5.0.0",
