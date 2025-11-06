@@ -1,3 +1,21 @@
+// Random utility function
+export function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+
+// New feature: Display random number on the app
+import React, { useState } from 'react';
+
+function RandomNumberFeature() {
+  const [number, setNumber] = useState(0);
+  return (
+    <div style={{margin: '20px', padding: '10px', border: '1px solid #ccc'}}>
+      <h3>Random Number Feature</h3>
+      <p>Number: {number}</p>
+      <button onClick={() => setNumber(getRandomInt(100))}>Generate Random Number</button>
+    </div>
+  );
+}
 import React from "react";
 
 import { Route, Switch } from "react-router-dom";
@@ -33,6 +51,7 @@ function App(props) {
       <Route path="/signup" component={SignUp} />
       <Route path="/forgot-password" component={ForgotPassword} />
       <Route path="/" component={Home} />
+      <RandomNumberFeature />
     </Switch>
   );
 }
