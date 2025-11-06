@@ -1,0 +1,21 @@
+name: Security PR Review
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  review:
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: monizb/vectorguard-pr-scanner@v1  # Replace with your tag/version
+        with:
+          model: gemini-1.5-pro-latest
+          temperature: 0.2
+          enable_inline: false
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
