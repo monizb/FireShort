@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: monizb/vectorguard-pr-scanner@v1  # Replace with your tag/version
+      - uses: monizb/vectorguard-pr-scanner@main  # Replace with your tag/version
         with:
           model: gemini-1.5-pro-latest
           temperature: 0.2
